@@ -7,20 +7,20 @@ import android.support.v4.util.LruCache;
  * Created by user on 2017/1/23.
  */
 
-public class DataCache {
+public class DataCache<K, V> {
     /**
      * cache json data
      */
-    private LruCache<Integer, String> mJsonCache;
+    private LruCache<K, V> mJsonCache;
 
     /**
      * cache picture info
      */
-    private LruCache<Integer, Bitmap> mBitmapCache;
+    private LruCache<K, Bitmap> mBitmapCache;
 
     public DataCache() {
-        mJsonCache = new LruCache<Integer, String>(1 * 1024 * 1024);
-        mBitmapCache = new LruCache<Integer, Bitmap>(2 * 1024 * 1024);
+        mJsonCache = new LruCache<K, V>(1 * 1024 * 1024);
+        mBitmapCache = new LruCache<K, Bitmap>(2 * 1024 * 1024);
     }
 
     /**
@@ -29,11 +29,11 @@ public class DataCache {
      * @param key
      * @param value
      */
-    public void addJsonLruCache(Integer key, String value) {
+    public void addJsonLruCache(K key, V value) {
         mJsonCache.put(key, value);
     }
 
-    public void addBitmapLruCache(Integer key, Bitmap value) {
+    public void addBitmapLruCache(K key, Bitmap value) {
         mBitmapCache.put(key, value);
     }
 
@@ -43,11 +43,11 @@ public class DataCache {
      * @param key
      * @return
      */
-    public String getJsonLruCache(Integer key) {
+    public V getJsonLruCache(K key) {
         return mJsonCache.get(key);
     }
 
-    public Bitmap getBitmapLruCache(Integer key) {
+    public Bitmap getBitmapLruCache(K key) {
         return mBitmapCache.get(key);
     }
 

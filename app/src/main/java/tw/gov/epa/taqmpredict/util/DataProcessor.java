@@ -10,6 +10,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 /**
@@ -33,8 +35,10 @@ public class DataProcessor extends AsyncTask<Void, Void, Void> {
     private String offset = "0";
     private String orderby = "SiteName";
     private String token = "GFnGTmY/a0qiH1ClEPIQTg";
-    private String url = "http://opendata.epa.gov.tw/webapi/api/rest/datastore/355000000I-001805/?format=json&token=GFnGTmY/a0qiH1ClEPIQTg";
-    private DataCache dataCache;
+    private String url = "http://opendata.epa.gov.tw/webapi/api/rest/datastore/"+resourceID+"/?format="+format+"&token="+token;
+    private DataCache<String,String> dataCache;
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
     public DataProcessor(DataCache dataCache){
         this.dataCache =  dataCache;
     }
@@ -47,17 +51,26 @@ public class DataProcessor extends AsyncTask<Void, Void, Void> {
     @Override
     protected Void doInBackground(Void... arg0) {
         HttpHandler sh = new HttpHandler();
-        DataParser dp = new DataParser(this.dataCache);
+        String key = simpleDateFormat.format(new Date());
+        if(dataCache!=null) {
+            DataParser dataParser = new DataParser(this.dataCache);
+            String jsonStr = dataCache.getJsonLruCache(key);
 
-        // Making a request to url and getting response
-        String jsonStr = sh.makeServiceCall(url);
+            if (jsonStr != null && !jsonStr.equals("")) {
+                Log.e(TAG, "Response from cache: " + jsonStr);
+                dataParser.parser_object(jsonStr);
+            } else {
+                // Making a request to url and getting response
+                jsonStr = sh.makeServiceCall(url);
+                Log.e(TAG, "Response from url: " + jsonStr);
 
-        Log.e(TAG, "Response from url: " + jsonStr);
-
-        if (jsonStr != null) {
-            dp.parser_object(jsonStr);
-        } else {
-            Log.e(TAG, "Couldn't get json from server.");
+                if (jsonStr != null && !jsonStr.equals("")) {
+                    dataCache.addJsonLruCache(key,jsonStr);
+                    dataParser.parser_object(jsonStr);
+                } else {
+                    Log.e(TAG, "Couldn't get json from server.");
+                }
+            }
         }
         return null;
     }
