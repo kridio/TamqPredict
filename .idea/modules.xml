@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/TamqPredict.iml" filepath="$PROJECT_DIR$/TamqPredict.iml" />
-      <module fileurl="file://$PROJECT_DIR$/TaqmPredict.iml" filepath="$PROJECT_DIR$/TaqmPredict.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
