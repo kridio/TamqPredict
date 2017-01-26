@@ -8,14 +8,14 @@ import java.util.Date;
 
 public class EpaData {
     public static String SITENAME = "SiteName";
-    public static String COUNTRY = "Country";
+    public static String COUNTY = "County";
     public static String POLLUTANT = "Pollutant";
     public static String STATUS = "Status";
-    public static String PUBLISH_TIME = "publishTime";
+    public static String PUBLISH_TIME = "PublishTime";
     public static String AQI = "AQI";
     public static String PM2DOT5 = "PM2.5";
     public static String PM10 = "PM10";
-    public static String O3 = "o3";
+    public static String O3 = "O3";
 
     private String siteName;
     private String country;

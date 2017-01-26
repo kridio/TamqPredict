@@ -3,6 +3,9 @@ package tw.gov.epa.taqmpredict.util;
 import android.graphics.Bitmap;
 import android.support.v4.util.LruCache;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by user on 2017/1/23.
  */
@@ -18,9 +21,29 @@ public class DataCache<K, V> {
      */
     private LruCache<K, Bitmap> mBitmapCache;
 
+    private DataCalendar dataCalendar;
+
     public DataCache() {
         mJsonCache = new LruCache<K, V>(1 * 1024 * 1024);
         mBitmapCache = new LruCache<K, Bitmap>(2 * 1024 * 1024);
+        dataCalendar = new DataCalendar();
+    }
+
+    /**
+     * Generate data key
+     * @param date
+     * @return date key
+     */
+    public String getDateKey(Date date){
+        return dataCalendar.getDateFormat(date);
+    }
+
+    /**
+     * Generate real time data key
+     * @return date key
+     */
+    public String getRealTimeInfoKey(){
+        return getDateKey(new Date());
     }
 
     /**

@@ -1,18 +1,7 @@
 package tw.gov.epa.taqmpredict.util;
 
 import android.os.AsyncTask;
-import android.provider.ContactsContract;
 import android.util.Log;
-
-import com.google.gson.*;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
 
 /**
  * Created by user on 2017/1/23.
@@ -37,7 +26,7 @@ public class DataProcessor extends AsyncTask<Void, Void, Void> {
     private String token = "GFnGTmY/a0qiH1ClEPIQTg";
     private String url = "http://opendata.epa.gov.tw/webapi/api/rest/datastore/"+resourceID+"/?format="+format+"&token="+token;
     private DataCache<String,String> dataCache;
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
 
     public DataProcessor(DataCache dataCache){
         this.dataCache =  dataCache;
@@ -48,12 +37,17 @@ public class DataProcessor extends AsyncTask<Void, Void, Void> {
         super.onPreExecute();
     }
 
+    /**
+     * Get data from server and store in cache
+     * @param arg0
+     * @return
+     */
     @Override
     protected Void doInBackground(Void... arg0) {
-        HttpHandler sh = new HttpHandler();
-        String key = simpleDateFormat.format(new Date());
+        HttpHandler httpHandler = new HttpHandler();
+        String key = dataCache.getRealTimeInfoKey();
         if(dataCache!=null) {
-            DataParser dataParser = new DataParser(this.dataCache);
+            DataParser dataParser = new DataParser();
             String jsonStr = dataCache.getJsonLruCache(key);
 
             if (jsonStr != null && !jsonStr.equals("")) {
@@ -61,7 +55,7 @@ public class DataProcessor extends AsyncTask<Void, Void, Void> {
                 dataParser.parser_object(jsonStr);
             } else {
                 // Making a request to url and getting response
-                jsonStr = sh.makeServiceCall(url);
+                jsonStr = httpHandler.makeServiceCall(url);
                 Log.e(TAG, "Response from url: " + jsonStr);
 
                 if (jsonStr != null && !jsonStr.equals("")) {
