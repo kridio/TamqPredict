@@ -1,8 +1,6 @@
 package tw.gov.epa.taqmpredict;
 
 import android.Manifest;
-import android.content.Intent;
-import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -21,20 +19,25 @@ import com.nobrain.android.permissions.Result;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
-import tw.gov.epa.taqmpredict.gps.AreaRequest;
+import tw.gov.epa.taqmpredict.data.EpaDataRequest;
+import tw.gov.epa.taqmpredict.gps.area.AreaRequest;
 import tw.gov.epa.taqmpredict.gps.GPSTracker;
-import tw.gov.epa.taqmpredict.util.DataCache;
-import tw.gov.epa.taqmpredict.util.DataProcessor;
+import tw.gov.epa.taqmpredict.data.DataCache;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
 
-    private Toolbar mToolbar;
     private DataCache<String,String> dataCache;
-    private DataProcessor dataProcessor;
+//    private DataProcessor dataProcessor;
+    private GPSTracker gpsTracker;
     private AreaRequest areaRequest;
+    private EpaDataRequest epaDataRequest;
+
     private TextView tv_location;
+    private Toolbar mToolbar;
+
     public static final int REQUEST_CODE = 102;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +52,13 @@ public class MainActivity extends AppCompatActivity {
 
         changeFragment(MainFragment.newInstance());
 
-        startService(new Intent(this, GPSTracker.class));
+        gpsTracker = new GPSTracker(this);
+        gpsTracker.startLocation();
+
+        areaRequest = new AreaRequest();
+
+        epaDataRequest = new EpaDataRequest();
+
         dataCache = new DataCache<String, String>();
     }
 
@@ -59,11 +68,11 @@ public class MainActivity extends AppCompatActivity {
         //set full screen
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
 
-        areaRequest = new AreaRequest(this);
-        areaRequest.execute();
+        areaRequest.getArea(gpsTracker.getLat_lng());
+        epaDataRequest.getEpaDataRecord();
 
-        dataProcessor = new DataProcessor(dataCache);
-        dataProcessor.execute();
+//        dataProcessor = new DataProcessor(dataCache);
+//        dataProcessor.execute();
     }
 
     @Override
@@ -74,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        gpsTracker.stopLocation();
     }
 
     private void changeFragment(Fragment f) {

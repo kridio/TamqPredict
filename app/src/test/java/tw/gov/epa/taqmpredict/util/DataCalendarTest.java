@@ -1,11 +1,11 @@
 package tw.gov.epa.taqmpredict.util;
 
-import junit.framework.TestCase;
-
 import org.junit.Before;
 import org.junit.Test;
 
 import java.text.SimpleDateFormat;
+
+import tw.gov.epa.taqmpredict.data.DataCalendar;
 
 import static org.junit.Assert.*;
 
