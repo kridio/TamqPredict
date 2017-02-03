@@ -5,10 +5,14 @@ import android.util.Log;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import tw.gov.epa.taqmpredict.data.pojo.Record;
+import tw.gov.epa.taqmpredict.gps.area.pojo.AreaData;
 
 /**
  * Created by user on 2017/2/2.
@@ -25,11 +29,11 @@ public class EpaDataRequest {
      * {sort}:排序欄位
      * {token}:資料下載驗證碼，「權限登記」頁面進行登記後可取得。
      */
-    private final String resourceID = "355000000I-001805";
-    private final String format = "json";
-    private final String token = "GFnGTmY/a0qiH1ClEPIQTg";
-    private final String param = "format="+format+"&token="+token;
-    private String url = "http://opendata.epa.gov.tw/webapi/api/rest/datastore/"+resourceID+"/";
+    private final String RESOURCEID = "355000000I-001805";
+    private final String FORMAT = "json";
+    private final String TOKEN = "GFnGTmY/a0qiH1ClEPIQTg";
+    //private final String param = "format="+format+"&token="+token;
+    private String url = "http://opendata.epa.gov.tw/webapi/api/rest/datastore/";
     private String limit = "0";
     private String offset = "0";
     private String orderby = "SiteName";
@@ -43,12 +47,24 @@ public class EpaDataRequest {
                 .build();
 
         EpaDataRequestService epaDataRequestService = retrofit.create(EpaDataRequestService.class);
-        Observable<Record> epaData = epaDataRequestService.getEpaDataRecord(param);
+        Call<Record> epaData = epaDataRequestService.getEpaDataRecord(RESOURCEID,FORMAT,TOKEN);
 
-        epaData.subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(Record -> {
-                    Log.e(TAG+":Current Epa Record ", Record.getPM25());
-                });
+        epaData.enqueue(new Callback<Record>() {
+            @Override
+            public void onResponse(Call<Record> call, Response<Record> response) {
+                Log.d(TAG,"PM2.5:"+response.body().getPM25());
+            }
+
+            @Override
+            public void onFailure(Call<Record> call, Throwable t) {
+
+            }
+        });
+
+//        epaData.subscribeOn(Schedulers.newThread())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(Record -> {
+//                    Log.e(TAG+":Current Epa Record ", Record.getPM25());
+//                });
     }
 }

@@ -5,10 +5,15 @@ import android.util.Log;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import tw.gov.epa.taqmpredict.gps.area.pojo.AddressComponent;
 import tw.gov.epa.taqmpredict.gps.area.pojo.AreaData;
+import tw.gov.epa.taqmpredict.gps.area.pojo.Result;
 
 /**
  * Created by user on 2017/1/25.
@@ -17,10 +22,12 @@ import tw.gov.epa.taqmpredict.gps.area.pojo.AreaData;
 public class AreaRequest {
     private final static String TAG = AreaRequest.class.getSimpleName();
 
-    private final String url = "http://api.openweathermap.org/data/2.5/";
+    private final String url = "http://maps.google.com/maps/api/geocode/";
+    private final String LANG = "zh-TW";
+    private final String SENSOR = "true";
 
     public void getArea(String lat_lng){
-        lat_lng = "12,21&language=zh-TW&sensor=true";
+        lat_lng = "12,21";
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url)
@@ -29,15 +36,33 @@ public class AreaRequest {
                 .build();
 
         AreaRequestService areaRequestService = retrofit.create(AreaRequestService.class);
-        Observable<AreaData> area = areaRequestService.getAreaData(lat_lng);
+        Call<AreaData> area = areaRequestService.getAreaData(lat_lng,LANG,SENSOR);
 
-        area.subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(areaData -> {
-                    Log.e(TAG+":Current Area ", areaData.getResults()
-                            .get(0)
-                            .getFormattedAddress());
-                });
+        area.enqueue(new Callback<AreaData>() {
+
+            @Override
+            public void onResponse(Call<AreaData> call, Response<AreaData> response) {
+                for(Result result:response.body().getResults()){
+                    for(AddressComponent address:result.getAddressComponents()){
+                        Log.d("request long area:",address.getLongName());
+                        Log.d("request short area:",address.getShortName());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AreaData> call, Throwable t) {
+
+            }
+        });
+
+//        area.subscribeOn(Schedulers.newThread())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(areaData -> {
+//                    Log.e(TAG+":Current Area ", areaData.getResults()
+//                            .get(0)
+//                            .getFormattedAddress());
+//                });
     }
 
 //    public double getLatitu(){

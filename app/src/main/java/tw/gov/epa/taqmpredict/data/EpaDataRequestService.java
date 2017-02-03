@@ -1,7 +1,9 @@
 package tw.gov.epa.taqmpredict.data;
 
 import io.reactivex.Observable;
+import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 import tw.gov.epa.taqmpredict.data.pojo.Record;
 
@@ -10,6 +12,10 @@ import tw.gov.epa.taqmpredict.data.pojo.Record;
  */
 
 public interface EpaDataRequestService {
-    @GET("?")
-    Observable<Record> getEpaDataRecord(@Query("q") String records);
+    @GET("{resourceid}/")
+    Call<Record> getEpaDataRecord(
+            @Path("resourceid") String resourceid,
+            @Query("format") String format,
+            @Query("token") String token
+    );
 }

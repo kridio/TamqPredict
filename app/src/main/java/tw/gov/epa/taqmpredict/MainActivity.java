@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void createView(){
-        tv_location = (TextView) findViewById(R.id.tv_location);
+
     }
 
     Observable<String> observable = Observable.create(new ObservableOnSubscribe<String>() {

@@ -1,6 +1,7 @@
 package tw.gov.epa.taqmpredict.gps.area;
 
 import io.reactivex.Observable;
+import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 import tw.gov.epa.taqmpredict.gps.area.pojo.AreaData;
@@ -10,6 +11,10 @@ import tw.gov.epa.taqmpredict.gps.area.pojo.AreaData;
  */
 
 public interface AreaRequestService {
-    @GET("json?")
-    Observable<AreaData> getAreaData(@Query("q") String county);
+    @GET("json")
+    Call<AreaData> getAreaData(
+            @Query("latlng") String latlng,
+            @Query("language") String language,
+            @Query("sensor") String sensor
+    );
 }
