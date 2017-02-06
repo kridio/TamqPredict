@@ -17,14 +17,15 @@ import io.nlopez.smartlocation.SmartLocation;
 import io.nlopez.smartlocation.geofencing.utils.TransitionGeofence;
 import io.nlopez.smartlocation.location.providers.LocationGooglePlayServicesProvider;
 
-public class GPSTracker implements OnActivityUpdatedListener,OnLocationUpdatedListener,OnGeofencingTransitionListener {
-    private final static String TAG = GPSTracker.class.getSimpleName();
+public class GPSTrackerService implements OnActivityUpdatedListener,OnLocationUpdatedListener,OnGeofencingTransitionListener {
+    private final static String TAG = GPSTrackerService.class.getSimpleName();
 
     private Context context;
     private LocationGooglePlayServicesProvider provider;
-    private String lat_lng="";
+    private String lat = "";
+    private String lng = "";
 
-    public GPSTracker(Context context){
+    public GPSTrackerService(Context context){
         this.context = context;
     }
 
@@ -65,11 +66,8 @@ public class GPSTracker implements OnActivityUpdatedListener,OnLocationUpdatedLi
 
     @Override
     public void onLocationUpdated(Location location) {
-        lat_lng = location.getLatitude()+","+location.getLongitude();
-    }
+        logd("onLocationUpdated: "+location.getLatitude()+","+location.getLongitude());
 
-    public String getLat_lng(){
-        return lat_lng;
     }
 
     public void logd(String log){

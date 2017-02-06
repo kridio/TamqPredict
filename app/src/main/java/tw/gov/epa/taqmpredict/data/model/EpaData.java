@@ -1,5 +1,5 @@
 
-package tw.gov.epa.taqmpredict.data.pojo;
+package tw.gov.epa.taqmpredict.data.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

@@ -1,65 +1,60 @@
 package tw.gov.epa.taqmpredict;
 
 import android.Manifest;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nobrain.android.permissions.AndroidPermissions;
-import com.nobrain.android.permissions.Checker;
 import com.nobrain.android.permissions.Result;
 
-import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
-import tw.gov.epa.taqmpredict.data.EpaDataRequest;
-import tw.gov.epa.taqmpredict.gps.area.AreaRequest;
-import tw.gov.epa.taqmpredict.gps.GPSTracker;
+import tw.gov.epa.taqmpredict.data.DataRequestService;
+import tw.gov.epa.taqmpredict.data.DataRequestPresenter;
+import tw.gov.epa.taqmpredict.data.IDataRequestPresenter;
+import tw.gov.epa.taqmpredict.gps.GPSTrackerService;
+import tw.gov.epa.taqmpredict.gps.area.AreaRequestPresenter;
+import tw.gov.epa.taqmpredict.gps.area.AreaRequestService;
 import tw.gov.epa.taqmpredict.data.DataCache;
+import tw.gov.epa.taqmpredict.gps.area.IAreaRequestPresenter;
+import tw.gov.epa.taqmpredict.util.PermissionsManager;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements IMainView{
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private DataCache<String,String> dataCache;
-//    private DataProcessor dataProcessor;
-    private GPSTracker gpsTracker;
-    private AreaRequest areaRequest;
-    private EpaDataRequest epaDataRequest;
+    private GPSTrackerService gpsTrackerService;
+    private AreaRequestService areaRequestService;
+    private DataRequestService epaDataRequestService;
 
     private TextView tv_location;
     private Toolbar mToolbar;
 
-    public static final int REQUEST_CODE = 102;
+    private IDataRequestPresenter epaDataRequestPresenter;
+    private IAreaRequestPresenter areaRequestPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        checkPermission();
-
-        createView();
+        PermissionsManager.checkPermission(this);
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
         changeFragment(MainFragment.newInstance());
 
-        gpsTracker = new GPSTracker(this);
-        gpsTracker.startLocation();
+        gpsTrackerService = new GPSTrackerService(this);
+        areaRequestService = new AreaRequestService();
+        epaDataRequestService = new DataRequestService();
 
-        areaRequest = new AreaRequest();
-
-        epaDataRequest = new EpaDataRequest();
-
-        dataCache = new DataCache<String, String>();
+        epaDataRequestPresenter = new DataRequestPresenter(this,epaDataRequestService);
+        areaRequestPresenter = new AreaRequestPresenter(this,areaRequestService,gpsTrackerService);
     }
 
     @Override
@@ -67,23 +62,18 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         //set full screen
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
-
-        areaRequest.getArea(gpsTracker.getLat_lng());
-        epaDataRequest.getEpaDataRecord();
-
-//        dataProcessor = new DataProcessor(dataCache);
-//        dataProcessor.execute();
+        gpsTrackerService.startLocation();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+        gpsTrackerService.stopLocation();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        gpsTracker.stopLocation();
     }
 
     private void changeFragment(Fragment f) {
@@ -92,42 +82,11 @@ public class MainActivity extends AppCompatActivity {
         transaction.commitAllowingStateLoss();
     }
 
-    public void checkPermission(){
-        AndroidPermissions.check(this)
-                .permissions(Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION)
-                .hasPermissions(new Checker.Action0() {
-                    @Override
-                    public void call(String[] permissions) {
-                        String msg = "Permission has " + permissions[0];
-                        Log.d(TAG, msg);
-                        Toast.makeText(MainActivity.this,
-                                msg,
-                                Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .noPermissions(new Checker.Action1() {
-                    @Override
-                    public void call(String[] permissions) {
-                        String msg = "Permission has no " + permissions[0];
-                        Log.d(TAG, msg);
-                        Toast.makeText(MainActivity.this,
-                                msg,
-                                Toast.LENGTH_SHORT).show();
-
-                        ActivityCompat.requestPermissions(MainActivity.this
-                                , new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION}
-                                , REQUEST_CODE);
-                    }
-                })
-                .check();
-
-    }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, final String[] permissions, int[] grantResults) {
         AndroidPermissions.result(MainActivity.this)
-                .addPermissions(REQUEST_CODE, Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION)
-                .putActions(REQUEST_CODE, new Result.Action0() {
+                .addPermissions(PermissionsManager.REQUEST_CODE, Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION)
+                .putActions(PermissionsManager.REQUEST_CODE, new Result.Action0() {
                     @Override
                     public void call() {
                         String msg = "Request Success : " + permissions[0];
@@ -148,15 +107,4 @@ public class MainActivity extends AppCompatActivity {
                 })
                 .result(requestCode, permissions, grantResults);
     }
-
-    public void createView(){
-
-    }
-
-    Observable<String> observable = Observable.create(new ObservableOnSubscribe<String>() {
-        @Override
-        public void subscribe(ObservableEmitter<String> e) throws Exception {
-
-        }
-    });
 }

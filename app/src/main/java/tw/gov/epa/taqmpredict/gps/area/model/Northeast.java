@@ -1,5 +1,5 @@
 
-package tw.gov.epa.taqmpredict.gps.area.pojo;
+package tw.gov.epa.taqmpredict.gps.area.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -7,7 +7,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Location implements Parcelable
+public class Northeast implements Parcelable
 {
 
     @SerializedName("lat")
@@ -16,21 +16,21 @@ public class Location implements Parcelable
     @SerializedName("lng")
     @Expose
     private Double lng;
-    public final static Creator<Location> CREATOR = new Creator<Location>() {
+    public final static Creator<Northeast> CREATOR = new Creator<Northeast>() {
 
 
         @SuppressWarnings({
             "unchecked"
         })
-        public Location createFromParcel(Parcel in) {
-            Location instance = new Location();
+        public Northeast createFromParcel(Parcel in) {
+            Northeast instance = new Northeast();
             instance.lat = ((Double) in.readValue((Double.class.getClassLoader())));
             instance.lng = ((Double) in.readValue((Double.class.getClassLoader())));
             return instance;
         }
 
-        public Location[] newArray(int size) {
-            return (new Location[size]);
+        public Northeast[] newArray(int size) {
+            return (new Northeast[size]);
         }
 
     }

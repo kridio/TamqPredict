@@ -1,5 +1,5 @@
 
-package tw.gov.epa.taqmpredict.gps.area.pojo;
+package tw.gov.epa.taqmpredict.gps.area.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
