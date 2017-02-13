@@ -13,6 +13,8 @@ import android.widget.Toast;
 import com.nobrain.android.permissions.AndroidPermissions;
 import com.nobrain.android.permissions.Result;
 
+import me.yokeyword.fragmentation.Fragmentation;
+import me.yokeyword.fragmentation.SupportActivity;
 import tw.gov.epa.taqmpredict.data.DataRequestService;
 import tw.gov.epa.taqmpredict.data.DataRequestPresenter;
 import tw.gov.epa.taqmpredict.data.IDataRequestPresenter;
@@ -23,7 +25,7 @@ import tw.gov.epa.taqmpredict.data.DataCache;
 import tw.gov.epa.taqmpredict.gps.area.IAreaRequestPresenter;
 import tw.gov.epa.taqmpredict.util.PermissionsManager;
 
-public class MainActivity extends AppCompatActivity implements IMainView{
+public class MainActivity extends SupportActivity implements IMainView{
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private DataCache<String,String> dataCache;
@@ -40,7 +42,16 @@ public class MainActivity extends AppCompatActivity implements IMainView{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+
+        if (savedInstanceState == null) {
+            loadRootFragment(R.id.fragment_main, MainFragment.newInstance());  // 加载根Fragment
+        }
+
+        Fragmentation.builder()
+                .stackViewMode(Fragmentation.BUBBLE)
+                .install();
 
         PermissionsManager.checkPermission(this);
 

@@ -8,18 +8,39 @@
     android:layout_height="match_parent"
     tools:context="tw.gov.epa.taqmpredict.MainActivity">
 
+
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_gravity="center">
+            <TextView
+                android:id="@+id/tv_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/font_size_medium"
+                android:layout_marginTop="10dp"
+                android:text="桃園市/龍潭區"
+                android:layout_gravity="center" />
 
-        <TextView
-            android:id="@+id/tv_location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/tv_datetime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:textSize="@dimen/font_size_small"
+                android:text="2017-02-13 (一) Monday 13:44:54"/>
+
+        </LinearLayout>
+
     </android.support.v7.widget.Toolbar>>
 
     <include

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CircularRing">
+        <attr name="circleNumber" format="integer" />
+        <attr name="circleWidth" format="integer" />
+        <attr name="roundColor" format="color" />
+        <attr name="circleTextColor" format="color" />
+        <attr name="circleRoundWidth" format="integer" />
+        <attr name="circleTextSize" format="dimension" />
+        <attr name="circleColor1" format="color" />
+        <attr name="circleColor2" format="color" />
+        <attr name="circleColor3" format="color" />
+    </declare-styleable>
+</resources>
