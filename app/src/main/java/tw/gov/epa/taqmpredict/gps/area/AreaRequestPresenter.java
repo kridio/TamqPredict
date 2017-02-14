@@ -1,8 +1,5 @@
 package tw.gov.epa.taqmpredict.gps.area;
 
-import android.content.Context;
-
-import tw.gov.epa.taqmpredict.IMainView;
 import tw.gov.epa.taqmpredict.gps.GPSTrackerService;
 
 /**
@@ -12,16 +9,16 @@ import tw.gov.epa.taqmpredict.gps.GPSTrackerService;
 public class AreaRequestPresenter implements IAreaRequestPresenter{
     private final String TAG = AreaRequestPresenter.class.getSimpleName();
 
-    private IMainView mView;
+//    private IMainView mView;
     private AreaRequestService mAreaRequestService;
     private GPSTrackerService mGpsTrackerService;
 
     private GPSTrackerService gpsTracker;
 
-    public AreaRequestPresenter(IMainView view,
+    public AreaRequestPresenter(//IMainView view,
                                 AreaRequestService areaRequestService,
                                 GPSTrackerService gpsTrackerService){
-        mView = view;
+//        mView = view;
         mAreaRequestService = areaRequestService;
         mGpsTrackerService = gpsTrackerService;
     }

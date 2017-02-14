@@ -1,20 +1,19 @@
 package tw.gov.epa.taqmpredict;
 
 import android.Manifest;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nobrain.android.permissions.AndroidPermissions;
 import com.nobrain.android.permissions.Result;
 
-import me.yokeyword.fragmentation.Fragmentation;
 import me.yokeyword.fragmentation.SupportActivity;
+import me.yokeyword.fragmentation.SupportFragment;
+import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator;
+import me.yokeyword.fragmentation.anim.FragmentAnimator;
+import me.yokeyword.fragmentation.helper.FragmentLifecycleCallbacks;
 import tw.gov.epa.taqmpredict.data.DataRequestService;
 import tw.gov.epa.taqmpredict.data.DataRequestPresenter;
 import tw.gov.epa.taqmpredict.data.IDataRequestPresenter;
@@ -23,18 +22,16 @@ import tw.gov.epa.taqmpredict.gps.area.AreaRequestPresenter;
 import tw.gov.epa.taqmpredict.gps.area.AreaRequestService;
 import tw.gov.epa.taqmpredict.data.DataCache;
 import tw.gov.epa.taqmpredict.gps.area.IAreaRequestPresenter;
+import tw.gov.epa.taqmpredict.ui.fragment.MainFragment;
 import tw.gov.epa.taqmpredict.util.PermissionsManager;
 
-public class MainActivity extends SupportActivity implements IMainView{
+public class MainActivity extends SupportActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private DataCache<String,String> dataCache;
     private GPSTrackerService gpsTrackerService;
     private AreaRequestService areaRequestService;
     private DataRequestService epaDataRequestService;
-
-    private TextView tv_location;
-    private Toolbar mToolbar;
 
     private IDataRequestPresenter epaDataRequestPresenter;
     private IAreaRequestPresenter areaRequestPresenter;
@@ -46,26 +43,36 @@ public class MainActivity extends SupportActivity implements IMainView{
         setContentView(R.layout.activity_main);
 
         if (savedInstanceState == null) {
-            loadRootFragment(R.id.fragment_main, MainFragment.newInstance());  // 加载根Fragment
+            loadRootFragment(R.id.tamq_container, MainFragment.newInstance());  // load root Fragment
         }
-
-        Fragmentation.builder()
-                .stackViewMode(Fragmentation.BUBBLE)
-                .install();
 
         PermissionsManager.checkPermission(this);
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(mToolbar);
+        registerFragmentLifecycleCallbacks(new FragmentLifecycleCallbacks() {
+            @Override
+            public void onFragmentSupportVisible(SupportFragment fragment) {
+                Log.i("MainActivity", "onFragmentSupportVisible--->" + fragment.getClass().getSimpleName());
+            }
 
-        changeFragment(MainFragment.newInstance());
+            @Override
+            public void onFragmentCreated(SupportFragment fragment, Bundle savedInstanceState) {
+                super.onFragmentCreated(fragment, savedInstanceState);
+            }
+        });
+
+
+
+//        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(mToolbar);
+
+//        changeFragment(MainFragment.newInstance());
 
         gpsTrackerService = new GPSTrackerService(this);
         areaRequestService = new AreaRequestService();
         epaDataRequestService = new DataRequestService();
 
-        epaDataRequestPresenter = new DataRequestPresenter(this,epaDataRequestService);
-        areaRequestPresenter = new AreaRequestPresenter(this,areaRequestService,gpsTrackerService);
+//        epaDataRequestPresenter = new DataRequestPresenter(this,epaDataRequestService);
+//        areaRequestPresenter = new AreaRequestPresenter(this,areaRequestService,gpsTrackerService);
     }
 
     @Override
@@ -87,10 +94,20 @@ public class MainActivity extends SupportActivity implements IMainView{
         super.onDestroy();
     }
 
-    private void changeFragment(Fragment f) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.activity_main, f);
-        transaction.commitAllowingStateLoss();
+//    private void changeFragment(Fragment f) {
+//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//        transaction.replace(R.id.activity_main, f);
+//        transaction.commitAllowingStateLoss();
+//    }
+
+    @Override
+    public void onBackPressedSupport() {
+        super.onBackPressedSupport();
+    }
+
+    @Override
+    public FragmentAnimator onCreateFragmentAnimator() {
+        return new DefaultHorizontalAnimator();
     }
 
     @Override

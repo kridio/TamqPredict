@@ -27,6 +27,7 @@ android {
 //        sourceCompatibility 1.8
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+        encoding "UTF-8"
     }
     packagingOptions {
         exclude 'META-INF/rxjava.properties'
@@ -61,4 +62,5 @@ dependencies {
     compile 'com.android.support:gridlayout-v7:25.1.1'
     compile 'com.android.support:recyclerview-v7:25.1.1'
     compile 'me.yokeyword:fragmentation:0.10.1'
+    compile 'org.greenrobot:eventbus:3.0.0'
 }

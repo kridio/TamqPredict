@@ -2,13 +2,11 @@ package tw.gov.epa.taqmpredict.data;
 
 import android.util.Log;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import tw.gov.epa.taqmpredict.IMainView;
 import tw.gov.epa.taqmpredict.data.model.EpaData;
 import tw.gov.epa.taqmpredict.data.model.Record;
 import tw.gov.epa.taqmpredict.data.model.Result;
@@ -20,14 +18,15 @@ import tw.gov.epa.taqmpredict.data.model.Result;
 public class DataRequestPresenter implements IDataRequestPresenter {
     private final String TAG = DataRequestPresenter.class.getSimpleName();
 
-    private IMainView mView;
+//    private IMainView mView;
     private DataRequestService mDataRequestService;
 
     private boolean isCache = false;
     private DataCache<String,String> dataCache;
 
-    public DataRequestPresenter(IMainView view,DataRequestService dataRequestService){
-        mView = view;
+    public DataRequestPresenter(//IMainView view,
+                                DataRequestService dataRequestService){
+//        mView = view;
         mDataRequestService = dataRequestService;
         dataCache = new DataCache<String, String>();
     }
