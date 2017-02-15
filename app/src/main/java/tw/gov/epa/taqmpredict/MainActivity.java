@@ -3,7 +3,7 @@ package tw.gov.epa.taqmpredict;
 import android.Manifest;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.nobrain.android.permissions.AndroidPermissions;
@@ -15,10 +15,8 @@ import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
 import me.yokeyword.fragmentation.helper.FragmentLifecycleCallbacks;
 import tw.gov.epa.taqmpredict.data.DataRequestService;
-import tw.gov.epa.taqmpredict.data.DataRequestPresenter;
 import tw.gov.epa.taqmpredict.data.IDataRequestPresenter;
 import tw.gov.epa.taqmpredict.gps.GPSTrackerService;
-import tw.gov.epa.taqmpredict.gps.area.AreaRequestPresenter;
 import tw.gov.epa.taqmpredict.gps.area.AreaRequestService;
 import tw.gov.epa.taqmpredict.data.DataCache;
 import tw.gov.epa.taqmpredict.gps.area.IAreaRequestPresenter;
@@ -61,6 +59,7 @@ public class MainActivity extends SupportActivity {
         });
 
 
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 //        mToolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(mToolbar);
@@ -79,7 +78,7 @@ public class MainActivity extends SupportActivity {
     protected void onResume() {
         super.onResume();
         //set full screen
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
+        //getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
         gpsTrackerService.startLocation();
     }
 

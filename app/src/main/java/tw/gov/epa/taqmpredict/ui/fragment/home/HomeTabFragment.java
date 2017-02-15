@@ -3,13 +3,20 @@ package tw.gov.epa.taqmpredict.ui.fragment.home;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import tw.gov.epa.taqmpredict.R;
+import tw.gov.epa.taqmpredict.R2;
 import tw.gov.epa.taqmpredict.base.BaseFragment;
 import tw.gov.epa.taqmpredict.event.TabSelectedEvent;
 import tw.gov.epa.taqmpredict.ui.fragment.MainFragment;
@@ -19,10 +26,17 @@ import tw.gov.epa.taqmpredict.ui.fragment.MainFragment;
  */
 
 public class HomeTabFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
+    private static final String TAG = HomeTabFragment.class.getSimpleName();
+    @BindView(R2.id.tv_location)
+    TextView tvLocation;
+    @BindView(R2.id.tv_datetime)
+    TextView tvDatetime;
+    @BindView(R2.id.toolbar)
+    Toolbar toolbar;
+
     public static HomeTabFragment newInstance() {
-        
         Bundle args = new Bundle();
-        
+
         HomeTabFragment fragment = new HomeTabFragment();
         fragment.setArguments(args);
         return fragment;
@@ -32,28 +46,41 @@ public class HomeTabFragment extends BaseFragment implements SwipeRefreshLayout.
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tab_home, container, false);
-        initView(view);
-        return super.onCreateView(inflater, container, savedInstanceState);
+        ButterKnife.bind(this, view);
+        EventBus.getDefault().register(this);
+        return view;
     }
 
-    private void initView(View view) {
-
-    }
 
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
+        logd("onLazyInitView");
     }
 
+    /**
+     * reselected fragment
+     *
+     * @param event
+     */
     @Subscribe
     public void onTabSelectedEvent(TabSelectedEvent event) {
         if (event.position != MainFragment.FIRST) return;
+        logd("onTabSelectedEvent");
+    }
 
-
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        EventBus.getDefault().unregister(this);
     }
 
     @Override
     public void onRefresh() {
 
+    }
+
+    private void logd(String log) {
+        Log.d(TAG, log);
     }
 }

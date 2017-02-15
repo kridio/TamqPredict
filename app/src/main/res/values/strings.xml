@@ -1,3 +1,5 @@
 <resources>
     <string name="title_activity_maps">Map</string>
+    <string name="title_area_display">------ ------</string>
+    <string name="title_datetime_display">----/--/-- (-) ---- --:--:--</string>
 </resources>

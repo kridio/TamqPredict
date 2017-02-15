@@ -28,9 +28,9 @@ public class PermissionsManager {
                     public void call(String[] permissions) {
                         String msg = "Permission has " + permissions[0];
                         Log.d(TAG, msg);
-                        Toast.makeText(activity,
-                                msg,
-                                Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(activity,
+//                                msg,
+//                                Toast.LENGTH_SHORT).show();
                     }
                 })
                 .noPermissions(new Checker.Action1() {
@@ -38,9 +38,9 @@ public class PermissionsManager {
                     public void call(String[] permissions) {
                         String msg = "Permission has no " + permissions[0];
                         Log.d(TAG, msg);
-                        Toast.makeText(activity,
-                                msg,
-                                Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(activity,
+//                                msg,
+//                                Toast.LENGTH_SHORT).show();
 
                         ActivityCompat.requestPermissions(activity
                                 , new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION}
