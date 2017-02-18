@@ -19,8 +19,7 @@
             android:layout_marginTop="10dp"
             android:text="@string/title_area_display"
             android:textSize="@dimen/font_size_medium"
-            android:textColor="@color/cardview_light_background"
-            android:letterSpacing="2" />
+            android:textColor="@color/cardview_light_background"/>
 
         <TextView
             android:id="@+id/tv_datetime"

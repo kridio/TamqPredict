@@ -2,7 +2,6 @@ package tw.gov.epa.taqmpredict.ui.fragment.home;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,7 +15,6 @@ import org.greenrobot.eventbus.Subscribe;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import tw.gov.epa.taqmpredict.R;
-import tw.gov.epa.taqmpredict.R2;
 import tw.gov.epa.taqmpredict.base.BaseFragment;
 import tw.gov.epa.taqmpredict.event.TabSelectedEvent;
 import tw.gov.epa.taqmpredict.ui.fragment.MainFragment;
@@ -25,13 +23,13 @@ import tw.gov.epa.taqmpredict.ui.fragment.MainFragment;
  * Created by user on 2017/2/14.
  */
 
-public class HomeTabFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
+public class HomeTabFragment extends BaseFragment {
     private static final String TAG = HomeTabFragment.class.getSimpleName();
-    @BindView(R2.id.tv_location)
+    @BindView(R.id.tv_location)
     TextView tvLocation;
-    @BindView(R2.id.tv_datetime)
+    @BindView(R.id.tv_datetime)
     TextView tvDatetime;
-    @BindView(R2.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
 
     public static HomeTabFragment newInstance() {
@@ -50,7 +48,6 @@ public class HomeTabFragment extends BaseFragment implements SwipeRefreshLayout.
         EventBus.getDefault().register(this);
         return view;
     }
-
 
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
@@ -73,11 +70,6 @@ public class HomeTabFragment extends BaseFragment implements SwipeRefreshLayout.
     public void onDestroyView() {
         super.onDestroyView();
         EventBus.getDefault().unregister(this);
-    }
-
-    @Override
-    public void onRefresh() {
-
     }
 
     private void logd(String log) {

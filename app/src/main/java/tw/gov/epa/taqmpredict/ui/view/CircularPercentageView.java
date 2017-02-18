@@ -85,6 +85,32 @@ public class CircularPercentageView extends View {
         mTypedArray.recycle();
     }
 
+    /**
+     * draw point
+     */
+//    private void drawPoint(){
+//        float secRot = mCalendar.get(Calendar.SECOND) / 30f * (float) Math.PI;
+//        float minRot = mCalendar.get(Calendar.MINUTE) / 30f * (float) Math.PI;
+//        float hrRot = (((mCalendar.get(Calendar.HOUR_OF_DAY) + (mCalendar.get(Calendar.MINUTE) / 60f))) / 6f) * (float) Math.PI;
+//
+//        float secLength = centerX - 60;
+//        float minLength = centerX - 80;
+//        float hrLength = centerX - 100;
+//
+//        float hrX = (float) Math.sin(hrRot) * hrLength;
+//        float hrY = (float) -Math.cos(hrRot) * hrLength;
+//        canvas.drawLine(centerX, centerY, centerX + hrX, centerY + hrY, paintHour);
+//
+//        float minX = (float) Math.sin(minRot) * minLength;
+//        float minY = (float) -Math.cos(minRot) * minLength;
+//
+//        canvas.drawLine(centerX, centerY, centerX + minX, centerY + minY, paintMinute);
+//
+//        float secX = (float) Math.sin(secRot) * secLength;
+//        float secY = (float) -Math.cos(secRot) * secLength;
+//        canvas.drawLine(centerX, centerY, centerX + secX, centerY + secY, paintSecond);
+//    }
+
 
     /**
      * 空白出颜色背景

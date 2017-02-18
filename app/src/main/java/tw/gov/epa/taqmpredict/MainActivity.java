@@ -3,6 +3,7 @@ package tw.gov.epa.taqmpredict;
 import android.Manifest;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.WindowManager;
 import android.widget.Toast;
 
@@ -86,6 +87,14 @@ public class MainActivity extends SupportActivity {
     protected void onPause() {
         super.onPause();
         gpsTrackerService.stopLocation();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            //TODO 按返回鍵，則執行退出確認
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     @Override
