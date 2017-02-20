@@ -1,35 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.Toolbar xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<!--<android.support.v7.widget.Toolbar xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:id="@+id/toolbar"-->
+    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:theme="@style/AppTheme.NoActionBar"-->
+    <!--android:minHeight="0dp"-->
+    <!--android:elevation="0dp"-->
+    <!--app:layout_collapseParallaxMultiplier="1.0">-->
+<LinearLayout android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:theme="?attr/actionBarTheme"
-    android:minHeight="?attr/actionBarSize"
-    android:id="@+id/toolbar"
+    android:orientation="vertical"
+    android:id="@+id/location_bar"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/tv_location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:text="@string/title_area_display"
-            android:textSize="@dimen/font_size_medium"
-            android:textColor="@color/cardview_light_background"/>
 
-        <TextView
-            android:id="@+id/tv_datetime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="5dp"
-            android:text="@string/title_datetime_display"
-            android:textSize="@dimen/font_size_small"
-            android:textColor="@color/cardview_light_background" />
-    </LinearLayout>
-</android.support.v7.widget.Toolbar>
+    <TextView
+        android:id="@+id/tv_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="@string/title_area_display"
+        android:textColor="@color/cardview_light_background"
+        android:textSize="@dimen/font_size_medium" />
+
+    <TextView
+        android:id="@+id/tv_datetime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:text="@string/title_datetime_display"
+        android:textColor="@color/cardview_light_background"
+        android:textSize="@dimen/font_size_small" />
+</LinearLayout>
+<!--</android.support.v7.widget.Toolbar>-->
 

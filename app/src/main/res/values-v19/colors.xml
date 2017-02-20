@@ -5,4 +5,14 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="tab_unselect">#c9c9c9</color>
+
+    <color name="text_color">#FFFFFF</color>
+
+    <!--<color name="chart_color_US">#576F86</color>-->
+    <!--<color name="chart_color_JP">#E7655A</color>-->
+    <!--<color name="chart_color_Real">#F6CE5D</color>-->
+    <color name="chart_color_Real">#BAE6FB</color>
+    <color name="chart_color_Predict">#FF0000</color>
+
+    <color name="bottom_list">#393939</color>
 </resources>

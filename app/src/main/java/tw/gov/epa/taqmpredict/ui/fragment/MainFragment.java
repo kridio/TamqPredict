@@ -18,8 +18,8 @@ import tw.gov.epa.taqmpredict.R;
 import tw.gov.epa.taqmpredict.base.BaseFragment;
 import tw.gov.epa.taqmpredict.event.StartBrotherEvent;
 import tw.gov.epa.taqmpredict.event.TabSelectedEvent;
-import tw.gov.epa.taqmpredict.ui.fragment.about.AboutTabFragment;
 import tw.gov.epa.taqmpredict.ui.fragment.home.HomeTabFragment;
+import tw.gov.epa.taqmpredict.ui.fragment.listview.ListTabFragment;
 import tw.gov.epa.taqmpredict.ui.fragment.map.MapTabFragment;
 import tw.gov.epa.taqmpredict.ui.view.BottomBar;
 import tw.gov.epa.taqmpredict.ui.view.BottomBarTab;
@@ -59,7 +59,7 @@ public class MainFragment extends BaseFragment {
         if (savedInstanceState == null) {
             mFragments[FIRST] = HomeTabFragment.newInstance();
             mFragments[SECOND] = MapTabFragment.newInstance();
-            mFragments[THIRD] = AboutTabFragment.newInstance();
+            mFragments[THIRD] = ListTabFragment.newInstance();
 
             loadMultipleRootFragment(R.id.tamq_tab_container, FIRST,
                     mFragments[FIRST],
@@ -68,7 +68,7 @@ public class MainFragment extends BaseFragment {
         } else {
             mFragments[FIRST] = findChildFragment(HomeTabFragment.class);
             mFragments[SECOND] = findChildFragment(MapTabFragment.class);
-            mFragments[THIRD] = findChildFragment(AboutTabFragment.class);
+            mFragments[THIRD] = findChildFragment(ListTabFragment.class);
         }
         initView();
 

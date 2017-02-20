@@ -3,18 +3,24 @@ package tw.gov.epa.taqmpredict.ui.fragment.listview;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TableLayout;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import tw.gov.epa.taqmpredict.R;
 import tw.gov.epa.taqmpredict.base.BaseFragment;
+import tw.gov.epa.taqmpredict.event.TabSelectedEvent;
+import tw.gov.epa.taqmpredict.ui.fragment.MainFragment;
 
 /**
  * Created by user on 2017/2/18.
@@ -24,8 +30,10 @@ public class ListTabFragment extends BaseFragment {
     private final static String TAG = ListTabFragment.class.getSimpleName();
     @BindView(R.id.tabs)
     TabLayout tabs;
-    @BindView(R.id.tables)
-    TableLayout tables;
+    @BindView(R.id.recyclerView)
+    RecyclerView recyclerView;
+
+    private ListRecyclerAdapter mAdapter;
 
     public static ListTabFragment newInstance() {
         Bundle args = new Bundle();
@@ -41,6 +49,18 @@ public class ListTabFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_tab_list, container, false);
         ButterKnife.bind(this, view);
         EventBus.getDefault().register(this);
+
+        mAdapter = new ListRecyclerAdapter(getContext());
+        ArrayList<String> myDataset = new ArrayList<>();
+        for(int i = 0; i < 100; i++){
+            myDataset.add(Integer.toString(i));
+        }
+        mAdapter.setData(myDataset);
+
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(mAdapter);
         return view;
     }
 
@@ -54,6 +74,18 @@ public class ListTabFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         EventBus.getDefault().unregister(this);
+    }
+
+
+    /**
+     * reselected fragment
+     *
+     * @param event
+     */
+    @Subscribe
+    public void onTabSelectedEvent(TabSelectedEvent event) {
+        if (event.position != MainFragment.FIRST) return;
+        logd("onTabSelectedEvent");
     }
 
 

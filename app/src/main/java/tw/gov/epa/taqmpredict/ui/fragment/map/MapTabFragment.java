@@ -54,9 +54,10 @@ public class MapTabFragment extends BaseFragment implements OnMapReadyCallback {
         if (savedInstanceState != null) {
             mapViewBundle = savedInstanceState.getBundle(MAPVIEW_BUNDLE_KEY);
         }
+        logd("mapView result:"+mMapView);
         mMapView.onCreate(mapViewBundle);
         mMapView.getMapAsync(this);
-        logd("mapView result:"+mMapView);
+
         EventBus.getDefault().register(this);
         return view;
     }
@@ -113,9 +114,16 @@ public class MapTabFragment extends BaseFragment implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         logd("onMapReady");
         mGoogleMap = googleMap;
+
+        mGoogleMap.getUiSettings().setMyLocationButtonEnabled(false);
+        mGoogleMap.getUiSettings().setZoomControlsEnabled(false);
+        mGoogleMap.getUiSettings().setZoomGesturesEnabled(true);
+        mGoogleMap.getUiSettings().setRotateGesturesEnabled(true);
+        mGoogleMap.getUiSettings().setScrollGesturesEnabled(true);
+        mGoogleMap.getUiSettings().setTiltGesturesEnabled(true);
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mGoogleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+//        LatLng sydney = new LatLng(-34, 151);
+//        mGoogleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+//        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 }
