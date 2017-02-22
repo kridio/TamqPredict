@@ -4,11 +4,19 @@
     android:layout_margin="10dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/label_mark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_action_pm25"/>
     <TextView
-        android:layout_marginLeft="10dp"
         android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
         android:id="@+id/info_text"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/label_mark"
+        android:textColor="@color/bg_white"
+        android:layout_marginTop="10dp"
+        android:text="123"/>
+
 </RelativeLayout>

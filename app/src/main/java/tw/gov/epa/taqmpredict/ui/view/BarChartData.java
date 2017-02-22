@@ -20,12 +20,12 @@ import tw.gov.epa.taqmpredict.R;
  * Created by user on 2017/2/20.
  */
 
-public class ChartData {
+public class BarChartData {
     private Context mContext;
 
     private int DATA_COUNT = 24;
 
-    public ChartData(Context context){
+    public BarChartData(Context context){
         mContext = context;
     }
 

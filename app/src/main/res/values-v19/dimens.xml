@@ -6,4 +6,6 @@
     <dimen name="font_size_medium">24sp</dimen>
     <dimen name="font_size_large">30sp</dimen>
     <dimen name="bottombar_tamq_height">52dp</dimen>
+
+    <dimen name="item_margin">8dp</dimen>
 </resources>

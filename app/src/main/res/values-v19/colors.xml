@@ -15,4 +15,10 @@
     <color name="chart_color_Predict">#FF0000</color>
 
     <color name="bottom_list">#393939</color>
+
+
+    <color name="bg_blue">#33B5E5</color>
+    <color name="bg_tool_blue">#22A5D5</color>
+    <color name="bg_white">#FFFFFF</color>
+    <color name="bg_gray">#A9A9A9</color>
 </resources>
