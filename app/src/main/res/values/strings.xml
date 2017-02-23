@@ -1,7 +1,7 @@
 <resources>
     <string name="title_activity_maps">Map</string>
     <string name="title_area_display">桃園市 龍潭區</string>
-    <string name="title_datetime_display">2017 02 20 (一) Monday 10:08:05</string>
+    <string name="title_datetime_display">2017-02-20 (一) Monday 10:08:05</string>
     <string name="chart_label_Predict">預測數值</string>
     <string name="chart_label_Real">實際數值</string>
     <string name="chart_title">比較圖表</string>

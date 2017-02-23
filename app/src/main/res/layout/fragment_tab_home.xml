@@ -1,186 +1,202 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--android:background="@drawable/bg_gradiant"-->
+    <!--android:orientation="vertical">-->
+
+<RelativeLayout android:id="@+id/card_view"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/bg_gradiant"
-    android:orientation="vertical">
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/dusk">
 
-    <RelativeLayout
-        android:id="@+id/card_view"
+    <include layout="@layout/toolbar" />
+
+
+    <LinearLayout
+        android:id="@+id/rl_main_header"
+        android:layout_below="@+id/location_bar"
+        android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <include layout="@layout/toolbar"/>
+        android:orientation="vertical"
+        android:weightSum="3">
 
-
-        <RelativeLayout
+        <android.support.v4.view.ViewPager
+            android:id="@+id/mainhead_viewpager"
+            android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/location_bar"
-            android:id="@+id/main_view">
+            android:layout_weight="1" />
 
-            <TextView
-                android:id="@+id/circle_aqi_view"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:background="@drawable/aqi_circle"
-                android:layout_marginLeft="130dp"
-                android:gravity="center"
-                android:text="123"
-                android:textColor="@color/text_color"
-                android:layout_marginTop="13dp"
-                android:textSize="50dp"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="130dp" />
-
-            <TextView
-                android:id="@+id/aqi_txt"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="AQI"
-                android:textColor="@color/bottom_list"
-                android:layout_toRightOf="@+id/circle_aqi_view"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="50dp"
-                android:textSize="15dp"
-                android:alpha="0.4"/>
-
-            <TextView
-                android:id="@+id/aqi_txt_per"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="/ 500"
-                android:textColor="#000000"
-                android:layout_toRightOf="@+id/circle_aqi_view"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="80dp"
-                android:textSize="15dp"
-                android:alpha="0.4"/>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="40sp"
-                android:background="@drawable/bg_text"
-                android:layout_marginTop="25dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:layout_below="@+id/circle_aqi_view"
-                android:alpha="0.3"/>
-            <TextView
-                android:text="對敏感族群不良"
-                android:gravity="center"
-                android:textStyle="normal|bold"
-                android:textSize="30sp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#FFFFFF"
-                android:layout_marginTop="25dp"
-                android:id="@+id/tv_AQI_Description"
-                android:alpha="0.7"
-                android:layout_below="@+id/circle_aqi_view"/>
+        <com.github.mikephil.charting.charts.LineChart
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_weight="2" />
 
 
+        <!--<TextView-->
+        <!--android:id="@+id/circle_aqi_view"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:background="@drawable/aqi_circle"-->
+        <!--android:layout_marginLeft="130dp"-->
+        <!--android:gravity="center"-->
+        <!--android:text="123"-->
+        <!--android:textColor="@color/text_color"-->
+        <!--android:layout_marginTop="13dp"-->
+        <!--android:textSize="50dp"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_marginStart="130dp" />-->
 
-            <!--<tw.gov.epa.taqmpredict.ui.view.CustomDrawableView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_below="@+id/tv_AQI_Description"/>-->
+        <!--<TextView-->
+        <!--android:id="@+id/aqi_txt"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:text="AQI"-->
+        <!--android:textColor="@color/bottom_list"-->
+        <!--android:layout_toRightOf="@+id/circle_aqi_view"-->
+        <!--android:layout_marginLeft="10dp"-->
+        <!--android:layout_marginTop="50dp"-->
+        <!--android:textSize="15dp"-->
+        <!--android:alpha="0.4"/>-->
 
+        <!--<TextView-->
+        <!--android:id="@+id/aqi_txt_per"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:text="/ 500"-->
+        <!--android:textColor="#000000"-->
+        <!--android:layout_toRightOf="@+id/circle_aqi_view"-->
+        <!--android:layout_marginLeft="10dp"-->
+        <!--android:layout_marginTop="80dp"-->
+        <!--android:textSize="15dp"-->
+        <!--android:alpha="0.4"/>-->
 
-        </RelativeLayout>
-
-        <!--<android.support.design.widget.TabLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_below="@+id/main_view"-->
-            <!--android:id="@+id/tab_layout"-->
-            <!--app:tabIndicatorColor="@android:color/white"/>-->
-
-        <!--<com.github.mikephil.charting.charts.BarChart-->
-            <!--android:id="@+id/barChart"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_below="@+id/tab_layout"-->
-            <!--android:background="#696969"/>-->
         <!--<FrameLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:alpha="0.3"-->
-            <!--android:background="@color/bg_blue"-->
-            <!--android:padding="10dp"-->
-            <!--android:layout_marginTop="80dp"-->
-            <!--android:layout_below="@+id/main_view"-->
-            <!--android:layout_alignParentBottom="true"/>-->
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
-            android:layout_below="@+id/main_view"
-            android:layout_alignParentBottom="true"/>
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="80dp"-->
-            <!--android:layout_below="@+id/main_view"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:alpha="1.0">-->
-            <!--<TextView-->
-                <!--android:id="@+id/tv_pm25"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="PM2.5"-->
-                <!--android:textColor="@color/text_color"-->
-                <!--android:textSize="20dp" />-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="40sp"-->
+        <!--android:background="@drawable/bg_text"-->
+        <!--android:layout_marginTop="25dp"-->
+        <!--android:layout_marginLeft="30dp"-->
+        <!--android:layout_marginRight="30dp"-->
+        <!--android:layout_below="@+id/circle_aqi_view"-->
+        <!--android:alpha="0.3"/>-->
+        <!--<TextView-->
+        <!--android:text="對敏感族群不良"-->
+        <!--android:gravity="center"-->
+        <!--android:textStyle="normal|bold"-->
+        <!--android:textSize="30sp"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textColor="#FFFFFF"-->
+        <!--android:layout_marginTop="25dp"-->
+        <!--android:id="@+id/tv_AQI_Description"-->
+        <!--android:alpha="0.7"-->
+        <!--android:layout_below="@+id/circle_aqi_view"/>-->
 
 
-            <!--<ImageView-->
-                <!--android:id="@+id/iv_pm25"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginLeft="20dp"-->
-                <!--android:layout_toRightOf="@+id/tv_pm25"-->
-                <!--android:background="@drawable/ic_favorite_red_24dp" />-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/tv_so2"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginLeft="20dp"-->
-                <!--android:layout_toRightOf="@+id/iv_pm25"-->
-                <!--android:text="SO2"-->
-                <!--android:textColor="@color/text_color"-->
-                <!--android:textSize="20dp" />-->
-
-            <!--<ImageView-->
-                <!--android:id="@+id/iv_so2"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginLeft="20dp"-->
-                <!--android:layout_toRightOf="@+id/tv_so2"-->
-                <!--android:background="@drawable/ic_favorite_red_24dp" />-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/tv_co"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginLeft="20dp"-->
-                <!--android:layout_toRightOf="@+id/iv_so2"-->
-                <!--android:text="CO"-->
-                <!--android:textColor="@color/text_color"-->
-                <!--android:textSize="20dp" />-->
-
-            <!--<ImageView-->
-                <!--android:id="@+id/iv_co"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginLeft="20dp"-->
-                <!--android:layout_toRightOf="@+id/tv_co"-->
-                <!--android:background="@drawable/ic_favorite_red_24dp" />-->
-        <!--</LinearLayout>-->
+        <!--<tw.gov.epa.taqmpredict.ui.view.CustomDrawableView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_below="@+id/tv_AQI_Description"/>-->
 
 
-    </RelativeLayout>
-</LinearLayout>
+    </LinearLayout>
+
+    <!--<android.support.design.widget.TabLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@+id/main_view"-->
+    <!--android:id="@+id/tab_layout"-->
+    <!--app:tabIndicatorColor="@android:color/white"/>-->
+
+    <!--<com.github.mikephil.charting.charts.BarChart-->
+    <!--android:id="@+id/barChart"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_below="@+id/tab_layout"-->
+    <!--android:background="#696969"/>-->
+    <!--<FrameLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:alpha="0.3"-->
+    <!--android:background="@color/bg_blue"-->
+    <!--android:padding="10dp"-->
+    <!--android:layout_marginTop="80dp"-->
+    <!--android:layout_below="@+id/main_view"-->
+    <!--android:layout_alignParentBottom="true"/>-->
+
+    <!--<android.support.v7.widget.RecyclerView-->
+    <!--android:id="@+id/recyclerView"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="80dp"-->
+    <!--android:layout_below="@+id/rl_header_pm25"-->
+    <!--android:layout_alignParentBottom="true"/>-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="80dp"-->
+    <!--android:layout_below="@+id/main_view"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:alpha="1.0">-->
+    <!--<TextView-->
+    <!--android:id="@+id/tv_pm25"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="PM2.5"-->
+    <!--android:textColor="@color/text_color"-->
+    <!--android:textSize="20dp" />-->
+
+
+    <!--<ImageView-->
+    <!--android:id="@+id/iv_pm25"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginLeft="20dp"-->
+    <!--android:layout_toRightOf="@+id/tv_pm25"-->
+    <!--android:background="@drawable/ic_favorite_red_24dp" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/tv_so2"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginLeft="20dp"-->
+    <!--android:layout_toRightOf="@+id/iv_pm25"-->
+    <!--android:text="SO2"-->
+    <!--android:textColor="@color/text_color"-->
+    <!--android:textSize="20dp" />-->
+
+    <!--<ImageView-->
+    <!--android:id="@+id/iv_so2"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginLeft="20dp"-->
+    <!--android:layout_toRightOf="@+id/tv_so2"-->
+    <!--android:background="@drawable/ic_favorite_red_24dp" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/tv_co"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginLeft="20dp"-->
+    <!--android:layout_toRightOf="@+id/iv_so2"-->
+    <!--android:text="CO"-->
+    <!--android:textColor="@color/text_color"-->
+    <!--android:textSize="20dp" />-->
+
+    <!--<ImageView-->
+    <!--android:id="@+id/iv_co"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginLeft="20dp"-->
+    <!--android:layout_toRightOf="@+id/tv_co"-->
+    <!--android:background="@drawable/ic_favorite_red_24dp" />-->
+    <!--</LinearLayout>-->
+
+
+</RelativeLayout>
+<!--</LinearLayout>-->

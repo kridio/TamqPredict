@@ -37,7 +37,7 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
     }
 
     @Override
-    public HomeRecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item, parent, false);
         ViewHolder vh = new ViewHolder(v);
@@ -45,7 +45,7 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
     }
 
     @Override
-    public void onBindViewHolder(HomeRecyclerAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
         holder.tv_info.setText(mData.get(position));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

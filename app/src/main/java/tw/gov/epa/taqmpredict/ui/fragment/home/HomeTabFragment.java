@@ -1,25 +1,18 @@
 package tw.gov.epa.taqmpredict.ui.fragment.home;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.charts.LineChart;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,8 +20,6 @@ import tw.gov.epa.taqmpredict.R;
 import tw.gov.epa.taqmpredict.base.BaseFragment;
 import tw.gov.epa.taqmpredict.event.TabSelectedEvent;
 import tw.gov.epa.taqmpredict.ui.fragment.MainFragment;
-import tw.gov.epa.taqmpredict.ui.view.BarChartData;
-import tw.gov.epa.taqmpredict.ui.view.LineChartData;
 
 /**
  * Created by user on 2017/2/14.
@@ -36,18 +27,10 @@ import tw.gov.epa.taqmpredict.ui.view.LineChartData;
 
 public class HomeTabFragment extends BaseFragment {
     private static final String TAG = HomeTabFragment.class.getSimpleName();
-    @BindView(R.id.tv_location)
-    TextView tvLocation;
-    @BindView(R.id.tv_datetime)
-    TextView tvDatetime;
-    @BindView(R.id.recyclerView)
-    RecyclerView recyclerView;
-//    @BindView(R.id.toolbar)
-//    Toolbar toolbar;
-//    @BindView(R.id.lineChart)
-//    LineChart lineChart;
-//    @BindView(R.id.tab_layout)
-//    TabLayout tabLayout;
+    @BindView(R.id.mainhead_viewpager)
+    ViewPager mainheadViewpager;
+
+    List<View> viewList;
 
     private HomeRecyclerAdapter mAdapter;
 
@@ -65,6 +48,17 @@ public class HomeTabFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_tab_home, container, false);
         ButterKnife.bind(this, view);
         EventBus.getDefault().register(this);
+
+        View v1 = inflater.inflate(R.layout.main_header_pm25, null);
+        View v2 = inflater.inflate(R.layout.main_header_aqi, null);
+
+        viewList = new ArrayList<View>();
+        viewList.add(v1);
+        viewList.add(v2);
+
+        mainheadViewpager.setAdapter(new HomeViewPagerAdapter(viewList));
+        mainheadViewpager.setCurrentItem(0);
+
 //        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 //        toolbar.setNavigationIcon(R.drawable.ic_playlist_add_white_24dp);
 //        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -102,17 +96,17 @@ public class HomeTabFragment extends BaseFragment {
 
 
 //        toolbar.inflateMenu(R.menu.menu_layout);
-        mAdapter = new HomeRecyclerAdapter(getContext());
-        ArrayList<String> myDataset = new ArrayList<>();
-        for(int i = 0; i < 100; i++){
-            myDataset.add(Integer.toString(i));
-        }
-        mAdapter.setData(myDataset);
-
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
-        recyclerView.addItemDecoration(new MarginDecoration(getContext()));
-        recyclerView.setAdapter(mAdapter);
+//        mAdapter = new HomeRecyclerAdapter(getContext());
+//        ArrayList<String> myDataset = new ArrayList<>();
+//        for (int i = 0; i < 100; i++) {
+//            myDataset.add(Integer.toString(i));
+//        }
+//        mAdapter.setData(myDataset);
+//
+//        recyclerView.setHasFixedSize(true);
+//        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+//        recyclerView.addItemDecoration(new MarginDecoration(getContext()));
+//        recyclerView.setAdapter(mAdapter);
         return view;
     }
 
