@@ -5,4 +5,5 @@
     <string name="chart_label_Predict">預測數值</string>
     <string name="chart_label_Real">實際數值</string>
     <string name="chart_title">比較圖表</string>
+    <string name="chart_predict">預測值</string>
 </resources>

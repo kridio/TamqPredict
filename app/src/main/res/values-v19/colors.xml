@@ -24,4 +24,8 @@
 
     <color name="alarm_shape_red">#FF0000</color>
     <color name="alarm_shape_green">#00FF00</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="accent">#40C4FF</color>
+    <color name="icon_disabled">#FF63727B</color>
 </resources>

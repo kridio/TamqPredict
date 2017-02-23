@@ -2,7 +2,6 @@ package tw.gov.epa.taqmpredict.ui.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +10,6 @@ import android.view.ViewGroup;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.yokeyword.fragmentation.SupportFragment;
 import tw.gov.epa.taqmpredict.R;
@@ -37,8 +35,8 @@ public class MainFragment extends BaseFragment {
     public static final int SECOND = 1;
     public static final int THIRD = 2;
 
-    @BindView(R.id.bottomBar)
-    BottomBar bottomBar;
+//    @BindView(R.id.bottomBar)
+//    BottomBar bottomBar;
 
     private SupportFragment[] mFragments = new SupportFragment[3];
 
@@ -70,7 +68,7 @@ public class MainFragment extends BaseFragment {
             mFragments[SECOND] = findChildFragment(MapTabFragment.class);
             mFragments[THIRD] = findChildFragment(ListTabFragment.class);
         }
-        initView();
+        //initView();
 
         EventBus.getDefault().register(this);
 
@@ -78,35 +76,34 @@ public class MainFragment extends BaseFragment {
     }
 
     private void initView() {
-
-        bottomBar
-                .addItem(new BottomBarTab(_mActivity, R.drawable.ic_home_balance_white_24dp, "Home"))
-                .addItem(new BottomBarTab(_mActivity, R.drawable.ic_map_white_24dp, "Map"))
-                .addItem(new BottomBarTab(_mActivity, R.drawable.ic_insert_chart_white_24dp, "List"));
-
-        bottomBar.setOnTabSelectedListener(new BottomBar.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(int position, int prePosition) {
-                showHideFragment(mFragments[position], mFragments[prePosition]);
-
-                BottomBarTab tab = bottomBar.getItem(FIRST);
-                if (position == SECOND) {
-                    //tab.setUnreadCount(0);
-                } else {
-                    //tab.setUnreadCount(tab.getUnreadCount() + 1);
-                }
-            }
-
-            @Override
-            public void onTabUnselected(int position) {
-                logd("unselected:" + position);
-            }
-
-            @Override
-            public void onTabReselected(int position) {
-                EventBus.getDefault().post(new TabSelectedEvent(position));
-            }
-        });
+//        bottomBar
+//                .addItem(new BottomBarTab(_mActivity, R.drawable.ic_home_balance_white_24dp, "Home"))
+//                .addItem(new BottomBarTab(_mActivity, R.drawable.ic_map_white_24dp, "Map"))
+//                .addItem(new BottomBarTab(_mActivity, R.drawable.ic_insert_chart_white_24dp, "List"));
+//
+//        bottomBar.setOnTabSelectedListener(new BottomBar.OnTabSelectedListener() {
+//            @Override
+//            public void onTabSelected(int position, int prePosition) {
+//                showHideFragment(mFragments[position], mFragments[prePosition]);
+//
+//                BottomBarTab tab = bottomBar.getItem(FIRST);
+//                if (position == SECOND) {
+//                    //tab.setUnreadCount(0);
+//                } else {
+//                    //tab.setUnreadCount(tab.getUnreadCount() + 1);
+//                }
+//            }
+//
+//            @Override
+//            public void onTabUnselected(int position) {
+//                logd("unselected:" + position);
+//            }
+//
+//            @Override
+//            public void onTabReselected(int position) {
+//                EventBus.getDefault().post(new TabSelectedEvent(position));
+//            }
+//        });
     }
 
     @Override

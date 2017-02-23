@@ -1,131 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:id="@+id/rl_header_aqi"
+<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_header_aqi"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!--<TextView-->
-        <!--android:alpha="0.4"-->
-        <!--android:id="@+id/aqi_txt"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginLeft="10dp"-->
-        <!--android:layout_marginTop="50dp"-->
-        <!--android:layout_toRightOf="@+id/circle_aqi_view"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:text="AQI"-->
-        <!--android:textColor="@color/bg_white"-->
-        <!--android:textSize="15dp" />-->
-
-    <!--<TextView-->
-        <!--android:alpha="0.4"-->
-        <!--android:id="@+id/aqi_txt_per"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="171dp"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:text="/ 500"-->
-        <!--android:textColor="@color/bg_white"-->
-        <!--android:textSize="15dp"-->
-        <!--android:layout_below="@+id/aqi_txt"-->
-        <!--android:layout_alignLeft="@+id/aqi_txt"-->
-        <!--android:layout_alignStart="@+id/aqi_txt" />-->
-
-    <!--<TextView-->
-        <!--android:background="@drawable/aqi_circle"-->
-        <!--android:gravity="center"-->
-        <!--android:id="@+id/circle_aqi_view"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="122dp"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:text="123"-->
-        <!--android:textColor="@color/text_color"-->
-        <!--android:textSize="50dp"-->
-        <!--android:layout_below="@+id/aqi_txt"-->
-        <!--android:layout_alignParentLeft="true"-->
-        <!--android:layout_alignParentStart="true"-->
-        <!--android:layout_marginLeft="94dp"-->
-        <!--android:layout_marginStart="94dp" />-->
+    <FrameLayout
+        android:alpha="0.1"
+        android:background="@drawable/bg_text"
+        android:layout_height="40sp"
+        android:layout_width="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/textView10"/>
 
     <TextView
-        android:text="AQI"
-        android:textSize="40dp"
-        android:textColor="@color/bg_white"
-        android:layout_width="wrap_content"
+        android:alpha="0.7"
+        android:gravity="center"
+        android:id="@+id/tv_AQI_Description"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="102dp"
-        android:layout_marginStart="102dp"
-        android:layout_marginTop="40dp"
-        android:id="@+id/textView9"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_width="match_parent"
+        android:text="對敏感族群不良"
+        android:textColor="@color/bg_white"
+        android:textSize="30sp"
+        android:textStyle="normal|bold"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/textView10" />
 
     <TextView
         android:text="空氣品質指標"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="10dp"
+        android:textSize="20dp"
         android:alpha="0.6"
         android:textColor="@color/bg_white"
         android:id="@+id/textView8"
-        android:layout_alignBaseline="@+id/textView9"
-        android:layout_alignBottom="@+id/textView9"
+        android:layout_above="@+id/textView10"
         android:layout_toRightOf="@+id/textView9"
         android:layout_toEndOf="@+id/textView9" />
 
     <TextView
-        android:text="50"
+        android:text="AQI"
+        android:textSize="60dp"
+        android:textColor="@color/bg_white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView9"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginStart="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="121"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="60dp"
         android:textColor="@color/bg_white"
         android:id="@+id/textView10"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"
         android:layout_below="@+id/textView9"
-        android:layout_alignRight="@+id/textView8"
-        android:layout_alignEnd="@+id/textView8"
-        android:layout_marginRight="24dp"
-        android:layout_marginEnd="24dp" />
+        android:layout_toRightOf="@+id/imageView"
+        android:layout_toEndOf="@+id/imageView" />
 
-    <TextView
-        android:text="良好"
-        android:background="@drawable/alarm_oval_shape_green"
-        android:gravity="center"
-        android:textColor="@color/bg_white"
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView11"
-        android:layout_below="@+id/textView10"
-        android:layout_alignRight="@+id/textView10"
-        android:layout_alignEnd="@+id/textView10" />
+        android:background="@drawable/ic_iconmonstr_smiley_24"
+        android:id="@+id/imageView"
 
-
-    <!--<FrameLayout-->
-        <!--android:alpha="0.3"-->
-        <!--android:background="@drawable/bg_text"-->
-        <!--android:layout_below="@+id/circle_aqi_view"-->
-        <!--android:layout_height="40sp"-->
-        <!--android:layout_marginLeft="30dp"-->
-        <!--android:layout_marginRight="30dp"-->
-        <!--android:layout_marginTop="25dp"-->
-        <!--android:layout_width="match_parent" />-->
-
-    <!--<TextView-->
-        <!--android:alpha="0.7"-->
-        <!--android:gravity="center"-->
-        <!--android:id="@+id/tv_AQI_Description"-->
-        <!--android:layout_below="@+id/circle_aqi_view"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="25dp"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:text="對敏感族群不良"-->
-        <!--android:textColor="#FFFFFF"-->
-        <!--android:textSize="30sp"-->
-        <!--android:textStyle="normal|bold" />-->
-
-
-    <!--<tw.gov.epa.taqmpredict.ui.view.CustomDrawableView-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_below="@+id/tv_AQI_Description"/>-->
-
+        android:layout_alignTop="@+id/textView10"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="47dp"
+        android:layout_marginStart="47dp" />
 
 </RelativeLayout>

@@ -1,5 +1,6 @@
 package tw.gov.epa.taqmpredict.ui.fragment.home;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
@@ -7,6 +8,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.github.mikephil.charting.charts.LineChart;
+import com.ogaclejapan.smarttablayout.SmartTabLayout;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -20,6 +24,7 @@ import tw.gov.epa.taqmpredict.R;
 import tw.gov.epa.taqmpredict.base.BaseFragment;
 import tw.gov.epa.taqmpredict.event.TabSelectedEvent;
 import tw.gov.epa.taqmpredict.ui.fragment.MainFragment;
+import tw.gov.epa.taqmpredict.ui.view.LineChartData;
 
 /**
  * Created by user on 2017/2/14.
@@ -29,6 +34,10 @@ public class HomeTabFragment extends BaseFragment {
     private static final String TAG = HomeTabFragment.class.getSimpleName();
     @BindView(R.id.mainhead_viewpager)
     ViewPager mainheadViewpager;
+    @BindView(R.id.lineChart)
+    LineChart lineChart;
+    @BindView(R.id.smartTabLayout)
+    SmartTabLayout smartTabLayout;
 
     List<View> viewList;
 
@@ -59,6 +68,20 @@ public class HomeTabFragment extends BaseFragment {
         mainheadViewpager.setAdapter(new HomeViewPagerAdapter(viewList));
         mainheadViewpager.setCurrentItem(0);
 
+        smartTabLayout.setViewPager(mainheadViewpager);
+
+        ArrayList<String> labels = new ArrayList<String>();
+        labels.add("January");
+        labels.add("February");
+
+        LineChartData lineChartData = new LineChartData(getContext());
+        lineChartData.configChartAxis(lineChart);
+        lineChart.setData(lineChartData.getLineData());
+        lineChart.setVisibleXRangeMaximum(7);
+        lineChart.setBackgroundColor(Color.GRAY);
+        lineChart.setAlpha(0.3f);
+        lineChart.invalidate();
+
 //        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 //        toolbar.setNavigationIcon(R.drawable.ic_playlist_add_white_24dp);
 //        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -74,10 +97,6 @@ public class HomeTabFragment extends BaseFragment {
 //        barChart.setVisibleXRangeMaximum(6);
 //        barChart.moveViewToX(15);
 //        barChart.invalidate();
-
-//        LineChartData lineChartData = new LineChartData();
-//        lineChartData.configChartAxis(lineChart);
-//        lineChart.setData(lineChartData.getLineData());
 
 //        tabLayout.addTab(tabLayout.newTab().setText("PM2.5"));
 //        tabLayout.addTab(tabLayout.newTab().setText("PM10"));

@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle"> //指定形狀類型，默認為rectangle
 
-    <solid android:color="@color/bg_blue" /> //指定形狀的填充色
+    <solid android:color="@color/alarm_shape_red" /> //指定形狀的填充色
 
     <padding
         android:bottom="12dp"
