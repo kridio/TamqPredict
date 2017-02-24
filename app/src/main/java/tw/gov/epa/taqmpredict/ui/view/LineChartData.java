@@ -2,10 +2,11 @@ package tw.gov.epa.taqmpredict.ui.view;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 
-import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
@@ -39,27 +40,79 @@ public class LineChartData {
     };
 
 
-    private List<Entry> getChartData(){
+    private List<Entry> getChartDataReal(){
         List<Entry> chartData = new ArrayList<>();
-        chartData.add(new Entry(3, 36));
+        chartData.add(new Entry(0, 44));
+        chartData.add(new Entry(1, 35));
+        chartData.add(new Entry(2, 65));
+        chartData.add(new Entry(3, 89));
+        chartData.add(new Entry(4, 48));
+        chartData.add(new Entry(5, 32));
         chartData.add(new Entry(6, 67));
-        chartData.add(new Entry(9, 53));
+        chartData.add(new Entry(7, 22));
+        chartData.add(new Entry(8, 45));
+        chartData.add(new Entry(9, 36));
+        chartData.add(new Entry(10, 74));
+        chartData.add(new Entry(11, 82));
         chartData.add(new Entry(12, 48));
-        chartData.add(new Entry(15, 34));
-        chartData.add(new Entry(18, 73));
-        chartData.add(new Entry(21, 28));
-        chartData.add(new Entry(24, 37));
+        chartData.add(new Entry(13, 32));
+        chartData.add(new Entry(14, 49));
+        chartData.add(new Entry(15, 41));
+        chartData.add(new Entry(16, 47));
+        chartData.add(new Entry(17, 56));
+        chartData.add(new Entry(18, 50));
+        chartData.add(new Entry(19, 55));
+        chartData.add(new Entry(20, 54));
+        chartData.add(new Entry(21, 78));
+        chartData.add(new Entry(22, 62));
+        chartData.add(new Entry(23, 65));
+        return chartData;
+    }
+
+    private List<Entry> getChartDataPredict(){
+        List<Entry> chartData = new ArrayList<>();
+        chartData.add(new Entry(0, 40));
+        chartData.add(new Entry(1, 32));
+        chartData.add(new Entry(2, 68));
+        chartData.add(new Entry(3, 86));
+        chartData.add(new Entry(4, 48));
+        chartData.add(new Entry(5, 37));
+        chartData.add(new Entry(6, 69));
+        chartData.add(new Entry(7, 26));
+        chartData.add(new Entry(8, 40));
+        chartData.add(new Entry(9, 32));
+        chartData.add(new Entry(10, 79));
+        chartData.add(new Entry(11, 86));
+        chartData.add(new Entry(12, 48));
+        chartData.add(new Entry(13, 37));
+        chartData.add(new Entry(14, 42));
+        chartData.add(new Entry(15, 43));
+        chartData.add(new Entry(16, 46));
+        chartData.add(new Entry(17, 52));
+        chartData.add(new Entry(18, 56));
+        chartData.add(new Entry(19, 57));
+        chartData.add(new Entry(20, 59));
+        chartData.add(new Entry(21, 73));
+        chartData.add(new Entry(22, 65));
+        chartData.add(new Entry(23, 68));
         return chartData;
     }
 
     public LineData getLineData(){
-        ILineDataSet dataSetA = new LineDataSet(getChartData(), mContext.getString(R.string.chart_predict));
+        ILineDataSet dataSetA = new LineDataSet(getChartDataReal(), mContext.getString(R.string.chart_label_Real));
+        dataSetA.setDrawFilled(true);
+        dataSetA.setDrawValues(false);
 
-        dataSetA.setValueTextSize(20);
-        dataSetA.setValueTextColor(Color.WHITE);
+
+        LineDataSet dataSetB = new LineDataSet(getChartDataPredict(), mContext.getString(R.string.chart_label_Predict));
+        dataSetB.setDrawFilled(true);
+        dataSetB.setDrawValues(false);
+        dataSetB.setFillColor(mContext.getResources().getColor(R.color.alarm_shape_red));
+
 
         List<ILineDataSet> dataSets = new ArrayList<>();
         dataSets.add(dataSetA); // add the datasets
+        dataSets.add(dataSetB);
 
         return new LineData(dataSets);
     }
@@ -67,6 +120,8 @@ public class LineChartData {
     public void configChartAxis(LineChart chart_bar){
         chart_bar.setAlpha(0.5f);
         chart_bar.getDescription().setEnabled(false);
+        Legend legend = chart_bar.getLegend();
+        legend.setTextSize(20);
 
         XAxis xAxis = chart_bar.getXAxis();
         xAxis.setTextSize(15);
@@ -75,13 +130,9 @@ public class LineChartData {
 
         YAxis leftYAxis = chart_bar.getAxisLeft();
         leftYAxis.setDrawGridLines(false);
-        leftYAxis.setEnabled(false);
+        leftYAxis.setEnabled(true);
 
         YAxis RightYAxis = chart_bar.getAxisRight();
         RightYAxis.setEnabled(false);   //不顯示右側
-    }
-
-    public LineChartData(){
-
     }
 }

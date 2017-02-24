@@ -59,11 +59,16 @@ public class HomeTabFragment extends BaseFragment {
         EventBus.getDefault().register(this);
 
         View v1 = inflater.inflate(R.layout.main_header_pm25, null);
-        View v2 = inflater.inflate(R.layout.main_header_aqi, null);
+        View v2 = inflater.inflate(R.layout.main_header_pm25_n1, null);
+        View v3 = inflater.inflate(R.layout.main_header_pm25_n6, null);
+        View v4 = inflater.inflate(R.layout.main_header_pm25_n12, null);
+
 
         viewList = new ArrayList<View>();
         viewList.add(v1);
-        viewList.add(v2);
+        //viewList.add(v2);
+        viewList.add(v3);
+        viewList.add(v4);
 
         mainheadViewpager.setAdapter(new HomeViewPagerAdapter(viewList));
         mainheadViewpager.setCurrentItem(0);
@@ -78,6 +83,7 @@ public class HomeTabFragment extends BaseFragment {
         lineChartData.configChartAxis(lineChart);
         lineChart.setData(lineChartData.getLineData());
         lineChart.setVisibleXRangeMaximum(7);
+//        lineChart.moveViewToX(15);
         lineChart.setBackgroundColor(Color.GRAY);
         lineChart.setAlpha(0.3f);
         lineChart.invalidate();

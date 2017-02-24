@@ -1,17 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:id="@+id/card_view"
+<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@drawable/dusk">
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/imageView2"
+        android:background="@drawable/bg_gradiant"/>
+
     <include layout="@layout/toolbar" />
+
     <LinearLayout
         android:id="@+id/rl_main_header"
-        android:layout_below="@+id/location_bar"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:orientation="vertical"
-        android:weightSum="2">
+        android:weightSum="2"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/location_bar">
 
         <android.support.v4.view.ViewPager
             android:id="@+id/mainhead_viewpager"
@@ -23,23 +33,25 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/smartTabLayout"
             android:layout_width="wrap_content"
-            android:layout_height="16dp"
+            android:layout_height="20dp"
             android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginTop="20dp"
             app:stl_clickable="false"
             app:stl_customTabTextLayoutId="@layout/custom_tab_circle"
             app:stl_dividerColor="@color/transparent"
             app:stl_dividerThickness="0dp"
             app:stl_indicatorColor="@color/accent"
-            app:stl_indicatorCornerRadius="4dp"
+            app:stl_indicatorCornerRadius="6dp"
             app:stl_indicatorGravity="center"
             app:stl_indicatorInterpolation="linear"
-            app:stl_indicatorThickness="8dp"
+            app:stl_indicatorThickness="12dp"
             app:stl_underlineColor="@color/transparent"
             app:stl_underlineThickness="0dp"/>
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"/> >
+        <!--<FrameLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"/>-->
 
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/lineChart"

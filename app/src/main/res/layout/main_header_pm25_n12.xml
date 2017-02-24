@@ -31,7 +31,7 @@
         android:layout_alignParentStart="true" />
 
     <TextView
-        android:text="10級"
+        android:text="3級"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -44,7 +44,7 @@
         android:layout_marginRight="45dp"/>
 
     <TextView
-        android:text="79"
+        android:text="32"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="60dp"
@@ -81,18 +81,26 @@
         android:layout_toEndOf="@+id/textView5" />
 
     <TextView
-        android:text="不良"
-        android:background="@drawable/alarm_oval_shape_red"
+        android:text="良好"
+        android:background="@drawable/alarm_oval_shape_green"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/bg_white"
-        android:textSize="35dp"
         android:gravity="center"
         android:alpha="0.6"
+        android:textSize="35dp"
         android:layout_marginTop="12dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:id="@+id/textView7"
         android:layout_below="@+id/textView4"
         android:layout_centerHorizontal="true"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        app:srcCompat="@drawable/next12_1"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/textView2"
+        android:id="@+id/imageView" />
 </RelativeLayout>
