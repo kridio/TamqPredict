@@ -8,4 +8,9 @@
     <dimen name="bottombar_tamq_height">52dp</dimen>
 
     <dimen name="item_margin">8dp</dimen>
+
+    <dimen name="common_dimen_small">6dp</dimen>
+    <!-- Per the design guidelines, navigation drawers should be between 240dp and 320dp:
+         https://developer.android.com/design/patterns/navigation-drawer.html -->
+    <dimen name="navigation_drawer_width">240dp</dimen>
 </resources>

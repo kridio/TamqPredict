@@ -1,8 +1,13 @@
 package tw.gov.epa.taqmpredict.gps.area;
 
+import android.content.Context;
+import android.location.Address;
+import android.location.Geocoder;
 import android.util.Log;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -32,7 +37,9 @@ public class AreaRequestService {
     private Map<String, String> paramsMap;
     private AreaRequestApi areaRequestApi;
 
-    public AreaRequestService(){
+    private Context mContedxt;
+
+    public AreaRequestService(Context context){
         paramsMap = new HashMap<>();
         paramsMap.put(LANG_NAME,LANG);
         paramsMap.put(SENSOR_NAME,SENSOR);
@@ -44,9 +51,21 @@ public class AreaRequestService {
                 .build();
 
         areaRequestApi = retrofit.create(AreaRequestApi.class);
+        mContedxt = context;
     }
 
-    public void getArea(String lat_lng){
+    public void getAreaByGoogleApi(double lat,double lng){
+        try {
+            Geocoder gc = new Geocoder(mContedxt, Locale.TRADITIONAL_CHINESE);
+            List<Address> lstAddress = gc.getFromLocation(lat, lng, 1);
+//            String returnAddress = lstAddress.get(0).getAddressLine(0);
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }
+
+    public void getAreaByHttp(String lat_lng){
         if(isLatLngValid(lat_lng)) {
             paramsMap.put(LATLNG_NAME, lat_lng);
 

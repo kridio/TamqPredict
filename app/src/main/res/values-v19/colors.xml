@@ -31,4 +31,12 @@
     <color name="accent">#FFFFFF</color>
     <!--<color name="icon_disabled">#FF63727B</color>-->
     <color name="icon_disabled">#000000</color>
+
+    <color name="pm25_txt">#FFFFFF</color>
+    <color name="pm25_good">#8DC21F</color>
+    <color name="pm25_primary">#F7C700</color>
+    <color name="pm25_intermediate">#E70012</color>
+    <color name="pm25_urgent">#611987</color>
+
+    <color name="toolbar_bg">#373737</color>
 </resources>

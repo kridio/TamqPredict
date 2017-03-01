@@ -1,36 +1,53 @@
 package tw.gov.epa.taqmpredict.db;
 
+
 import android.content.Context;
-import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 /**
- * Created by user on 2017/2/18.
+ * Created by SilenceDut on 16/10/28.
  */
 
 public class DBHelper extends SQLiteOpenHelper {
-    public static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_NAME = "TamqPredict.db";
+    private static DBHelper sDBHelper;
+    private static final String DBNAME = "AirPollution";
+    private static final int CURRENT_VERSION = 1;
 
-    private static final String SQL_CREATE_ENTRIES = "CREATE TABLE "  + " ("+" )";
-    private static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " ;
-
-    public DBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, DATABASE_NAME, factory, DATABASE_VERSION);
+    public static DBHelper getInstance(Context context) {
+        if (sDBHelper == null) {
+            synchronized (DBHelper.class) {
+                if (sDBHelper == null) {
+                    sDBHelper = new DBHelper(context, DBNAME, null, CURRENT_VERSION);
+                }
+            }
+        }
+        return sDBHelper;
     }
 
-    public DBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version, DatabaseErrorHandler errorHandler) {
-        super(context, name, factory, version, errorHandler);
+    private DBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
+        super(context, name, factory, version);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
+        onUpgrade(db, 0, CURRENT_VERSION);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        for (int version = oldVersion + 1; version <= newVersion; version++) {
+            upgradeTo(db, version);
+        }
+    }
 
+    private void upgradeTo(SQLiteDatabase db, int version) {
+        switch (version) {
+            case 1:
+                db.execSQL(CityDao.SQL_CREATE_ENTRIES);
+                break;
+            default:
+                throw new IllegalStateException("Don't know how to upgrade to " + version);
+        }
     }
 }

@@ -68,4 +68,8 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
     compile 'com.ogaclejapan.smarttablayout:library:1.6.1@aar'
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+    compile 'com.orhanobut:logger:1.15'
 }

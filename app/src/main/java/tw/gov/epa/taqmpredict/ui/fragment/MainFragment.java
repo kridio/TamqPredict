@@ -2,14 +2,21 @@ package tw.gov.epa.taqmpredict.ui.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.util.ArrayList;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.yokeyword.fragmentation.SupportFragment;
 import tw.gov.epa.taqmpredict.R;
@@ -19,8 +26,6 @@ import tw.gov.epa.taqmpredict.event.TabSelectedEvent;
 import tw.gov.epa.taqmpredict.ui.fragment.home.HomeTabFragment;
 import tw.gov.epa.taqmpredict.ui.fragment.listview.ListTabFragment;
 import tw.gov.epa.taqmpredict.ui.fragment.map.MapTabFragment;
-import tw.gov.epa.taqmpredict.ui.view.BottomBar;
-import tw.gov.epa.taqmpredict.ui.view.BottomBarTab;
 
 
 /**
@@ -34,7 +39,14 @@ public class MainFragment extends BaseFragment {
     public static final int FIRST = 0;
     public static final int SECOND = 1;
     public static final int THIRD = 2;
+    @BindView(R.id.recyclerView_city)
+    RecyclerView recyclerViewCity;
+    @BindView(R.id.tv_add_area)
+    TextView tvAddArea;
+    @BindView(R.id.tv_edit_area)
+    TextView tvEditArea;
 
+    CityRecyclerViewAdapter cityRecyclerViewAdapter;
 //    @BindView(R.id.bottomBar)
 //    BottomBar bottomBar;
 
@@ -54,9 +66,31 @@ public class MainFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         ButterKnife.bind(this, view);
 
+        cityRecyclerViewAdapter = new CityRecyclerViewAdapter(getContext());
+        ArrayList<String> myDataset = new ArrayList<>();
+        for(int i = 0; i < 1; i++){
+            myDataset.add(Integer.toString(i));
+        }
+        cityRecyclerViewAdapter.setData(myDataset);
+
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerViewCity.setLayoutManager(layoutManager);
+        recyclerViewCity.setHasFixedSize(true);
+        recyclerViewCity.setAdapter(cityRecyclerViewAdapter);
+
+        tvAddArea.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                EventBus.getDefault().post(new TabSelectedEvent(SECOND));
+                start(ListAreaFragment.newInstance());
+                Log.d("MainActivity","tvAddRea");
+            }
+        });
+
         if (savedInstanceState == null) {
             mFragments[FIRST] = HomeTabFragment.newInstance();
-            mFragments[SECOND] = MapTabFragment.newInstance();
+            mFragments[SECOND] = ListAreaFragment.newInstance();
             mFragments[THIRD] = ListTabFragment.newInstance();
 
             loadMultipleRootFragment(R.id.tamq_tab_container, FIRST,
@@ -65,7 +99,7 @@ public class MainFragment extends BaseFragment {
                     mFragments[THIRD]);
         } else {
             mFragments[FIRST] = findChildFragment(HomeTabFragment.class);
-            mFragments[SECOND] = findChildFragment(MapTabFragment.class);
+            mFragments[SECOND] = findChildFragment(ListAreaFragment.class);
             mFragments[THIRD] = findChildFragment(ListTabFragment.class);
         }
         //initView();

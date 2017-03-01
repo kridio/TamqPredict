@@ -25,6 +25,6 @@ public class AreaRequestPresenter implements IAreaRequestPresenter{
 
     @Override
     public void getArea() {
-//        mAreaRequestService.getArea();
+//        mAreaRequestService.getAreaByHttp();
     }
 }

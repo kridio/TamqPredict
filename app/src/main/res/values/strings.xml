@@ -5,4 +5,22 @@
     <string name="chart_label_Predict">預測數值</string>
     <string name="chart_label_Real">實際數值</string>
     <string name="chart_title">比較圖表</string>
+
+    <!--3級以下-->
+    <string name="slogan_good">品質良好</string>
+    <!--4~6級-->
+    <string name="slogan_primary">初級防護</string>
+    <!--7~9級-->
+    <string name="slogan_intermediate">中級防護</string>
+    <!--10級-->
+    <string name="slogan_urgent">緊急防護</string>
+
+    <string name="slogan_good_sentence_1">空氣品質良好</string>
+    <string name="slogan_good_sentence_2">適合遊山玩水</string>
+    <string name="slogan_primary_sentence_1">可正常戶外活動</string>
+    <string name="slogan_primary_sentence_2">若不適者請戴口罩</string>
+    <string name="slogan_intermediate_sentence_1">不適者減少戶外活動</string>
+    <string name="slogan_intermediate_sentence_2">敏感族群建議戴口罩</string>
+    <string name="slogan_urgent_sentence_1">不適者減少戶外活動</string>
+    <string name="slogan_urgent_sentence_2">敏感族群避免外出</string>
 </resources>

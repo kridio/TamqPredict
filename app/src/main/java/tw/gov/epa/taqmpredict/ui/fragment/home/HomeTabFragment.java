@@ -32,16 +32,16 @@ import tw.gov.epa.taqmpredict.ui.view.LineChartData;
 
 public class HomeTabFragment extends BaseFragment {
     private static final String TAG = HomeTabFragment.class.getSimpleName();
-    @BindView(R.id.mainhead_viewpager)
-    ViewPager mainheadViewpager;
-    @BindView(R.id.lineChart)
-    LineChart lineChart;
-    @BindView(R.id.smartTabLayout)
-    SmartTabLayout smartTabLayout;
+//    @BindView(R.id.mainhead_viewpager)
+//    ViewPager mainheadViewpager;
+//    @BindView(R.id.lineChart)
+//    LineChart lineChart;
+//    @BindView(R.id.smartTabLayout)
+//    SmartTabLayout smartTabLayout;
 
-    List<View> viewList;
+//    List<View> viewList;
 
-    private HomeRecyclerAdapter mAdapter;
+//    private HomeRecyclerAdapter mAdapter;
 
     public static HomeTabFragment newInstance() {
         Bundle args = new Bundle();
@@ -54,39 +54,39 @@ public class HomeTabFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_tab_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
         EventBus.getDefault().register(this);
 
-        View v1 = inflater.inflate(R.layout.main_header_pm25, null);
-        View v2 = inflater.inflate(R.layout.main_header_pm25_n1, null);
-        View v3 = inflater.inflate(R.layout.main_header_pm25_n6, null);
-        View v4 = inflater.inflate(R.layout.main_header_pm25_n12, null);
+//        View v1 = inflater.inflate(R.layout.main_header_pm25, null);
+//        View v2 = inflater.inflate(R.layout.main_header_pm25_n1, null);
+//        View v3 = inflater.inflate(R.layout.main_header_pm25_n6, null);
+//        View v4 = inflater.inflate(R.layout.main_header_pm25_n12, null);
 
 
-        viewList = new ArrayList<View>();
-        viewList.add(v1);
-        //viewList.add(v2);
-        viewList.add(v3);
-        viewList.add(v4);
+//        viewList = new ArrayList<View>();
+//        viewList.add(v1);
+//        //viewList.add(v2);
+//        viewList.add(v3);
+//        viewList.add(v4);
 
-        mainheadViewpager.setAdapter(new HomeViewPagerAdapter(viewList));
-        mainheadViewpager.setCurrentItem(0);
+//        mainheadViewpager.setAdapter(new HomeViewPagerAdapter(viewList));
+//        mainheadViewpager.setCurrentItem(0);
 
-        smartTabLayout.setViewPager(mainheadViewpager);
+//        smartTabLayout.setViewPager(mainheadViewpager);
 
-        ArrayList<String> labels = new ArrayList<String>();
-        labels.add("January");
-        labels.add("February");
+//        ArrayList<String> labels = new ArrayList<String>();
+//        labels.add("January");
+//        labels.add("February");
 
-        LineChartData lineChartData = new LineChartData(getContext());
-        lineChartData.configChartAxis(lineChart);
-        lineChart.setData(lineChartData.getLineData());
-        lineChart.setVisibleXRangeMaximum(7);
+//        LineChartData lineChartData = new LineChartData(getContext());
+//        lineChartData.configChartAxis(lineChart);
+//        lineChart.setData(lineChartData.getLineData());
+//        lineChart.setVisibleXRangeMaximum(7);
 //        lineChart.moveViewToX(15);
-        lineChart.setBackgroundColor(Color.GRAY);
-        lineChart.setAlpha(0.3f);
-        lineChart.invalidate();
+//        lineChart.setBackgroundColor(Color.GRAY);
+//        lineChart.setAlpha(0.3f);
+//        lineChart.invalidate();
 
 //        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 //        toolbar.setNavigationIcon(R.drawable.ic_playlist_add_white_24dp);

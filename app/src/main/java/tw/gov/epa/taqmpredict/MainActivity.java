@@ -68,7 +68,7 @@ public class MainActivity extends SupportActivity {
 //        changeFragment(MainFragment.newInstance());
 
         gpsTrackerService = new GPSTrackerService(this);
-        areaRequestService = new AreaRequestService();
+        areaRequestService = new AreaRequestService(this);
         epaDataRequestService = new DataRequestService();
 
 //        epaDataRequestPresenter = new DataRequestPresenter(this,epaDataRequestService);
