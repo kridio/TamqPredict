@@ -2,7 +2,6 @@ package tw.gov.epa.taqmpredict.ui.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -22,10 +21,9 @@ import me.yokeyword.fragmentation.SupportFragment;
 import tw.gov.epa.taqmpredict.R;
 import tw.gov.epa.taqmpredict.base.BaseFragment;
 import tw.gov.epa.taqmpredict.event.StartBrotherEvent;
-import tw.gov.epa.taqmpredict.event.TabSelectedEvent;
+import tw.gov.epa.taqmpredict.predict.DriverService;
 import tw.gov.epa.taqmpredict.ui.fragment.home.HomeTabFragment;
 import tw.gov.epa.taqmpredict.ui.fragment.listview.ListTabFragment;
-import tw.gov.epa.taqmpredict.ui.fragment.map.MapTabFragment;
 
 
 /**
@@ -83,7 +81,8 @@ public class MainFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
 //                EventBus.getDefault().post(new TabSelectedEvent(SECOND));
-                start(ListAreaFragment.newInstance());
+                //start(ListAreaFragment.newInstance());
+                new DriverService().getPredictData();
                 Log.d("MainActivity","tvAddRea");
             }
         });

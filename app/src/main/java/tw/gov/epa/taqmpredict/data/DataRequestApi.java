@@ -12,10 +12,8 @@ import tw.gov.epa.taqmpredict.data.model.EpaData;
  * Created by user on 2017/2/2.
  */
 
-
 public interface DataRequestApi {
     final String RESOURCE_ID = "resourceid";
-
     @GET("{"+RESOURCE_ID+"}/")
     Call<EpaData> getEpaDataRecord(
             @Path(RESOURCE_ID)String resourceid,
