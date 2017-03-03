@@ -1,20 +1,13 @@
 package tw.gov.epa.taqmpredict.data;
 
-import android.provider.ContactsContract;
-import android.util.Log;
-
 import java.util.HashMap;
 import java.util.Map;
 
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import tw.gov.epa.taqmpredict.data.model.EpaData;
-import tw.gov.epa.taqmpredict.data.model.Record;
-import tw.gov.epa.taqmpredict.data.model.Result;
 
 /**
  * Created by user on 2017/2/2.
@@ -61,7 +54,7 @@ public class DataRequestService {
     }
 
     public Call<EpaData> getEpaData(){
-        return dataRequestApi.getEpaDataRecord(RESOURCEID,mParams);
+        return dataRequestApi.getEpaDataRecord(RESOURCEID,mDefaultParams);
     }
 
     public DataRequestService setParams(Map<String,String> params){

@@ -8,4 +8,5 @@ import java.util.Map;
 
 public interface IDataRequestPresenter {
     public void getEpaData(Map params);
+    public void getEpaData();
 }

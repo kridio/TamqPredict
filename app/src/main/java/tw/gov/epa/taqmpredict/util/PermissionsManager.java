@@ -1,10 +1,8 @@
 package tw.gov.epa.taqmpredict.util;
 
 import android.Manifest;
-import android.content.Context;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.nobrain.android.permissions.AndroidPermissions;
 import com.nobrain.android.permissions.Checker;
@@ -22,7 +20,9 @@ public class PermissionsManager {
 
     public static void checkPermission(MainActivity activity){
         AndroidPermissions.check(activity)
-                .permissions(Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION)
+                .permissions(Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.ACCESS_COARSE_LOCATION,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 .hasPermissions(new Checker.Action0() {
                     @Override
                     public void call(String[] permissions) {
@@ -43,7 +43,9 @@ public class PermissionsManager {
 //                                Toast.LENGTH_SHORT).show();
 
                         ActivityCompat.requestPermissions(activity
-                                , new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION}
+                                , new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
+                                        Manifest.permission.ACCESS_COARSE_LOCATION,
+                                        Manifest.permission.WRITE_EXTERNAL_STORAGE}
                                 , REQUEST_CODE);
                     }
                 })

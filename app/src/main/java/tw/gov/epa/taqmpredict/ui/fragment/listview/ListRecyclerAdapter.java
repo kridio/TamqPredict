@@ -8,11 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
-import butterknife.BindView;
 import tw.gov.epa.taqmpredict.R;
 
 /**

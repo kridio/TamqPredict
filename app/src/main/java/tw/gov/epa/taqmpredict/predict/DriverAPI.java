@@ -1,11 +1,8 @@
 package tw.gov.epa.taqmpredict.predict;
 
-import java.util.Map;
-
 import retrofit2.Call;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 import tw.gov.epa.taqmpredict.predict.model.PredictData;
 
 /**
@@ -13,8 +10,9 @@ import tw.gov.epa.taqmpredict.predict.model.PredictData;
  */
 
 public interface DriverAPI {
-    @GET("open")
+    @GET("uc")
     Call<PredictData> getPredictData(
-            @Field("id") String id
+            @Query("id") String id,
+            @Query("export") String export
     );
 }

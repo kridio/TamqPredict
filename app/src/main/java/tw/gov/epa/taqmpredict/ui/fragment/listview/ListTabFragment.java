@@ -15,8 +15,6 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import tw.gov.epa.taqmpredict.R;
 import tw.gov.epa.taqmpredict.base.BaseFragment;
 import tw.gov.epa.taqmpredict.event.TabSelectedEvent;
@@ -28,13 +26,11 @@ import tw.gov.epa.taqmpredict.ui.fragment.MainFragment;
 
 public class ListTabFragment extends BaseFragment {
     private final static String TAG = ListTabFragment.class.getSimpleName();
-    @BindView(R.id.tabs)
-    TabLayout tabs;
-    @BindView(R.id.recyclerView)
-    RecyclerView recyclerView;
 
     private ListRecyclerAdapter mAdapter;
 
+    TabLayout tabs;
+    RecyclerView recyclerView;
     public static ListTabFragment newInstance() {
         Bundle args = new Bundle();
 
@@ -47,7 +43,9 @@ public class ListTabFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tab_list, container, false);
-        ButterKnife.bind(this, view);
+        tabs = (TabLayout)view.findViewById(R.id.tabs);
+        recyclerView = (RecyclerView)view.findViewById(R.id.recyclerView);
+
         EventBus.getDefault().register(this);
 
         mAdapter = new ListRecyclerAdapter(getContext());

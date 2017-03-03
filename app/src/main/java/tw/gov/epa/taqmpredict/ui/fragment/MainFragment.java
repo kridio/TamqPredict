@@ -15,8 +15,6 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import me.yokeyword.fragmentation.SupportFragment;
 import tw.gov.epa.taqmpredict.R;
 import tw.gov.epa.taqmpredict.base.BaseFragment;
@@ -24,7 +22,6 @@ import tw.gov.epa.taqmpredict.event.StartBrotherEvent;
 import tw.gov.epa.taqmpredict.predict.DriverService;
 import tw.gov.epa.taqmpredict.ui.fragment.home.HomeTabFragment;
 import tw.gov.epa.taqmpredict.ui.fragment.listview.ListTabFragment;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,11 +34,9 @@ public class MainFragment extends BaseFragment {
     public static final int FIRST = 0;
     public static final int SECOND = 1;
     public static final int THIRD = 2;
-    @BindView(R.id.recyclerView_city)
+
     RecyclerView recyclerViewCity;
-    @BindView(R.id.tv_add_area)
     TextView tvAddArea;
-    @BindView(R.id.tv_edit_area)
     TextView tvEditArea;
 
     CityRecyclerViewAdapter cityRecyclerViewAdapter;
@@ -62,7 +57,9 @@ public class MainFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-        ButterKnife.bind(this, view);
+        recyclerViewCity = (RecyclerView)view.findViewById(R.id.recyclerView_city);
+        tvAddArea = (TextView)view.findViewById(R.id.tv_add_area);
+        tvEditArea = (TextView)view.findViewById(R.id.tv_edit_area);
 
         cityRecyclerViewAdapter = new CityRecyclerViewAdapter(getContext());
         ArrayList<String> myDataset = new ArrayList<>();
@@ -81,9 +78,8 @@ public class MainFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
 //                EventBus.getDefault().post(new TabSelectedEvent(SECOND));
-                //start(ListAreaFragment.newInstance());
+          //      start(ListAreaFragment.newInstance());
                 new DriverService().getPredictData();
-                Log.d("MainActivity","tvAddRea");
             }
         });
 

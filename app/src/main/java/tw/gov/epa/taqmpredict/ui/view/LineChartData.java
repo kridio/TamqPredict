@@ -1,8 +1,6 @@
 package tw.gov.epa.taqmpredict.ui.view;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.Typeface;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;

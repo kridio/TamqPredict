@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.jakewharton.butterknife'
+//apply plugin: 'com.jakewharton.butterknife'
 
 android {
     compileSdkVersion 25
@@ -61,14 +61,16 @@ dependencies {
     compile 'io.nlopez.smartlocation:library:3.2.11'
     compile 'me.yokeyword:fragmentation:0.10.1'
     compile 'org.greenrobot:eventbus:3.0.0'
-    compile 'com.jakewharton:butterknife:8.5.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+//    compile 'com.jakewharton:butterknife:8.5.1'
+//    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
     compile 'com.ogaclejapan.smarttablayout:library:1.6.1@aar'
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
     testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
     compile 'com.orhanobut:logger:1.15'
-    compile 'com.squareup.okhttp3:okhttp:3.6.0'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.6.0'
+//    compile 'com.squareup.okhttp3:okhttp:3.6.0'
+//    compile 'com.squareup.okhttp3:logging-interceptor:3.6.0'
+    compile 'com.github.SilenceDut:jpinyin:v1.0'
+    compile 'javax.annotation:javax.annotation-api:1.2'
 }

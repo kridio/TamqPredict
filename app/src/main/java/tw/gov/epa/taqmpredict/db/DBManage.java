@@ -1,16 +1,11 @@
 package tw.gov.epa.taqmpredict.db;
 
 import android.content.ContentValues;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import tw.gov.epa.taqmpredict.util.FileUtil;
 import tw.gov.epa.taqmpredict.util.PreferencesUtil;
 import tw.gov.epa.taqmpredict.util.TaskExecutor;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 import tw.gov.epa.taqmpredict.AirPollutionApplication;
 

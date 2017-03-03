@@ -1,0 +1,383 @@
+{city_info:[{
+        "county": "雲林縣",
+		"countyPinyin": "yún,lín,xiàn",
+		"siteName": "麥寮鄉",
+		"cityId":"3913"
+	}, {
+	    "county": "臺東縣",
+		"countyPinyin": "tái,dōng,xiàn",
+		"siteName": "關山鎮",
+		"cityId":"4603"
+	}, {
+	    "county": "澎湖縣",
+		"countyPinyin": "péng,hú,xiàn",
+		"siteName": "馬公市",
+		"cityId":"4601"
+	}, {
+		"county": "金門縣",
+		"countyPinyin": "jīn,mén,xiàn",
+		"siteName": "金門",
+		"cityId":"90"
+	}, {
+		"county": "連江縣",
+		"countyPinyin": "lián,jiāng,xiàn",
+		"siteName": "馬祖",
+		"cityId":"91"
+	}, {
+		"county": "南投縣",
+		"countyPinyin": "nán,tóu,xiàn",
+		"siteName": "埔里鎮",
+		"cityId":"3802"
+	}, {
+		"county": "高雄市",
+		"countyPinyin": "gāo,xióng,shì",
+		"siteName": "復興區",
+		"cityId":"3213"
+	}, {
+		"county": "新北市",
+		"countyPinyin": "xīn,běi,shì",
+		"siteName": "永和區",
+		"cityId":"3103"
+	}, {
+		"county": "南投縣",
+		"countyPinyin": "nán,tóu,xiàn",
+		"siteName": "竹山鎮",
+		"cityId":"3804"
+	}, {
+		"county": "桃園市",
+		"countyPinyin": "táo,yuán,shì",
+		"siteName": "中壢區",
+		"cityId":"3202"
+	}, {
+		"county": "新北市",
+		"countyPinyin": "xīn,běi,shì",
+		"siteName": "三重區",
+		"cityId":"3102"
+	}, {
+		"county": "宜蘭縣",
+		"countyPinyin": "yí,lán,xiàn",
+		"siteName": "冬山鄉",
+		"cityId":"3408"
+	}, {
+		"county": "宜蘭縣",
+		"countyPinyin": "yí,lán,xiàn",
+		"siteName": "宜蘭市",
+		"cityId":"3401"
+	}, {
+		"county": "臺北市",
+		"countyPinyin": "tái,běi,shì",
+		"siteName": "陽明",
+		"cityId":"0116"
+	}, {
+		"county": "花蓮縣",
+		"countyPinyin": "huā,lián,xiàn",
+		"siteName": "花蓮市",
+		"cityId":"4501"
+	}, {
+		"county": "臺東縣",
+		"countyPinyin": "tái,dōng,xiàn",
+		"siteName": "臺東",
+		"cityId":"4601"
+	}, {
+		"county": "屏東縣",
+		"countyPinyin": "píng,dōng,xiàn",
+		"siteName": "恆春鎮",
+		"cityId":"4304"
+	}, {
+		"county": "屏東縣",
+		"countyPinyin": "píng,dōng,xiàn",
+		"siteName": "潮州區",
+		"cityId":"4302"
+	}, {
+		"county": "屏東縣",
+		"countyPinyin": "píng,dōng,xiàn",
+		"siteName": "屏東市",
+		"cityId":"4301"
+	}, {
+		"county": "高雄市",
+		"countyPinyin": "gāo,xióng,shì",
+		"siteName": "小港區",
+		"cityId":"0738"
+	}, {
+		"county": "高雄市",
+		"countyPinyin": "gāo,xióng,shì",
+		"siteName": "前鎮區",
+		"cityId":"0736"
+	}, {
+		"county": "高雄市",
+		"countyPinyin": "gāo,xióng,shì",
+		"siteName": "前金區",
+		"cityId":"0734"
+	}, {
+		"county": "高雄市",
+		"countyPinyin": "gāo,xióng,shì",
+		"siteName": "左營區",
+		"cityId":"0730"
+	}, {
+		"county": "高雄市",
+		"countyPinyin": "gāo,xióng,shì",
+		"siteName": "楠梓區",
+		"cityId":"0731"
+	}, {
+		"county": "高雄市",
+		"countyPinyin": "gāo,xióng,shì",
+		"siteName": "林園區",
+		"cityId":"0705"
+	}, {
+		"county": "高雄市",
+		"countyPinyin": "gāo,xióng,shì",
+		"siteName": "大寮區",
+		"cityId":"0706"
+	}, {
+		"county": "高雄市",
+		"countyPinyin": "gāo,xióng,shì",
+		"siteName": "鳳山區",
+		"cityId":"0701"
+	}, {
+		"county": "高雄市",
+		"countyPinyin": "gāo,xióng,shì",
+		"siteName": "仁武區",
+		"cityId":"0708"
+	}, {
+		"county": "高雄市",
+		"countyPinyin": "gāo,xióng,shì",
+		"siteName": "橋頭區",
+		"cityId":"0711"
+	}, {
+		"county": "高雄市",
+		"countyPinyin": "gāo,xióng,shì",
+		"siteName": "美濃區",
+		"cityId":"0704"
+	}, {
+		"county": "臺南市",
+		"countyPinyin": "tái,nán,shì",
+		"siteName": "臺南市",
+		"cityId":"05"
+	}, {
+		"county": "臺南市",
+		"countyPinyin": "tái,nán,shì",
+		"siteName": "安南區",
+		"cityId":"0537"
+	}, {
+		"county": "臺南市",
+		"countyPinyin": "tái,nán,shì",
+		"siteName": "善化區",
+		"cityId":"0507"
+	}, {
+		"county": "臺南市",
+		"countyPinyin": "tái,nán,shì",
+		"siteName": "新營區",
+		"cityId":"0501"
+	}, {
+		"county": "嘉義市",
+		"countyPinyin": "jiā,yì,shì",
+		"siteName": "嘉義",
+		"cityId":"22"
+	}, {
+		"county": "雲林縣",
+		"countyPinyin": "yún,lín,xiàn",
+		"siteName": "臺西鄉",
+		"cityId":"3916"
+	}, {
+		"county": "嘉義縣",
+		"countyPinyin": "jiā,yì,xiàn",
+		"siteName": "朴子市",
+		"cityId":"4001"
+	}, {
+		"county": "嘉義縣",
+		"countyPinyin": "jiā,yì,xiàn",
+		"siteName": "新港鄉",
+		"cityId":"4006"
+	}, {
+		"county": "雲林縣",
+		"countyPinyin": "yún,lín,xiàn",
+		"siteName": "崙背鄉",
+		"cityId":"3912"
+	}, {
+		"county": "雲林縣",
+		"countyPinyin": "yún,lín,xiàn",
+		"siteName": "斗六市",
+		"cityId":"3901"
+	}, {
+		"county": "南投市",
+		"countyPinyin": "nán,tóu,xiàn",
+		"siteName": "南投",
+		"cityId":"3801"
+	}, {
+		"county": "彰化縣",
+		"countyPinyin": "zhāng,huà,xiàn",
+		"siteName": "二林鎮",
+		"cityId":"3708"
+	}, {
+		"county": "彰化縣",
+		"countyPinyin": "zhāng,huà,xiàn",
+		"siteName": "線西鄉",
+		"cityId":"3709"
+	}, {
+		"county": "彰化縣",
+		"countyPinyin": "zhāng,huà,xiàn",
+		"siteName": "彰化市",
+		"cityId":"3701"
+	}, {
+		"county": "臺中市",
+		"countyPinyin": "tái,zhōng,shì",
+		"siteName": "西屯區",
+		"cityId":"0327"
+	}, {
+		"county": "臺中市",
+		"countyPinyin": "tái,zhōng,shì",
+		"siteName": "忠明",
+		"cityId": "0324"
+	}, {
+		"county": "臺中市",
+		"countyPinyin": "tái,zhōng,shì",
+		"siteName": "大里區",
+		"cityId": "0320"
+	}, {
+		"county": "臺中市",
+		"countyPinyin": "tái,zhōng,shì",
+		"siteName": "沙鹿區",
+		"cityId": "0305"
+	}, {
+		"county": "臺中市",
+		"countyPinyin": "tái,zhōng,shì",
+		"siteName": "豐原區",
+		"cityId": "0301"
+	}, {
+		"county": "苗栗縣",
+		"countyPinyin": "miáo,lì,xiàn",
+		"siteName": "三義鄉",
+		"cityId": "3513"
+	}, {
+		"county": "苗栗縣",
+		"countyPinyin": "miáo,lì,xiàn",
+		"siteName": "苗栗市",
+		"cityId": "3501"
+	}, {
+		"county": "苗栗縣",
+		"countyPinyin": "miáo,lì,xiàn",
+		"siteName": "頭份",
+		"cityId": "3505"
+	}, {
+		"county": "新竹市",
+		"countyPinyin": "xīn,zhú,shì",
+		"siteName": "新竹市",
+		"cityId": "12"
+	}, {
+		"county": "新竹縣",
+		"countyPinyin": "xīn,zhú,xiàn",
+		"siteName": "竹東鎮",
+		"cityId": "3303"
+	}, {
+		"county": "新竹縣",
+		"countyPinyin": "xīn,zhú,xiàn",
+		"siteName": "湖口鄉",
+		"cityId": "3306"
+	}, {
+		"county": "桃園市",
+		"countyPinyin": "táo,yuán,shì",
+		"siteName": "龍潭區",
+		"cityId": "3209"
+	}, {
+		"county": "桃園市",
+		"countyPinyin": "táo,yuán,shì",
+		"siteName": "平鎮區",
+		"cityId": "3210"
+	}, {
+		"county": "桃園市",
+		"countyPinyin": "táo,yuán,shì",
+		"siteName": "觀音區",
+		"cityId": "3212"
+	}, {
+		"county": "桃園市",
+		"countyPinyin": "táo,yuán,shì",
+		"siteName": "大園區",
+		"cityId": "3206"
+	}, {
+		"county": "桃園市",
+		"countyPinyin": "táo,yuán,shì",
+		"siteName": "桃園區",
+		"cityId": "3201"
+	}, {
+		"county": "臺北市",
+		"countyPinyin": "tái,běi,shì",
+		"siteName": "大同鄉",
+		"cityId": "3411"
+	}, {
+		"county": "臺北市",
+		"countyPinyin": "tái,běi,shì",
+		"siteName": "松山",
+		"cityId": "0101"
+	}, {
+		"county": "臺北市",
+		"countyPinyin": "tái,běi,shì",
+		"siteName": "古亭",
+		"cityId": "0118"
+	}, {
+		"county": "臺北市",
+		"countyPinyin": "tái,běi,shì",
+		"siteName": "萬華區",
+		"cityId": "0119"
+	}, {
+		"county": "臺北市",
+		"countyPinyin": "tái,běi,shì",
+		"siteName": "中山區",
+		"cityId": "0110"
+	}, {
+		"county": "臺北市",
+		"countyPinyin": "tái,běi,shì",
+		"siteName": "士林區",
+		"cityId": "0115"
+	}, {
+		"county": "新北市",
+		"countyPinyin": "xīn,běi,shì",
+		"siteName": "淡水區",
+		"cityId": "3110"
+	}, {
+		"county": "新北市",
+		"countyPinyin": "xīn,běi,shì",
+		"siteName": "林口區",
+		"cityId": "3117"
+	}, {
+		"county": "新北市",
+		"countyPinyin": "xīn,běi,shì",
+		"siteName": "菜寮站",
+		"cityId": "3102"
+	}, {
+		"county": "新北市",
+		"countyPinyin": "xīn,běi,shì",
+		"siteName": "新莊區",
+		"cityId": "3106"
+	}, {
+		"county": "新北市",
+		"countyPinyin": "xīn,běi,shì",
+		"siteName": "板橋區",
+		"cityId": "3101"
+	}, {
+		"county": "新北市",
+		"countyPinyin": "xīn,běi,shì",
+		"siteName": "土城區",
+		"cityId": "3113"
+	}, {
+		"county": "新北市",
+		"countyPinyin": "xīn,běi,shì",
+		"siteName": "新店區",
+		"cityId": "3105"
+	}, {
+		"county": "新北市",
+		"countyPinyin": "xīn,běi,shì",
+		"siteName": "萬里區",
+		"cityId": "3128"
+	}, {
+		"county": "新北市",
+		"countyPinyin": "xīn,běi,shì",
+		"siteName": "汐止區",
+		"cityId": "3111"
+	}, {
+		"county": "基隆市",
+		"countyPinyin": "jī,lóng,shì",
+		"siteName": "基隆區",
+		"cityId": "1107"
+	}
+]
+}

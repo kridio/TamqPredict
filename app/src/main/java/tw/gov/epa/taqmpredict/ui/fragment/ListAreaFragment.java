@@ -9,13 +9,9 @@ import android.view.ViewGroup;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import java.util.List;
-
-import butterknife.ButterKnife;
 import tw.gov.epa.taqmpredict.R;
 import tw.gov.epa.taqmpredict.base.BaseFragment;
 import tw.gov.epa.taqmpredict.event.TabSelectedEvent;
-import tw.gov.epa.taqmpredict.util.LogHelper;
 
 /**
  * Created by Administrator on 2017/3/1.
@@ -36,7 +32,7 @@ public class ListAreaFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_list_area, container, false);
-        ButterKnife.bind(this, view);
+
         EventBus.getDefault().register(this);
 
         return view;

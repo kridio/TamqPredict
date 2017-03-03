@@ -5,6 +5,8 @@ import android.app.Application;
 import com.google.gson.Gson;
 import com.squareup.leakcanary.LeakCanary;
 
+import tw.gov.epa.taqmpredict.data.DataRequestPresenter;
+import tw.gov.epa.taqmpredict.data.DataRequestService;
 import tw.gov.epa.taqmpredict.db.DBManage;
 import tw.gov.epa.taqmpredict.util.LogHelper;
 import tw.gov.epa.taqmpredict.util.TaskExecutor;
@@ -22,7 +24,8 @@ public class AirPollutionApplication extends Application {
         super.onCreate();
         sApplication = this;
 
-        DBManage.getInstance().copyCitysToDB();
+        //DBManage.getInstance().copyCitysToDB();
+        new DataRequestPresenter(new DataRequestService()).getEpaData();
 
         TaskExecutor.executeTask(new Runnable() {
             @Override
