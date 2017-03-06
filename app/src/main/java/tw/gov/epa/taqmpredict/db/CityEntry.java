@@ -8,7 +8,7 @@ import java.util.List;
 
 public class CityEntry {
     /**
-     * city_info : [{"adminArea":"台北市","locatlity":"中正區"}]
+     * city_info : [{"cityid":"4501(行政區代碼)","county":"花蓮市","SiteName":"花蓮"}]
      */
 
     private List<CityInfoEntity> city_info;
@@ -24,59 +24,65 @@ public class CityEntry {
     public static class CityInfoEntity {
         /**
          * lstAddress.get(0).getCountryName();  //台灣
-         * lstAddress.get(0).getAdminArea();  //台北市
+         * lstAddress.get(0).getCounty();  //台北市
          * lstAddress.get(0).getLocality();  //中正區
          * lstAddress.get(0).getThoroughfare();  //信陽街(包含路巷弄)
          * lstAddress.get(0).getFeatureName();  //會得到33(號)
          * lstAddress.get(0).getPostalCode();  //會得到100(郵遞區號)
          */
-//        private String prov;
-        private String country;
-        private String adminArea; //County
-        private String locatlity; //SiteName
-        private String lat;
-        private String lon;
+        private String cityid; //行政區代碼
+        private String cityName; //縣市
+        private String county; //鄉鎮市區
+        private String siteName; //測站名稱
+//        private String lat;
+//        private String lon;
 
-        public String getCountry() {
-            return country;
+        public String getCityid() {return cityid;}
+
+        public void setCityid(String cityid) {this.cityid = cityid;}
+
+        public String getCityName() {
+            return cityName;
         }
 
-        public void setCountry(String country) {
-            this.country = country;
+        public void setCityName(String cityName) {
+            this.cityName = cityName;
         }
 
-        public String getAdminArea() {
-            return adminArea;
+        public String getCounty() {
+            return county;
         }
 
-        public void setAdminArea(String adminArea) {
-            this.adminArea = adminArea;
+        public void setCounty(String county) {
+            this.county = county;
         }
 
-        public String getLocatlity() {
-            return locatlity;
-        }
+//        public String getLocatlity() {
+//            return locatlity;
+//        }
+//
+//        public void setLocatlity(String locatlity) {
+//            this.locatlity = locatlity;
+//        }
 
-        public void setLocatlity(String locatlity) {
-            this.locatlity = locatlity;
-        }
+        public String getSiteName() {return siteName;}
 
-        public String getLat() {
-            return lat;
-        }
+        public void setSiteName(String siteName) {this.siteName = siteName;}
 
-        public void setLat(String lat) {
-            this.lat = lat;
-        }
-
-        public String getLon() {
-            return lon;
-        }
-
-        public void setLon(String lon) {
-            this.lon = lon;
-        }
-
-
+//        public String getLat() {
+//            return lat;
+//        }
+//
+//        public void setLat(String lat) {
+//            this.lat = lat;
+//        }
+//
+//        public String getLon() {
+//            return lon;
+//        }
+//
+//        public void setLon(String lon) {
+//            this.lon = lon;
+//        }
     }
 }

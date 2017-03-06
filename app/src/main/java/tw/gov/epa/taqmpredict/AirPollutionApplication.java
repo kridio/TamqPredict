@@ -5,8 +5,6 @@ import android.app.Application;
 import com.google.gson.Gson;
 import com.squareup.leakcanary.LeakCanary;
 
-import tw.gov.epa.taqmpredict.data.DataRequestPresenter;
-import tw.gov.epa.taqmpredict.data.DataRequestService;
 import tw.gov.epa.taqmpredict.db.DBManage;
 import tw.gov.epa.taqmpredict.util.LogHelper;
 import tw.gov.epa.taqmpredict.util.TaskExecutor;
@@ -24,8 +22,7 @@ public class AirPollutionApplication extends Application {
         super.onCreate();
         sApplication = this;
 
-        //DBManage.getInstance().copyCitysToDB();
-        new DataRequestPresenter(new DataRequestService()).getEpaData();
+        DBManage.getInstance().copyCitysToDB();
 
         TaskExecutor.executeTask(new Runnable() {
             @Override
@@ -52,14 +49,7 @@ public class AirPollutionApplication extends Application {
     }
 
     private void initCrashReport() {
-//        Beta.autoInit = true;
-//        Beta.autoCheckUpgrade = false;
-//        Beta.initDelay = 3 * 1000;
-//        Beta.largeIconId = R.mipmap.icon;
-//        Beta.smallIconId = R.mipmap.icon;
-//        Beta.defaultBannerId = R.mipmap.icon;
-//        Beta.storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-//        Bugly.init(getApplicationContext(), APP_ID, false);
+
     }
 
     public static Gson getGson() {

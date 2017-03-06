@@ -58,7 +58,6 @@ public class AreaRequestService {
         try {
             Geocoder gc = new Geocoder(mContedxt, Locale.TRADITIONAL_CHINESE);
             List<Address> lstAddress = gc.getFromLocation(lat, lng, 1);
-//            String returnAddress = lstAddress.get(0).getAddressLine(0);
         }
         catch(Exception ex){
             ex.printStackTrace();

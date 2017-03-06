@@ -24,17 +24,17 @@ import tw.gov.epa.taqmpredict.ui.fragment.MainFragment;
  * Created by user on 2017/2/18.
  */
 
-public class ListTabFragment extends BaseFragment {
-    private final static String TAG = ListTabFragment.class.getSimpleName();
+public class ListFragment extends BaseFragment {
+    private final static String TAG = ListFragment.class.getSimpleName();
 
     private ListRecyclerAdapter mAdapter;
 
     TabLayout tabs;
     RecyclerView recyclerView;
-    public static ListTabFragment newInstance() {
+    public static ListFragment newInstance() {
         Bundle args = new Bundle();
 
-        ListTabFragment fragment = new ListTabFragment();
+        ListFragment fragment = new ListFragment();
         fragment.setArguments(args);
         return fragment;
     }

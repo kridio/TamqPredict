@@ -19,8 +19,8 @@ import tw.gov.epa.taqmpredict.ui.fragment.MainFragment;
  * Created by user on 2017/2/14.
  */
 
-public class HomeTabFragment extends BaseFragment {
-    private static final String TAG = HomeTabFragment.class.getSimpleName();
+public class HomeFragment extends BaseFragment {
+    private static final String TAG = HomeFragment.class.getSimpleName();
 //    @BindView(R.id.mainhead_viewpager)
 //    ViewPager mainheadViewpager;
 //    @BindView(R.id.lineChart)
@@ -32,10 +32,10 @@ public class HomeTabFragment extends BaseFragment {
 
 //    private HomeRecyclerAdapter mAdapter;
 
-    public static HomeTabFragment newInstance() {
+    public static HomeFragment newInstance() {
         Bundle args = new Bundle();
 
-        HomeTabFragment fragment = new HomeTabFragment();
+        HomeFragment fragment = new HomeFragment();
         fragment.setArguments(args);
         return fragment;
     }

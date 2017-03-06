@@ -1,22 +1,31 @@
-
 package tw.gov.epa.taqmpredict.gps.area.city.model;
 
-import java.util.List;
-import com.google.gson.annotations.SerializedName;
+import tw.gov.epa.taqmpredict.base.Constants;
 
-public class CityInfo {
-    @SerializedName("cityId")
+public class CityInfoData {
+
+    private String mInitial = Constants.DEFAULT_STR;
     private String mCityId;
-    @SerializedName("city_info")
-    private List<CityInfo> mCityInfo;
-    @SerializedName("county")
     private String mCounty;
-    @SerializedName("countyPinyin")
     private String mCountyPinyin;
-    @SerializedName("siteName")
     private String mSiteName;
-    @SerializedName("siteNamePinyin")
     private String mSiteNamePinyin;
+
+    public CityInfoData(String cityId,String county, String countyPinyin, String siteName ,String siteName_pinyin) {
+        this.mCityId = cityId;
+        this.mCounty = county;
+        this.mCountyPinyin = countyPinyin;
+        this.mSiteName = siteName;
+        this.mSiteNamePinyin = siteName_pinyin;
+    }
+
+    public String getInitial() {
+        return mInitial;
+    }
+
+    public void setInitial(String initial) {
+        this.mInitial = initial;
+    }
 
     public String getCityId() {
         return mCityId;
@@ -24,12 +33,6 @@ public class CityInfo {
 
     public void setCityId(String cityId) {
         mCityId = cityId;
-    }
-
-    public List<CityInfo> getCityInfo() {return mCityInfo;}
-
-    public void setCityInfo(List<CityInfo> cityInfo) {
-        mCityInfo = cityInfo;
     }
 
     public String getCounty() {
@@ -52,7 +55,7 @@ public class CityInfo {
         return mSiteName;
     }
 
-    public void setSiteName(String siteName) {mSiteName = siteName+"區";}
+    public void setSiteName(String siteName) {mSiteName = siteName;}
 
     public String getSiteNamePinyin() {
         return mSiteNamePinyin;

@@ -13,12 +13,12 @@ import tw.gov.epa.taqmpredict.base.BaseFragment;
  * Created by user on 2017/2/14.
  */
 
-public class AboutTabFragment extends BaseFragment{
-    public static AboutTabFragment newInstance() {
+public class AboutFragment extends BaseFragment{
+    public static AboutFragment newInstance() {
 
         Bundle args = new Bundle();
 
-        AboutTabFragment fragment = new AboutTabFragment();
+        AboutFragment fragment = new AboutFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -26,7 +26,7 @@ public class AboutTabFragment extends BaseFragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_tab_about, container, false);
+        View view = inflater.inflate(R.layout.fragment_about, container, false);
 
         return super.onCreateView(inflater, container, savedInstanceState);
     }

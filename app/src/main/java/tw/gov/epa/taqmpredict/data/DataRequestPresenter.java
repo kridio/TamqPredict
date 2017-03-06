@@ -23,8 +23,7 @@ import retrofit2.Response;
 import tw.gov.epa.taqmpredict.data.model.EpaData;
 import tw.gov.epa.taqmpredict.data.model.Record;
 import tw.gov.epa.taqmpredict.data.model.Result;
-import tw.gov.epa.taqmpredict.gps.area.city.model.CityInfo;
-import tw.gov.epa.taqmpredict.util.LogHelper;
+import tw.gov.epa.taqmpredict.gps.area.city.model.CityInfoData;
 
 /**
  * Created by user on 2017/2/6.
@@ -59,39 +58,26 @@ public class DataRequestPresenter implements IDataRequestPresenter {
                     @Override
                     public void onResponse(Call<EpaData> call, Response<EpaData> response) {
                         Result response_result = response.body().getResult();
-                        List<CityInfo> inf_list = new ArrayList<CityInfo>();
+                        List<CityInfoData> inf_list = new ArrayList<CityInfoData>();
                         for (Record record : response_result.getRecords()) {
-                            CityInfo inf = new CityInfo();
-                            inf.setCounty(record.getCounty());
-                            inf.setSiteName(record.getSiteName());
-                            try {
-                                inf.setCountyPinyin(PinyinHelper.convertToPinyinString(inf.getCounty(),
-                                        ",", PinyinFormat.WITH_TONE_MARK));
-                                inf.setSiteNamePinyin(PinyinHelper.convertToPinyinString(inf.getSiteName(),
-                                        ",", PinyinFormat.WITH_TONE_MARK));
-                            } catch (PinyinException e) {
-                                e.printStackTrace();
-                            }
-                            inf_list.add(inf);
-
                             Log.d(TAG, record.getPublishTime() + "\r\n" + record.getSiteName() + " " + record.getCounty() + "\r\n PM25:" + record.getPM25());
                         }
-                        Gson gson = new Gson();
-
-                        try {
-                            File file = new File(Environment.getExternalStorageDirectory() + File.separator + "test.txt");
-                            file.createNewFile();
-                            BufferedWriter out = new BufferedWriter(
-                                    new OutputStreamWriter(new FileOutputStream(file), "UTF-8"));
-                            gson.toJson(inf_list, out);
-                            out.close();
-
-                            //File file = new File(Environment.getExternalStorageDirectory() + File.separator + "test.txt");
-                            //file.createNewFile();
-                            //gson.toJson(inf_list, new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file),"UTF-8")));
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+//                        Gson gson = new Gson();
+//
+//                        try {
+//                            File file = new File(Environment.getExternalStorageDirectory() + File.separator + "test.txt");
+//                            file.createNewFile();
+//                            BufferedWriter out = new BufferedWriter(
+//                                    new OutputStreamWriter(new FileOutputStream(file), "UTF-8"));
+//                            gson.toJson(inf_list, out);
+//                            out.close();
+//
+//                            //File file = new File(Environment.getExternalStorageDirectory() + File.separator + "test.txt");
+//                            //file.createNewFile();
+//                            //gson.toJson(inf_list, new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file),"UTF-8")));
+//                        } catch (IOException e) {
+//                            e.printStackTrace();
+//                        }
                     }
 
                     @Override

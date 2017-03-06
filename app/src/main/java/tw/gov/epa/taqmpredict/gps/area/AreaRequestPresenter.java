@@ -18,7 +18,6 @@ public class AreaRequestPresenter implements IAreaRequestPresenter{
     public AreaRequestPresenter(//IMainView view,
                                 AreaRequestService areaRequestService,
                                 GPSTrackerService gpsTrackerService){
-//        mView = view;
         mAreaRequestService = areaRequestService;
         mGpsTrackerService = gpsTrackerService;
     }

@@ -1,4 +1,4 @@
-package tw.gov.epa.taqmpredict.ui.fragment;
+package tw.gov.epa.taqmpredict.ui.fragment.city;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

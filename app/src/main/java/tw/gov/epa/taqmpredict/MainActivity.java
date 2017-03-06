@@ -16,7 +16,6 @@ import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
 import me.yokeyword.fragmentation.helper.FragmentLifecycleCallbacks;
 import tw.gov.epa.taqmpredict.data.DataCache;
-import tw.gov.epa.taqmpredict.data.DataRequestPresenter;
 import tw.gov.epa.taqmpredict.data.DataRequestService;
 import tw.gov.epa.taqmpredict.data.IDataRequestPresenter;
 import tw.gov.epa.taqmpredict.gps.GPSTrackerService;

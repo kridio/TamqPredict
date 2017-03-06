@@ -20,8 +20,10 @@ import tw.gov.epa.taqmpredict.R;
 import tw.gov.epa.taqmpredict.base.BaseFragment;
 import tw.gov.epa.taqmpredict.event.StartBrotherEvent;
 import tw.gov.epa.taqmpredict.predict.DriverService;
-import tw.gov.epa.taqmpredict.ui.fragment.home.HomeTabFragment;
-import tw.gov.epa.taqmpredict.ui.fragment.listview.ListTabFragment;
+import tw.gov.epa.taqmpredict.ui.fragment.city.CityRecyclerViewAdapter;
+import tw.gov.epa.taqmpredict.ui.fragment.city.CitySearchFragment;
+import tw.gov.epa.taqmpredict.ui.fragment.home.HomeFragment;
+import tw.gov.epa.taqmpredict.ui.fragment.listview.ListFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -77,25 +79,23 @@ public class MainFragment extends BaseFragment {
         tvAddArea.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                EventBus.getDefault().post(new TabSelectedEvent(SECOND));
-          //      start(ListAreaFragment.newInstance());
-                new DriverService().getPredictData();
+                start(CitySearchFragment.newInstance());
             }
         });
 
         if (savedInstanceState == null) {
-            mFragments[FIRST] = HomeTabFragment.newInstance();
-            mFragments[SECOND] = ListAreaFragment.newInstance();
-            mFragments[THIRD] = ListTabFragment.newInstance();
+            mFragments[FIRST] = HomeFragment.newInstance();
+            mFragments[SECOND] = CitySearchFragment.newInstance();
+            mFragments[THIRD] = ListFragment.newInstance();
 
             loadMultipleRootFragment(R.id.tamq_tab_container, FIRST,
                     mFragments[FIRST],
                     mFragments[SECOND],
                     mFragments[THIRD]);
         } else {
-            mFragments[FIRST] = findChildFragment(HomeTabFragment.class);
-            mFragments[SECOND] = findChildFragment(ListAreaFragment.class);
-            mFragments[THIRD] = findChildFragment(ListTabFragment.class);
+            mFragments[FIRST] = findChildFragment(HomeFragment.class);
+            mFragments[SECOND] = findChildFragment(CitySearchFragment.class);
+            mFragments[THIRD] = findChildFragment(ListFragment.class);
         }
         //initView();
 
