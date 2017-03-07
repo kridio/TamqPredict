@@ -1,4 +1,4 @@
-package tw.gov.epa.taqmpredict.ui.fragment.city;
+package tw.gov.epa.taqmpredict.ui.fragment.home;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -15,7 +15,7 @@ import tw.gov.epa.taqmpredict.R;
  * Created by Administrator on 2017/3/1.
  */
 
-public class CityRecyclerViewAdapter extends RecyclerView.Adapter<CityRecyclerViewAdapter.ViewHolder> {
+public class HomeCityRecyclerViewAdapter extends RecyclerView.Adapter<HomeCityRecyclerViewAdapter.ViewHolder> {
     TextView tvArea;
 
     private Context mContext;
@@ -26,7 +26,7 @@ public class CityRecyclerViewAdapter extends RecyclerView.Adapter<CityRecyclerVi
         mDataArea = data;
     }
 
-    public CityRecyclerViewAdapter(Context context) {
+    public HomeCityRecyclerViewAdapter(Context context) {
         mContext = context;
     }
 
@@ -42,7 +42,7 @@ public class CityRecyclerViewAdapter extends RecyclerView.Adapter<CityRecyclerVi
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_city, parent, false);
+                .inflate(R.layout.item_home_list_city, parent, false);
         tvArea = (TextView)v.findViewById(R.id.tv_area) ;
         ViewHolder vh = new ViewHolder(v);
         return vh;

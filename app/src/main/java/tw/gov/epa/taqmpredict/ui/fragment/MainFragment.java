@@ -19,9 +19,8 @@ import me.yokeyword.fragmentation.SupportFragment;
 import tw.gov.epa.taqmpredict.R;
 import tw.gov.epa.taqmpredict.base.BaseFragment;
 import tw.gov.epa.taqmpredict.event.StartBrotherEvent;
-import tw.gov.epa.taqmpredict.predict.DriverService;
-import tw.gov.epa.taqmpredict.ui.fragment.city.CityRecyclerViewAdapter;
-import tw.gov.epa.taqmpredict.ui.fragment.city.CitySearchFragment;
+import tw.gov.epa.taqmpredict.ui.fragment.home.HomeCityRecyclerViewAdapter;
+import tw.gov.epa.taqmpredict.ui.fragment.city.CityFragment;
 import tw.gov.epa.taqmpredict.ui.fragment.home.HomeFragment;
 import tw.gov.epa.taqmpredict.ui.fragment.listview.ListFragment;
 
@@ -34,16 +33,8 @@ public class MainFragment extends BaseFragment {
     private static final int REQ_MSG = 10;
 
     public static final int FIRST = 0;
-    public static final int SECOND = 1;
-    public static final int THIRD = 2;
-
-    RecyclerView recyclerViewCity;
-    TextView tvAddArea;
-    TextView tvEditArea;
-
-    CityRecyclerViewAdapter cityRecyclerViewAdapter;
-//    @BindView(R.id.bottomBar)
-//    BottomBar bottomBar;
+//    public static final int SECOND = 1;
+//    public static final int THIRD = 2;
 
     private SupportFragment[] mFragments = new SupportFragment[3];
 
@@ -59,48 +50,19 @@ public class MainFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-        recyclerViewCity = (RecyclerView)view.findViewById(R.id.recyclerView_city);
-        tvAddArea = (TextView)view.findViewById(R.id.tv_add_area);
-        tvEditArea = (TextView)view.findViewById(R.id.tv_edit_area);
-
-        cityRecyclerViewAdapter = new CityRecyclerViewAdapter(getContext());
-        ArrayList<String> myDataset = new ArrayList<>();
-        for(int i = 0; i < 1; i++){
-            myDataset.add(Integer.toString(i));
-        }
-        cityRecyclerViewAdapter.setData(myDataset);
-
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerViewCity.setLayoutManager(layoutManager);
-        recyclerViewCity.setHasFixedSize(true);
-        recyclerViewCity.setAdapter(cityRecyclerViewAdapter);
-
-        tvAddArea.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                start(CitySearchFragment.newInstance());
-            }
-        });
-
         if (savedInstanceState == null) {
             mFragments[FIRST] = HomeFragment.newInstance();
-            mFragments[SECOND] = CitySearchFragment.newInstance();
-            mFragments[THIRD] = ListFragment.newInstance();
+//            mFragments[SECOND] = CityFragment.newInstance();
+//            mFragments[THIRD] = ListFragment.newInstance();
 
-            loadMultipleRootFragment(R.id.tamq_tab_container, FIRST,
-                    mFragments[FIRST],
-                    mFragments[SECOND],
-                    mFragments[THIRD]);
+            loadMultipleRootFragment(R.id.tamq_tab_container, FIRST,mFragments[FIRST]);
         } else {
             mFragments[FIRST] = findChildFragment(HomeFragment.class);
-            mFragments[SECOND] = findChildFragment(CitySearchFragment.class);
-            mFragments[THIRD] = findChildFragment(ListFragment.class);
+//            mFragments[SECOND] = findChildFragment(CityFragment.class);
+//            mFragments[THIRD] = findChildFragment(ListFragment.class);
         }
         //initView();
-
         EventBus.getDefault().register(this);
-
         return view;
     }
 

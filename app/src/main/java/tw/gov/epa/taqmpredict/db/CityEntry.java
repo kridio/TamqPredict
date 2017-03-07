@@ -8,7 +8,7 @@ import java.util.List;
 
 public class CityEntry {
     /**
-     * city_info : [{"cityid":"4501(行政區代碼)","county":"花蓮市","SiteName":"花蓮"}]
+     * city_info : [{"countyId":"4501(行政區代碼)","county":"花蓮市","SiteName":"花蓮"}]
      */
 
     private List<CityInfoEntity> city_info;
@@ -30,16 +30,14 @@ public class CityEntry {
          * lstAddress.get(0).getFeatureName();  //會得到33(號)
          * lstAddress.get(0).getPostalCode();  //會得到100(郵遞區號)
          */
-        private String cityid; //行政區代碼
-        private String cityName; //縣市
+        private String countyId; //行政區代碼
         private String county; //鄉鎮市區
+        private String cityName; //縣市
         private String siteName; //測站名稱
-//        private String lat;
-//        private String lon;
 
-        public String getCityid() {return cityid;}
+        public String getCountyId() {return countyId;}
 
-        public void setCityid(String cityid) {this.cityid = cityid;}
+        public void setCountyId(String countyId) {this.countyId = countyId;}
 
         public String getCityName() {
             return cityName;
@@ -56,14 +54,6 @@ public class CityEntry {
         public void setCounty(String county) {
             this.county = county;
         }
-
-//        public String getLocatlity() {
-//            return locatlity;
-//        }
-//
-//        public void setLocatlity(String locatlity) {
-//            this.locatlity = locatlity;
-//        }
 
         public String getSiteName() {return siteName;}
 

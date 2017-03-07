@@ -1,4 +1,4 @@
-{city_info:[{
+{"city_info":[{
               "cityName": "基隆市",
               "siteName": "基隆",
               "county":"信義區",
@@ -85,11 +85,11 @@
           	"county":"三重區",
           	"countyId":"3102"
           }, {
-               		"cityName": "新北市",
-               		"siteName": "菜寮",
-               		"county":"三重區",
-               		"countyId": "3102"
-               	}, {
+            "cityName": "新北市",
+            "siteName": "菜寮",
+            "county":"三重區",
+            "countyId": "3102"
+          }, {
            	"cityName": "新北市",
            	"siteName": "永和",
            	"county":"永和區",

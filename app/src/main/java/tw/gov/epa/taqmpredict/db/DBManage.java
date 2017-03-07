@@ -3,6 +3,7 @@ package tw.gov.epa.taqmpredict.db;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.github.stuxuhai.jpinyin.PinyinException;
 import com.github.stuxuhai.jpinyin.PinyinFormat;
@@ -54,7 +55,7 @@ public class DBManage {
             public void run() {
                 String citys = FileUtil.assetFile2String("cityList.txt", AirPollutionApplication.getContext());
                 CityEntry cityEntry = AirPollutionApplication.getGson().fromJson(citys, CityEntry.class);
-                Collections.sort(cityEntry.getCity_info(), new CityComparator());
+                //Collections.sort(cityEntry.getCity_info(), new CityComparator());
                 SQLiteDatabase db = sDBHelper.getWritableDatabase();
                 db.beginTransaction();
                 try {
@@ -62,7 +63,7 @@ public class DBManage {
                     for (CityEntry.CityInfoEntity cityInfoEntity : cityEntry.getCity_info()) {
                         // Create a new map of values, where column names are the keys
                         values = new ContentValues();
-                        values.put(CityDao.CITY_ID, cityInfoEntity.getCityid());
+                        values.put(CityDao.COUNTY_ID, cityInfoEntity.getCountyId());
                         values.put(CityDao.CITY_Name,cityInfoEntity.getCityName());
                         values.put(CityDao.CITY_Name_PINYIN,
                                 PinyinHelper.convertToPinyinString(
@@ -75,7 +76,8 @@ public class DBManage {
                         values.put(CityDao.SITE_NAME_PINYIN,
                                 PinyinHelper.convertToPinyinString(
                                         cityInfoEntity.getSiteName(),",", PinyinFormat.WITH_TONE_MARK));
-                        db.insert(CityDao.TABLE_NAME, null, values);
+                        long resu = db.insert(CityDao.TABLE_NAME, null, values);
+                        Log.d("copyCitysToDB: ",resu+": "+cityInfoEntity.getSiteName()+"("+cityInfoEntity.getCountyId()+")");
                     }
                     db.setTransactionSuccessful();
                     PreferencesUtil.put(CITY_INITED, true);
@@ -112,7 +114,7 @@ public class DBManage {
                             CityDao.SITE_NAME_PINYIN + " like \"%" + keyword + "%\" or " +
                             CityDao.COUNTY + " like \"%" + keyword + "%\" or " +
                             CityDao.COUNTY_PINYIN + " like \"%" + keyword + "%\" or " +
-                            CityDao.CITY_ID + " like \"%" + keyword + "%\"";
+                            CityDao.COUNTY_ID + " like \"%" + keyword + "%\"";
 
         return getCitys(searchSql, false);
     }
@@ -124,12 +126,14 @@ public class DBManage {
         CityInfoData city;
         String lastInitial = "";
         while (cursor.moveToNext()) {
-            String id = cursor.getString(cursor.getColumnIndex(CityDao.CITY_ID));
+            String id = cursor.getString(cursor.getColumnIndex(CityDao.COUNTY_ID));
+            String cityName = cursor.getString(cursor.getColumnIndex(CityDao.CITY_Name));
+            String cityName_pinyin = cursor.getString(cursor.getColumnIndex(CityDao.CITY_Name_PINYIN));
             String county = cursor.getString(cursor.getColumnIndex(CityDao.COUNTY));
             String county_pinyin = cursor.getString(cursor.getColumnIndex(CityDao.COUNTY_PINYIN));
             String siteName = cursor.getString(cursor.getColumnIndex(CityDao.SITE_NAME));
             String siteName_pinyin = cursor.getString(cursor.getColumnIndex(CityDao.SITE_NAME_PINYIN));
-            city = new CityInfoData(id,county,county_pinyin,siteName,siteName_pinyin);
+            city = new CityInfoData(id,cityName,cityName_pinyin,county,county_pinyin,siteName,siteName_pinyin);
             String currentInitial = county_pinyin.substring(0, 1);
             if (!lastInitial.equals(currentInitial) && all) {
                 city.setInitial(currentInitial);
@@ -146,19 +150,19 @@ public class DBManage {
     /**
      * order by a-z
      */
-    private class CityComparator implements Comparator<CityEntry.CityInfoEntity> {
-        @Override
-        public int compare(CityEntry.CityInfoEntity lhs, CityEntry.CityInfoEntity rhs) {
-            int c = 0;
-            try {
-                char a = PinyinHelper.convertToPinyinString(lhs.getCounty(),",", PinyinFormat.WITH_TONE_MARK).charAt(0);
-                char b = PinyinHelper.convertToPinyinString(rhs.getCounty(),",", PinyinFormat.WITH_TONE_MARK).charAt(0);
-                c = a-b;
-            } catch (PinyinException e) {
-                e.printStackTrace();
-            }
-            return c;
-        }
-    }
+//    private class CityComparator implements Comparator<CityEntry.CityInfoEntity> {
+//        @Override
+//        public int compare(CityEntry.CityInfoEntity lhs, CityEntry.CityInfoEntity rhs) {
+//            int c = 0;
+//            try {
+//                char a = PinyinHelper.convertToPinyinString(lhs.getCounty(),",", PinyinFormat.WITH_TONE_MARK).charAt(0);
+//                char b = PinyinHelper.convertToPinyinString(rhs.getCounty(),",", PinyinFormat.WITH_TONE_MARK).charAt(0);
+//                c = a-b;
+//            } catch (PinyinException e) {
+//                e.printStackTrace();
+//            }
+//            return c;
+//        }
+//    }
 
 }
