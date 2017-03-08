@@ -9,4 +9,5 @@ public class Constants {
     }
 
     public static final String DEFAULT_STR = "$";
+    public static final String HEADLINE_SITE = "$";
 }

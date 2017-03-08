@@ -114,6 +114,8 @@ public class DBManage {
                             CityDao.SITE_NAME_PINYIN + " like \"%" + keyword + "%\" or " +
                             CityDao.COUNTY + " like \"%" + keyword + "%\" or " +
                             CityDao.COUNTY_PINYIN + " like \"%" + keyword + "%\" or " +
+                            CityDao.CITY_Name + " like \"%" + keyword + "%\" or " +
+                            CityDao.CITY_Name_PINYIN + " like \"%" + keyword + "%\" or " +
                             CityDao.COUNTY_ID + " like \"%" + keyword + "%\"";
 
         return getCitys(searchSql, false);

@@ -22,8 +22,11 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {
     ArrayList<String> mDataList;
     OnRecyclerViewItemClickListener mOnItemClickListener = null;
 
-    public CityAdapter(Context context, ArrayList<String> dataList){
+    public CityAdapter(Context context){
         this.mContext = context;
+    }
+
+    public void setData(ArrayList<String> dataList){
         this.mDataList = dataList;
     }
 

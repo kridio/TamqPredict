@@ -22,7 +22,8 @@ public class PermissionsManager {
         AndroidPermissions.check(activity)
                 .permissions(Manifest.permission.ACCESS_FINE_LOCATION,
                         Manifest.permission.ACCESS_COARSE_LOCATION,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.ACCESS_NETWORK_STATE)
                 .hasPermissions(new Checker.Action0() {
                     @Override
                     public void call(String[] permissions) {
@@ -45,7 +46,8 @@ public class PermissionsManager {
                         ActivityCompat.requestPermissions(activity
                                 , new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
                                         Manifest.permission.ACCESS_COARSE_LOCATION,
-                                        Manifest.permission.WRITE_EXTERNAL_STORAGE}
+                                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                        Manifest.permission.ACCESS_NETWORK_STATE}
                                 , REQUEST_CODE);
                     }
                 })

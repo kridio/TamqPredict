@@ -24,7 +24,7 @@
     <string name="slogan_urgent_sentence_1">不適者減少戶外活動</string>
     <string name="slogan_urgent_sentence_2">敏感族群避免外出</string>
 
-    <string name="hint_search_box">輸入測站名稱或拼音</string>
+    <string name="hint_search_box">輸入測站名稱或郵遞區號</string>
     <string name="nothing_found">没有搜索结果</string>
 
 </resources>

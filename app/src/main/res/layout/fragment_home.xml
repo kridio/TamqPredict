@@ -262,6 +262,7 @@
     <FrameLayout
         android:layout_width="@dimen/navigation_drawer_width"
         android:layout_height="match_parent"
+        android:id="@+id/fl_navigation_city"
         android:layout_gravity="right">
 
         <include layout="@layout/navigation_city" />

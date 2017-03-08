@@ -55,7 +55,8 @@ public class MainFragment extends BaseFragment {
 //            mFragments[SECOND] = CityFragment.newInstance();
 //            mFragments[THIRD] = ListFragment.newInstance();
 
-            loadMultipleRootFragment(R.id.tamq_tab_container, FIRST,mFragments[FIRST]);
+            //loadMultipleRootFragment(R.id.tamq_tab_container, FIRST,mFragments[FIRST]);
+            loadRootFragment(R.id.tamq_tab_container,mFragments[FIRST]);
         } else {
             mFragments[FIRST] = findChildFragment(HomeFragment.class);
 //            mFragments[SECOND] = findChildFragment(CityFragment.class);

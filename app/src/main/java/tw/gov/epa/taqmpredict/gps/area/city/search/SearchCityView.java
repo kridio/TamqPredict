@@ -9,7 +9,7 @@ import tw.gov.epa.taqmpredict.gps.area.city.model.CityInfoData;
  */
 
 public interface SearchCityView {
-    void onMatched(List<CityInfoData> cityInfoDatas);
+    void onMatched(String key);
 
-    void onAllCities(List<CityInfoData> allInfoDatas);
+    void onAllCities();
 }

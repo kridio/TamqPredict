@@ -2,13 +2,20 @@ package tw.gov.epa.taqmpredict.ui.fragment.city;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -16,16 +23,19 @@ import org.greenrobot.eventbus.Subscribe;
 import java.util.ArrayList;
 import java.util.List;
 
-import tw.gov.epa.taqmpredict.AirPollutionApplication;
 import tw.gov.epa.taqmpredict.R;
-import tw.gov.epa.taqmpredict.base.BaseFragment;
 import tw.gov.epa.taqmpredict.base.BaseSwipeBackFragment;
 import tw.gov.epa.taqmpredict.db.DBManage;
+import tw.gov.epa.taqmpredict.event.ChoiceSiteEvent;
 import tw.gov.epa.taqmpredict.event.TabSelectedEvent;
 import tw.gov.epa.taqmpredict.gps.area.city.model.CityInfoData;
 import tw.gov.epa.taqmpredict.gps.area.city.search.SearchCityView;
 import tw.gov.epa.taqmpredict.ui.fragment.MainFragment;
 import tw.gov.epa.taqmpredict.ui.fragment.home.HomeFragment;
+import tw.gov.epa.taqmpredict.util.Check;
+
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 
 /**
  * Created by Administrator on 2017/2/28.
@@ -33,19 +43,41 @@ import tw.gov.epa.taqmpredict.ui.fragment.home.HomeFragment;
 
 public class CityFragment extends BaseSwipeBackFragment implements SearchCityView {
     private RecyclerView rv_city;
+    private LinearLayout mEmptyView;
+    private EditText mSearchTextView;
+    private ImageButton mActionEmptyBtn;
     private CityAdapter mCityAdapter;
     private ArrayList<String> dataList = new ArrayList<>();
+
+    List<CityInfoData> listCities;
     HomeFragment homeFragment;
-    CityFragment cityFragment;
 
     @Override
-    public void onMatched(List<CityInfoData> cityInfoDatas) {
-
+    public void onMatched(String key) {
+        listCities = DBManage.getInstance().searchCity(key);
+        dataList.clear();
+        for(CityInfoData data:listCities){
+            dataList.add(data.getCityName()+data.getSiteName()+"測站");
+        }
+        if (Check.isNull(listCities) || listCities.isEmpty()) {
+            mEmptyView.setVisibility(VISIBLE);
+            rv_city.setVisibility(GONE);
+        } else {
+            mEmptyView.setVisibility(GONE);
+            rv_city.setVisibility(VISIBLE);
+            mCityAdapter.setData(dataList);
+            mCityAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override
-    public void onAllCities(List<CityInfoData> allInfoDatas) {
-
+    public void onAllCities() {
+        listCities = DBManage.getInstance().getAllCities();
+        dataList.clear();
+        for(CityInfoData data:listCities){
+            dataList.add(data.getCityName()+data.getSiteName()+"測站");
+        }
+        rv_city.setVisibility(VISIBLE);
     }
 
     public static CityFragment newInstance() {
@@ -61,32 +93,91 @@ public class CityFragment extends BaseSwipeBackFragment implements SearchCityVie
         EventBus.getDefault().register(this);
         View view = inflater.inflate(R.layout.fragment_search, container, false);
         rv_city = (RecyclerView)view.findViewById(R.id.rv_city);
+        mEmptyView = (LinearLayout)view.findViewById(R.id.empty_view);
+        mSearchTextView = (EditText)view.findViewById(R.id.searchTextView);
+        mActionEmptyBtn = (ImageButton)view.findViewById(R.id.action_empty_btn);
+
         initRecyclerView();
 
+        if (savedInstanceState == null) {
+            homeFragment = HomeFragment.newInstance();
+        } else {
+            homeFragment = findFragment(HomeFragment.class);
+        }
+
         return attachToSwipeBack(view);
-        //return view;
     }
 
     public void initRecyclerView(){
         rv_city.setLayoutManager(new LinearLayoutManager(_mActivity));
         rv_city.setHasFixedSize(true);
 
-        List<CityInfoData> allCities = DBManage.getInstance().getAllCities();
-        for(CityInfoData data:allCities){
-            dataList.add("("+data.getCityId()+")"+data.getCityName()+" "+data.getCounty()+" "+data.getSiteName());
-        }
+        onAllCities();
 
-        mCityAdapter = new CityAdapter(_mActivity, dataList);
+        mCityAdapter = new CityAdapter(_mActivity);
         rv_city.setAdapter(mCityAdapter);
 
         mCityAdapter.setOnItemClickListener((view, pos)->{
             Log.d("CityFragment:",dataList.get(pos));
+            ChoiceSiteEvent event = new ChoiceSiteEvent();
+            event.setCityInfo(listCities.get(pos));
+            EventBus.getDefault().post(event);
+            replaceFragment(homeFragment,false);
+        });
+
+        mActionEmptyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSearchTextView.setText("");
+                onAllCities();
+                mCityAdapter.setData(dataList);
+                mCityAdapter.notifyDataSetChanged();
+            }
+        });
+
+        mSearchTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                return true;
+            }
+        });
+
+        mSearchTextView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                CharSequence text = mSearchTextView.getText();
+                boolean hasText = !TextUtils.isEmpty(text);
+                if (hasText) {
+                    mActionEmptyBtn.setVisibility(View.VISIBLE);
+                } else {
+                    mActionEmptyBtn.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String keyword = s.toString();
+                if (TextUtils.isEmpty(keyword)) {
+                    mActionEmptyBtn.setVisibility(View.GONE);
+                    mEmptyView.setVisibility(View.GONE);
+                    onAllCities();
+                } else {
+                    mActionEmptyBtn.setVisibility(View.VISIBLE);
+                    onMatched(keyword);
+                }
+            }
         });
     }
 
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
+        mCityAdapter.setData(dataList);
+        mCityAdapter.notifyDataSetChanged();
     }
 
 
@@ -104,5 +195,11 @@ public class CityFragment extends BaseSwipeBackFragment implements SearchCityVie
     public void onDestroyView() {
         super.onDestroyView();
         EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    public boolean onBackPressedSupport() {
+        replaceFragment(homeFragment,false);
+        return true;
     }
 }

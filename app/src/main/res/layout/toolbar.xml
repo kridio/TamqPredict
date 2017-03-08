@@ -8,11 +8,35 @@
     style="@style/mToolbarStyle"
     android:touchscreenBlocksFocus="false"
     xmlns:android="http://schemas.android.com/apk/res/android" >
-    <LinearLayout android:layout_width="match_parent"
+    <!--<LinearLayout android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="vertical"-->
+        <!--android:id="@+id/location_bar">-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/tv_location"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:text="@string/title_area_display"-->
+            <!--android:textColor="@color/cardview_light_background"-->
+            <!--android:textSize="@dimen/font_size_medium" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/tv_datetime"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:text="@string/title_datetime_display"-->
+            <!--android:textColor="@color/cardview_light_background"-->
+            <!--android:textSize="@dimen/font_size_small" />-->
+    <!--</LinearLayout>-->
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/location_bar"
-        xmlns:android="http://schemas.android.com/apk/res/android">
+        android:id="@+id/rl_toolbar">
 
         <TextView
             android:id="@+id/tv_location"
@@ -22,6 +46,7 @@
             android:layout_marginTop="10dp"
             android:text="@string/title_area_display"
             android:textColor="@color/cardview_light_background"
+            android:layout_centerHorizontal="true"
             android:textSize="@dimen/font_size_medium" />
 
         <TextView
@@ -32,8 +57,21 @@
             android:layout_marginTop="5dp"
             android:text="@string/title_datetime_display"
             android:textColor="@color/cardview_light_background"
-            android:textSize="@dimen/font_size_small" />
-    </LinearLayout>
+            android:textSize="@dimen/font_size_small"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/tv_location"/>
+        <ImageView
+            android:id="@+id/iv_add_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:src="@drawable/ic_view_list_black_36dp"/>
+    </RelativeLayout>
 
 </android.support.v7.widget.Toolbar>
 

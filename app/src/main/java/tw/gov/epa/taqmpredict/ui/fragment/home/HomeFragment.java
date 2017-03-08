@@ -2,25 +2,32 @@ package tw.gov.epa.taqmpredict.ui.fragment.home;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 
 import tw.gov.epa.taqmpredict.R;
 import tw.gov.epa.taqmpredict.base.BaseFragment;
 import tw.gov.epa.taqmpredict.base.BaseSwipeBackFragment;
+import tw.gov.epa.taqmpredict.base.Constants;
+import tw.gov.epa.taqmpredict.event.ChoiceSiteEvent;
 import tw.gov.epa.taqmpredict.event.TabSelectedEvent;
 import tw.gov.epa.taqmpredict.ui.fragment.MainFragment;
 import tw.gov.epa.taqmpredict.ui.fragment.city.CityFragment;
+import tw.gov.epa.taqmpredict.util.DateTimeUtil;
+import tw.gov.epa.taqmpredict.util.PreferencesUtil;
 
 /**
  * Created by user on 2017/2/14.
@@ -42,11 +49,14 @@ public class HomeFragment extends BaseSwipeBackFragment {
     RecyclerView recyclerViewCity;
     TextView tvAddArea;
     TextView tvEditArea;
+    TextView tvLocation;
+    TextView tvDatetime;
+    ImageView ivAddLoc;
+    DrawerLayout dlCity;
+
+    //String headline_site = "";
 
     HomeCityRecyclerViewAdapter cityRecyclerViewAdapter;
-
-    HomeFragment homeFragment;
-    CityFragment cityFragment;
 
     public static HomeFragment newInstance() {
         Bundle args = new Bundle();
@@ -65,27 +75,10 @@ public class HomeFragment extends BaseSwipeBackFragment {
         recyclerViewCity = (RecyclerView)view.findViewById(R.id.recyclerView_city);
         tvAddArea = (TextView)view.findViewById(R.id.tv_add_area);
         tvEditArea = (TextView)view.findViewById(R.id.tv_edit_area);
-
-        cityRecyclerViewAdapter = new HomeCityRecyclerViewAdapter(getContext());
-        ArrayList<String> myDataset = new ArrayList<>();
-        for(int i = 0; i < 1; i++){
-            myDataset.add(Integer.toString(i));
-        }
-        cityRecyclerViewAdapter.setData(myDataset);
-
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerViewCity.setLayoutManager(layoutManager);
-        recyclerViewCity.setHasFixedSize(true);
-        recyclerViewCity.setAdapter(cityRecyclerViewAdapter);
-
-        tvAddArea.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                start(CityFragment.newInstance());
-            }
-        });
-
+        tvLocation = (TextView)view.findViewById(R.id.tv_location);
+        tvDatetime = (TextView)view.findViewById(R.id.tv_datetime);
+        ivAddLoc = (ImageView)view.findViewById(R.id.iv_add_location);
+        dlCity = (DrawerLayout)view.findViewById(R.id.drawerLayout_city);
 //        View v1 = inflater.inflate(R.layout.main_header_pm25, null);
 //        View v2 = inflater.inflate(R.layout.main_header_pm25_n1, null);
 //        View v3 = inflater.inflate(R.layout.main_header_pm25_n6, null);
@@ -160,13 +153,49 @@ public class HomeFragment extends BaseSwipeBackFragment {
 //        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
 //        recyclerView.addItemDecoration(new MarginDecoration(getContext()));
 //        recyclerView.setAdapter(mAdapter);
-        return attachToSwipeBack(view);
+        return view;
     }
 
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
-        logd("onLazyInitView");
+
+        cityRecyclerViewAdapter = new HomeCityRecyclerViewAdapter(getContext());
+        ArrayList<String> myDataset = new ArrayList<>();
+        for(int i = 0; i < 1; i++){
+            myDataset.add(Integer.toString(i));
+        }
+        cityRecyclerViewAdapter.setData(myDataset);
+
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerViewCity.setLayoutManager(layoutManager);
+        recyclerViewCity.setHasFixedSize(true);
+        recyclerViewCity.setAdapter(cityRecyclerViewAdapter);
+
+        tvLocation.setText(PreferencesUtil.get(Constants.HEADLINE_SITE,""));
+        tvDatetime.setText(DateTimeUtil.getCurrentHLDateTime());
+
+        tvAddArea.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                start(CityFragment.newInstance());
+            }
+        });
+
+        ivAddLoc.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+//                if(dlCity.isDrawerOpen(v.findViewById(R.id.fl_navigation_city))) {
+//                    dlCity.closeDrawer(v.findViewById(R.id.fl_navigation_city));
+//                    logd("close");
+//                }
+//                else{
+//                    dlCity.openDrawer(v.findViewById(R.id.fl_navigation_city));
+//                    logd("open");
+//                }
+            }
+        });
     }
 
     /**
@@ -177,13 +206,22 @@ public class HomeFragment extends BaseSwipeBackFragment {
     @Subscribe
     public void onTabSelectedEvent(TabSelectedEvent event) {
         if (event.position != MainFragment.FIRST) return;
-        logd("onTabSelectedEvent");
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         EventBus.getDefault().unregister(this);
+    }
+
+    /**
+     *
+     * @param choiceSiteEvent
+     */
+    @Subscribe(threadMode = ThreadMode.POSTING)
+    public void onMessage(ChoiceSiteEvent choiceSiteEvent){
+        String headline_site = choiceSiteEvent.getCityInfo().getCityName()+"("+choiceSiteEvent.getCityInfo().getSiteName()+")";
+        PreferencesUtil.put(Constants.HEADLINE_SITE,headline_site);
     }
 
     private void logd(String log) {
