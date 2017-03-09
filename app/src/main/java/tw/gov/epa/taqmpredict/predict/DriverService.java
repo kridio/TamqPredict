@@ -16,8 +16,8 @@ import tw.gov.epa.taqmpredict.predict.model.Result;
 
 public class DriverService {
     private String url = "https://drive.google.com/"; //https://www.googleapis.com/
-    //正式ID:"0B_TvZKObPCRCa1VSdVJaWkU2Q2s" 測試ID:"0B7Ld7OVhJc6HMlBWN2xVWDdabkk"
-    private String id = "0B_TvZKObPCRCa1VSdVJaWkU2Q2s";
+    //測試ID:"0B_TvZKObPCRCa1VSdVJaWkU2Q2s" 正式ID:"0B7Ld7OVhJc6HTDlya29QbEpRdEU"
+    private String id = "0B7Ld7OVhJc6HTDlya29QbEpRdEU";//"0B_TvZKObPCRCa1VSdVJaWkU2Q2s";
     private String download = "download";
     private DriverAPI driveApi;
 
@@ -47,5 +47,4 @@ public class DriverService {
             }
         });
     }
-
 }

@@ -11,13 +11,13 @@ public class Result {
     private String siteName;
     @SerializedName("hr_1")
     @Expose
-    private Integer hr1;
+    private Double hr1;
     @SerializedName("hr_6")
     @Expose
-    private Integer hr6;
+    private Double hr6;
     @SerializedName("hr_12")
     @Expose
-    private Integer hr12;
+    private Double hr12;
     @SerializedName("predict_history")
     @Expose
     private String predictHistory;
@@ -36,27 +36,27 @@ public class Result {
         this.siteName = siteName;
     }
 
-    public Integer getHr1() {
+    public Double getHr1() {
         return hr1;
     }
 
-    public void setHr1(Integer hr1) {
+    public void setHr1(Double hr1) {
         this.hr1 = hr1;
     }
 
-    public Integer getHr6() {
+    public Double getHr6() {
         return hr6;
     }
 
-    public void setHr6(Integer hr6) {
+    public void setHr6(Double hr6) {
         this.hr6 = hr6;
     }
 
-    public Integer getHr12() {
+    public Double getHr12() {
         return hr12;
     }
 
-    public void setHr12(Integer hr12) {
+    public void setHr12(Double hr12) {
         this.hr12 = hr12;
     }
 

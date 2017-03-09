@@ -16,6 +16,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.sql.Driver;
 import java.util.ArrayList;
 
 import tw.gov.epa.taqmpredict.R;
@@ -24,6 +25,7 @@ import tw.gov.epa.taqmpredict.base.BaseSwipeBackFragment;
 import tw.gov.epa.taqmpredict.base.Constants;
 import tw.gov.epa.taqmpredict.event.ChoiceSiteEvent;
 import tw.gov.epa.taqmpredict.event.TabSelectedEvent;
+import tw.gov.epa.taqmpredict.predict.DriverService;
 import tw.gov.epa.taqmpredict.ui.fragment.MainFragment;
 import tw.gov.epa.taqmpredict.ui.fragment.city.CityFragment;
 import tw.gov.epa.taqmpredict.util.DateTimeUtil;
@@ -186,6 +188,8 @@ public class HomeFragment extends BaseSwipeBackFragment {
         ivAddLoc.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                logd("driver service");
+                new DriverService().getPredictData();
 //                if(dlCity.isDrawerOpen(v.findViewById(R.id.fl_navigation_city))) {
 //                    dlCity.closeDrawer(v.findViewById(R.id.fl_navigation_city));
 //                    logd("close");
