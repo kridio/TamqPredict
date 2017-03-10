@@ -24,6 +24,7 @@ import tw.gov.epa.taqmpredict.data.model.EpaData;
 import tw.gov.epa.taqmpredict.data.model.Record;
 import tw.gov.epa.taqmpredict.data.model.Result;
 import tw.gov.epa.taqmpredict.gps.area.city.model.CityInfoData;
+import tw.gov.epa.taqmpredict.ui.fragment.home.HomeFragment;
 
 /**
  * Created by user on 2017/2/6.
@@ -37,12 +38,15 @@ public class DataRequestPresenter implements IDataRequestPresenter {
 
     private boolean isCache = false;
     private DataCache<String,String> dataCache;
+    HomeFragment mHm;
 
     public DataRequestPresenter(//IMainView view,
-                                DataRequestService dataRequestService){
+                                DataRequestService dataRequestService,
+                                HomeFragment hm){
 //        mView = view;
         mDataRequestService = dataRequestService;
         dataCache = new DataCache<String, String>();
+        mHm = hm;
     }
 
     public void getEpaData(){
@@ -62,6 +66,7 @@ public class DataRequestPresenter implements IDataRequestPresenter {
                         for (Record record : response_result.getRecords()) {
                             Log.d(TAG, record.getPublishTime() + "\r\n" + record.getSiteName() + " " + record.getCounty() + "\r\n PM25:" + record.getPM25());
                         }
+                        mHm.setEpaData(response_result.getRecords());
 //                        Gson gson = new Gson();
 //
 //                        try {

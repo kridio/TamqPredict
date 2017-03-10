@@ -1,5 +1,6 @@
 package tw.gov.epa.taqmpredict.ui.fragment.home;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
@@ -18,14 +19,19 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.sql.Driver;
 import java.util.ArrayList;
+import java.util.List;
 
 import tw.gov.epa.taqmpredict.R;
 import tw.gov.epa.taqmpredict.base.BaseFragment;
 import tw.gov.epa.taqmpredict.base.BaseSwipeBackFragment;
 import tw.gov.epa.taqmpredict.base.Constants;
+import tw.gov.epa.taqmpredict.data.DataRequestPresenter;
+import tw.gov.epa.taqmpredict.data.DataRequestService;
+import tw.gov.epa.taqmpredict.data.model.Record;
 import tw.gov.epa.taqmpredict.event.ChoiceSiteEvent;
 import tw.gov.epa.taqmpredict.event.TabSelectedEvent;
 import tw.gov.epa.taqmpredict.predict.DriverService;
+import tw.gov.epa.taqmpredict.predict.model.Result;
 import tw.gov.epa.taqmpredict.ui.fragment.MainFragment;
 import tw.gov.epa.taqmpredict.ui.fragment.city.CityFragment;
 import tw.gov.epa.taqmpredict.util.DateTimeUtil;
@@ -56,6 +62,18 @@ public class HomeFragment extends BaseSwipeBackFragment {
     ImageView ivAddLoc;
     DrawerLayout dlCity;
 
+    TextView tv_pm25_view;
+    TextView tv_slogan;
+    TextView tv_slogan_alarm_1;
+    TextView tv_slogan_alarm_2;
+    ImageView iv_slogan_alarm;
+
+    TextView tv_pm25_view_nh;
+    TextView tv_slogan_nh;
+    TextView tv_slogan_alarm_1_nh;
+    TextView tv_slogan_alarm_2_nh;
+    ImageView iv_slogan_alarm_nh;
+
     //String headline_site = "";
 
     HomeCityRecyclerViewAdapter cityRecyclerViewAdapter;
@@ -81,6 +99,17 @@ public class HomeFragment extends BaseSwipeBackFragment {
         tvDatetime = (TextView)view.findViewById(R.id.tv_datetime);
         ivAddLoc = (ImageView)view.findViewById(R.id.iv_add_location);
         dlCity = (DrawerLayout)view.findViewById(R.id.drawerLayout_city);
+
+        tv_pm25_view = (TextView)view.findViewById(R.id.tv_pm25_view);
+        tv_slogan = (TextView)view.findViewById(R.id.tv_slogan);
+        tv_slogan_alarm_1 = (TextView)view.findViewById(R.id.tv_slogan_alarm_1);
+        tv_slogan_alarm_2 = (TextView)view.findViewById(R.id.tv_slogan_alarm_2);
+        iv_slogan_alarm = (ImageView)view.findViewById(R.id.iv_slogan_alarm);
+        tv_pm25_view_nh = (TextView)view.findViewById(R.id.tv_pm25_view_nh);
+        tv_slogan_nh = (TextView)view.findViewById(R.id.tv_slogan_nh);
+        tv_slogan_alarm_1_nh = (TextView)view.findViewById(R.id.tv_slogan_alarm_1_nh);
+        tv_slogan_alarm_2_nh = (TextView)view.findViewById(R.id.tv_slogan_alarm_2_nh);
+        iv_slogan_alarm_nh = (ImageView)view.findViewById(R.id.iv_slogan_alarm_nh);
 //        View v1 = inflater.inflate(R.layout.main_header_pm25, null);
 //        View v2 = inflater.inflate(R.layout.main_header_pm25_n1, null);
 //        View v3 = inflater.inflate(R.layout.main_header_pm25_n6, null);
@@ -189,7 +218,8 @@ public class HomeFragment extends BaseSwipeBackFragment {
             @Override
             public void onClick(View v) {
                 logd("driver service");
-                new DriverService().getPredictData();
+                new DriverService(HomeFragment.this).getPredictData();
+                new DataRequestPresenter(new DataRequestService(),HomeFragment.this).getEpaData();
 //                if(dlCity.isDrawerOpen(v.findViewById(R.id.fl_navigation_city))) {
 //                    dlCity.closeDrawer(v.findViewById(R.id.fl_navigation_city));
 //                    logd("close");
@@ -202,6 +232,86 @@ public class HomeFragment extends BaseSwipeBackFragment {
         });
     }
 
+
+    public void setData(List<Result> result){
+        for(Result rs:result) {
+            if(PreferencesUtil.get(Constants.SITENAME,"").equals(rs.getSiteName())){
+                tv_pm25_view_nh.setText(String.valueOf(rs.getHr1().intValue()));
+                setPredictSlogan(rs.getHr1().intValue());
+            }
+        }
+    }
+
+    public void setEpaData(List<Record> result){
+        for(Record rc:result) {
+            if(PreferencesUtil.get(Constants.SITENAME,"").equals(rc.getSiteName())){
+                tv_pm25_view.setText(String.valueOf(rc.getPM25()));
+                setSlogan(Integer.valueOf(rc.getPM25()));
+            }
+        }
+    }
+
+    public void setPredictSlogan(int pm){
+        if(pm<50){
+            tv_slogan_nh.setText(R.string.slogan_good);
+            tv_slogan_nh.setBackgroundResource(R.color.pm25_good);
+            tv_slogan_alarm_1_nh.setText(R.string.slogan_good_sentence_1);
+            tv_slogan_alarm_2_nh.setText(R.string.slogan_good_sentence_2);
+            iv_slogan_alarm_nh.setBackgroundResource(R.drawable.ic_directions_bike_black_24dp);
+
+        }
+        else if(pm<100){
+            tv_slogan_nh.setText(R.string.slogan_primary);
+            tv_slogan_nh.setBackgroundResource(R.color.pm25_primary);
+            tv_slogan_alarm_1_nh.setText(R.string.slogan_primary_sentence_1);
+            tv_slogan_alarm_2_nh.setText(R.string.slogan_primary_sentence_2);
+            iv_slogan_alarm_nh.setBackgroundResource(R.drawable.ic_directions_run_black_24dp);
+        }
+        else if(pm<150){
+            tv_slogan_nh.setText(R.string.slogan_intermediate);
+            tv_slogan_nh.setBackgroundResource(R.color.pm25_intermediate);
+            tv_slogan_alarm_1_nh.setText(R.string.slogan_intermediate_sentence_1);
+            tv_slogan_alarm_2_nh.setText(R.string.slogan_intermediate_sentence_2);
+            iv_slogan_alarm_nh.setBackgroundResource(R.drawable.ic_directions_bike_black_24dp);
+        }
+        else if(pm<200){
+            tv_slogan_nh.setText(R.string.slogan_urgent);
+            tv_slogan_nh.setBackgroundResource(R.color.pm25_urgent);
+            tv_slogan_alarm_1_nh.setText(R.string.slogan_urgent_sentence_1);
+            tv_slogan_alarm_2_nh.setText(R.string.slogan_urgent_sentence_2);
+            iv_slogan_alarm_nh.setBackgroundResource(R.drawable.ic_directions_bike_black_24dp);
+        }
+    }
+    public void setSlogan(int pm){
+        if(pm<50){
+            tv_slogan.setText(R.string.slogan_good);
+            tv_slogan_nh.setBackgroundResource(R.color.pm25_good);
+            tv_slogan_alarm_1.setText(R.string.slogan_good_sentence_1);
+            tv_slogan_alarm_2.setText(R.string.slogan_good_sentence_2);
+            iv_slogan_alarm_nh.setBackgroundResource(R.drawable.ic_directions_bike_black_24dp);
+        }
+        else if(pm<100){
+            tv_slogan.setText(R.string.slogan_primary);
+            tv_slogan_nh.setBackgroundResource(R.color.pm25_primary);
+            tv_slogan_alarm_1.setText(R.string.slogan_primary_sentence_1);
+            tv_slogan_alarm_2.setText(R.string.slogan_primary_sentence_2);
+            iv_slogan_alarm_nh.setBackgroundResource(R.drawable.ic_directions_run_black_24dp);
+        }
+        else if(pm<150){
+            tv_slogan.setText(R.string.slogan_intermediate);
+            tv_slogan_nh.setBackgroundResource(R.color.pm25_intermediate);
+            tv_slogan_alarm_1.setText(R.string.slogan_intermediate_sentence_1);
+            tv_slogan_alarm_2.setText(R.string.slogan_intermediate_sentence_2);
+            iv_slogan_alarm_nh.setBackgroundResource(R.drawable.ic_directions_bike_black_24dp);
+        }
+        else if(pm<200){
+            tv_slogan.setText(R.string.slogan_urgent);
+            tv_slogan_nh.setBackgroundResource(R.color.pm25_urgent);
+            tv_slogan_alarm_1.setText(R.string.slogan_urgent_sentence_1);
+            tv_slogan_alarm_2.setText(R.string.slogan_urgent_sentence_2);
+            iv_slogan_alarm_nh.setBackgroundResource(R.drawable.ic_directions_bike_black_24dp);
+        }
+    }
     /**
      * reselected fragment
      *
@@ -226,6 +336,7 @@ public class HomeFragment extends BaseSwipeBackFragment {
     public void onMessage(ChoiceSiteEvent choiceSiteEvent){
         String headline_site = choiceSiteEvent.getCityInfo().getCityName()+"("+choiceSiteEvent.getCityInfo().getSiteName()+")";
         PreferencesUtil.put(Constants.HEADLINE_SITE,headline_site);
+        PreferencesUtil.put(Constants.SITENAME,choiceSiteEvent.getCityInfo().getSiteName());
     }
 
     private void logd(String log) {

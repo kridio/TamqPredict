@@ -9,6 +9,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import tw.gov.epa.taqmpredict.predict.model.PredictData;
 import tw.gov.epa.taqmpredict.predict.model.Result;
+import tw.gov.epa.taqmpredict.ui.fragment.home.HomeFragment;
 
 /**
  * Created by user on 2017/3/2.
@@ -20,14 +21,16 @@ public class DriverService {
     private String id = "0B7Ld7OVhJc6HTDlya29QbEpRdEU";//"0B_TvZKObPCRCa1VSdVJaWkU2Q2s";
     private String download = "download";
     private DriverAPI driveApi;
+    HomeFragment mHm;
 
-    public DriverService() {
+    public DriverService(HomeFragment hm) {
         Retrofit retrofit = new Retrofit.Builder()
                 //.client(new OkHttpClient())
                 .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         driveApi = retrofit.create(DriverAPI.class);
+        this.mHm = hm;
     }
 
     public void getPredictData() {
@@ -39,6 +42,8 @@ public class DriverService {
                 for(Result res:response.body().getResult()){
                     Log.d("Driverservice:",res.getSiteName()+":"+res.getHr1());
                 }
+
+                mHm.setData(response.body().getResult());
             }
 
             @Override
