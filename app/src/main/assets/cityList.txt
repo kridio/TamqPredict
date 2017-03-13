@@ -2,384 +2,460 @@
               "cityName": "基隆市",
               "siteName": "基隆",
               "county":"信義區",
-              "countyId": "201"
+              "countyId": "201",
+              "areaGroup":"北部"
              },
         {
     		"cityName": "臺北市",
     		"siteName": "大同",
     		"county":"大同區",
-    		"countyId": "103"
+    		"countyId": "103",
+    		"areaGroup":"北部"
     	}, {
     		"cityName": "臺北市",
     		"siteName": "松山",
     		"county":"松山區",
-    		"countyId": "105"
+    		"countyId": "105",
+    		"areaGroup":"北部"
     	}, {
     		"cityName": "臺北市",
     		"siteName": "古亭",
     		"county":"大安區",
-    		"countyId": "106"
+    		"countyId": "106",
+    		"areaGroup":"北部"
     	}, {
     		"cityName": "臺北市",
     		"siteName": "萬華",
     		"county":"萬華區",
-    		"countyId": "108"
+    		"countyId": "108",
+            "areaGroup":"北部"
     	}, {
     		"cityName": "臺北市",
     		"siteName": "中山",
     		"county":"中山區",
-    		"countyId": "104"
+    		"countyId": "104",
+    		"areaGroup":"北部"
     	}, {
     		"cityName": "臺北市",
     		"siteName": "士林",
     		"county":"北投區",
-    		"countyId": "112"
+    		"countyId": "112",
+    		"areaGroup":"北部"
     	}, {
            	"cityName": "臺北市",
            	"siteName": "陽明",
            	"county":"北投區",
-           	"countyId":"112"
+           	"countyId":"112",
+           	"areaGroup":"北部"
            	},{
     		"cityName": "新北市",
     		"siteName": "淡水",
     		"county":"淡水區",
-    		"countyId": "251"
+    		"countyId": "251",
+    		"areaGroup":"北部"
     	}, {
     		"cityName": "新北市",
     		"siteName": "林口",
     		"county":"林口區",
     		"countyId": "244"
+    		,"areaGroup":"北部"
     	}, {
     		"cityName": "新北市",
     		"siteName": "新莊",
     		"county":"新莊區",
     		"countyId": "242"
+    		,"areaGroup":"北部"
     	}, {
     		"cityName": "新北市",
     		"siteName": "板橋",
     		"county":"板橋區",
     		"countyId": "220"
+    		,"areaGroup":"北部"
     	}, {
     		"cityName": "新北市",
     		"siteName": "土城",
     		"county":"土城區",
-    		"countyId": "236"
+    		"countyId": "236",
+    		"areaGroup":"北部"
     	}, {
     		"cityName": "新北市",
     		"siteName": "新店",
     		"county":"新店區",
-    		"countyId": "231"
+    		"countyId": "231",
+    		"areaGroup":"北部"
     	}, {
     		"cityName": "新北市",
     		"siteName": "萬里",
     		"county":"萬里區",
-    		"countyId": "207"
+    		"countyId": "207",
+    		"areaGroup":"北部"
     	}, {
     		"cityName": "新北市",
     		"siteName": "汐止",
     		"county":"汐止區",
-    		"countyId": "221"
+    		"countyId": "221",
+    		"areaGroup":"北部"
     	}, {
           	"cityName": "新北市",
           	"siteName": "三重",
           	"county":"三重區",
-          	"countyId":"241"
+          	"countyId":"241",
+          	"areaGroup":"北部"
           }, {
             "cityName": "新北市",
             "siteName": "菜寮",
             "county":"三重區",
-            "countyId": "241"
+            "countyId": "241",
+            "areaGroup":"北部"
           }, {
            	"cityName": "新北市",
            	"siteName": "永和",
            	"county":"永和區",
-           	"countyId":"234"
+           	"countyId":"234",
+           	"areaGroup":"北部"
            	}, {
              		"cityName": "桃園市",
              		"siteName": "龍潭",
              		"county":"龍潭區",
-             		"countyId": "325"
+             		"countyId": "325",
+             		"areaGroup":"北部"
              	}, {
              		"cityName": "桃園市",
              		"siteName": "平鎮",
              		"county":"平鎮區",
-             		"countyId": "324"
+             		"countyId": "324",
+             		"areaGroup":"北部"
              	}, {
              		"cityName": "桃園市",
              		"siteName": "觀音",
              		"county":"觀音區",
-             		"countyId": "328"
+             		"countyId": "328",
+             		"areaGroup":"北部"
              	}, {
              		"cityName": "桃園市",
              		"siteName": "大園",
              		"county":"大園區",
-             		"countyId": "337"
+             		"countyId": "337",
+             		"areaGroup":"北部"
              	}, {
              		"cityName": "桃園市",
              		"siteName": "桃園",
              		"county":"桃園區",
-             		"countyId": "330"
+             		"countyId": "330",
+             		"areaGroup":"北部"
             },{
               		"cityName": "桃園市",
               		"siteName": "中壢",
               		"county":"中壢區",
-              		"countyId":"320"
+              		"countyId":"320",
+              		"areaGroup":"北部"
               	}, {
                                 		"cityName": "新竹市",
                                 		"siteName": "新竹",
                                 		"county":"東區",
-                                		"countyId": "300"
+                                		"countyId": "300",
+                                		"areaGroup":"竹苗"
                                 	}, {
                                 		"cityName": "新竹縣",
                                 		"siteName": "竹東",
                                 		"county":"竹東鎮",
-                                		"countyId": "310"
+                                		"countyId": "310",
+                                		"areaGroup":"竹苗"
                                 	}, {
                                 		"cityName": "新竹縣",
                                 		"siteName": "湖口",
                                 		"county":"湖口鄉",
-                                		"countyId": "303"
+                                		"countyId": "303",
+                                		"areaGroup":"竹苗"
                                 	}, {
                            		"cityName": "苗栗縣",
                            		"siteName": "三義",
                            		"county":"三義鄉",
-                           		"countyId": "367"
+                           		"countyId": "367",
+                           		"areaGroup":"竹苗"
                            	}, {
                            		"cityName": "苗栗縣",
                            		"siteName": "苗栗",
                            		"county":"苗栗市",
-                           		"countyId": "360"
+                           		"countyId": "360",
+                           		"areaGroup":"竹苗"
                            	}, {
                            		"cityName": "苗栗縣",
                            		"siteName": "頭份",
                            		"county":"頭份市",
-                           		"countyId": "351"
+                           		"countyId": "351",
+                           		"areaGroup":"竹苗"
                            	}, {
                       		"cityName": "臺中市",
                       		"siteName": "西屯",
                       		"county":"西屯區",
-                      		"countyId":"407"
+                      		"countyId":"407",
+                      		"areaGroup":"中部"
                       	}, {
                       		"cityName": "臺中市",
                       		"siteName": "忠明",
                       		"county":"南屯區",
-                      		"countyId": "408"
+                      		"countyId": "408",
+                      		"areaGroup":"中部"
                       	}, {
                       		"cityName": "臺中市",
                       		"siteName": "大里",
                       		"county":"大里區",
-                      		"countyId": "412"
+                      		"countyId": "412",
+                      		"areaGroup":"中部"
                       	}, {
                       		"cityName": "臺中市",
                       		"siteName": "沙鹿",
                       		"county":"沙鹿區",
-                      		"countyId": "433"
+                      		"countyId": "433",
+                      		"areaGroup":"中部"
                       	}, {
                       		"cityName": "臺中市",
                       		"siteName": "豐原",
                       		"county":"豐原區",
-                      		"countyId": "420"
+                      		"countyId": "420",
+                      		"areaGroup":"中部"
                       	}, {
                  		"cityName": "彰化縣",
                  		"siteName": "二林",
                  		"county":"二林鎮",
-                 		"countyId":"526"
+                 		"countyId":"526",
+                 		"areaGroup":"中部"
                  	}, {
                  		"cityName": "彰化縣",
                  		"siteName": "線西",
                  		"county":"線西鄉",
-                 		"countyId":"507"
+                 		"countyId":"507",
+                 		"areaGroup":"中部"
                  	}, {
                  		"cityName": "彰化縣",
                  		"siteName": "彰化",
                  		"county":"彰化市",
-                 		"countyId":"500"
+                 		"countyId":"500",
+                 		"areaGroup":"中部"
                  	}, {
                      		"cityName": "南投市",
                      		"siteName": "南投",
                      		"county":"南投市",
-                     		"countyId":"540"
+                     		"countyId":"540",
+                     		"areaGroup":"中部"
                      	},{
                           		"cityName": "南投縣",
                           		"siteName": "埔里",
                           		"county":"埔里鎮",
-                          		"countyId":"545"
+                          		"countyId":"545",
+                          		"areaGroup":"中部"
                           	}, {
                           		"cityName": "南投縣",
                           		"siteName": "竹山",
                           		"county":"竹山鎮",
-                          		"countyId":"557"
+                          		"countyId":"557",
+                          		"areaGroup":"中部"
                           	},
       {
               		"cityName": "雲林縣",
               		"siteName": "臺西",
               		"county":"臺西鄉",
-              		"countyId":"636"
+              		"countyId":"636",
+              		"areaGroup":"雲嘉南"
               	},{
                           "cityName": "雲林縣",
                   		"siteName": "麥寮",
                   		"county":"麥寮鄉",
-                  		"countyId":"638"
+                  		"countyId":"638",
+                  		"areaGroup":"雲嘉南"
                   	}, {
                                     		"cityName": "雲林縣",
                                     		"siteName": "崙背",
                                     		"county":"崙背鄉",
-                                    		"countyId":"637"
+                                    		"countyId":"637",
+                                    		"areaGroup":"雲嘉南"
                                     	}, {
                                     		"cityName": "雲林縣",
                                     		"siteName": "斗六",
                                     		"county":"斗六市",
-                                    		"countyId":"640"
+                                    		"countyId":"640",
+                                    		"areaGroup":"雲嘉南"
                                     	},  {
               		"cityName": "嘉義縣",
               		"siteName": "朴子",
               		"county":"朴子市",
-              		"countyId":"613"
+              		"countyId":"613",
+              		"areaGroup":"雲嘉南"
               	}, {
               		"cityName": "嘉義縣",
               		"siteName": "新港",
               		"county":"新港鄉",
-              		"countyId":"616"
+              		"countyId":"616",
+              		"areaGroup":"雲嘉南"
               	},{
      		"cityName": "嘉義市",
      		"siteName": "嘉義",
      		"county":"西區",
-     		"countyId":"600"
+     		"countyId":"600",
+     		"areaGroup":"雲嘉南"
      	}, {
      		"cityName": "臺南市",
      		"siteName": "臺南",
      		"county":"中西區",
-     		"countyId":"700"
+     		"countyId":"700",
+     		"areaGroup":"雲嘉南"
      	}, {
      		"cityName": "臺南市",
      		"siteName": "安南",
      		"county":"安南區",
-     		"countyId":"709"
+     		"countyId":"709",
+     		"areaGroup":"雲嘉南"
      	}, {
      		"cityName": "臺南市",
      		"siteName": "善化",
      		"county":"善化區",
-     		"countyId":"741"
+     		"countyId":"741",
+     		"areaGroup":"雲嘉南"
      	}, {
      		"cityName": "臺南市",
      		"siteName": "新營",
      		"county":"新營區",
-     		"countyId":"730"
+     		"countyId":"730",
+     		"areaGroup":"雲嘉南"
      	}, {
 		"cityName": "高雄市",
 		"siteName": "小港",
 		"county":"小港區",
-		"countyId":"812"
+		"countyId":"812",
+		"areaGroup":"高屏"
 	}, {
 		"cityName": "高雄市",
 		"siteName": "前鎮",
 		"county":"前鎮區",
-		"countyId":"806"
+		"countyId":"806",
+		"areaGroup":"高屏"
 	}, {
 		"cityName": "高雄市",
 		"siteName": "前金",
 		"county":"前金區",
-		"countyId":"801"
+		"countyId":"801",
+		"areaGroup":"高屏"
 	}, {
       		"cityName": "高雄市",
       		"siteName": "復興",
       		"county":"前鎮區",
-      		"countyId":"806"
+      		"countyId":"806",
+      		"areaGroup":"高屏"
       	}, {
 		"cityName": "高雄市",
 		"siteName": "左營",
 		"county":"左營區",
-		"countyId":"813"
+		"countyId":"813",
+		"areaGroup":"高屏"
 	}, {
 		"cityName": "高雄市",
 		"siteName": "楠梓",
 		"county":"楠梓區",
-		"countyId":"811"
+		"countyId":"811",
+		"areaGroup":"高屏"
 	}, {
 		"cityName": "高雄市",
 		"siteName": "林園",
 		"county":"林園區",
-		"countyId":"832"
+		"countyId":"832",
+		"areaGroup":"高屏"
 	}, {
 		"cityName": "高雄市",
 		"siteName": "大寮",
 		"county":"大寮區",
-		"countyId":"831"
+		"countyId":"831",
+		"areaGroup":"高屏"
 	}, {
 		"cityName": "高雄市",
 		"siteName": "鳳山",
 		"county":"鳳山區",
-		"countyId":"830"
+		"countyId":"830",
+		"areaGroup":"高屏"
 	}, {
 		"cityName": "高雄市",
 		"siteName": "仁武",
 		"county":"仁武區",
-		"countyId":"814"
+		"countyId":"814",
+		"areaGroup":"高屏"
 	}, {
 		"cityName": "高雄市",
 		"siteName": "橋頭",
 		"county":"橋頭區",
-		"countyId":"825"
+		"countyId":"825",
+		"areaGroup":"高屏"
 	}, {
 		"cityName": "高雄市",
 		"siteName": "美濃",
 		"county":"美濃區",
-		"countyId":"843"
+		"countyId":"843",
+		"areaGroup":"高屏"
 	}, {
      		"cityName": "屏東縣",
      		"siteName": "恆春",
      		"county":"恆春鎮",
-     		"countyId":"946"
+     		"countyId":"946",
+     		"areaGroup":"高屏"
      	}, {
      		"cityName": "屏東縣",
      		"siteName": "潮州",
      		"county":"潮州鎮",
-     		"countyId":"920"
+     		"countyId":"920",
+     		"areaGroup":"高屏"
      	}, {
      		"cityName": "屏東縣",
      		"siteName": "屏東",
      		"county":"屏東市",
-     		"countyId":"900"
+     		"countyId":"900",
+     		"areaGroup":"高屏"
      	},{
           		"cityName": "宜蘭縣",
           		"siteName": "冬山",
           		"county":"冬山鄉",
-          		"countyId":"269"
+          		"countyId":"269",
+          		"areaGroup":"宜蘭"
           	}, {
           		"cityName": "宜蘭縣",
           		"siteName": "宜蘭",
           		"county":"宜蘭市",
-          		"countyId":"260"
+          		"countyId":"260",
+          		"areaGroup":"宜蘭"
           	}, {
           		"cityName": "花蓮縣",
           		"siteName": "花蓮",
           		"county":"花蓮市",
-          		"countyId":"970"
+          		"countyId":"970",
+          		"areaGroup":"花東"
           	}, {
           		"cityName": "臺東縣",
           		"siteName": "臺東",
           		"county":"臺東市",
-          		"countyId":"950"
+          		"countyId":"950",
+          		"areaGroup":"花東"
           	},{
              	    "cityName": "臺東縣",
              		"siteName": "關山",
              		"county":"關山鎮",
-             		"countyId":"956"
+             		"countyId":"956",
+             		"areaGroup":"花東"
              	}, {
              	    "cityName": "澎湖縣",
              		"siteName": "馬公",
              		"county":"馬公市",
-             		"countyId":"880"
+             		"countyId":"880",
+             		"areaGroup":"離島"
              	}, {
              		"cityName": "金門縣",
              		"siteName": "金門",
              		"county":"金城鎮",
-             		"countyId":"893"
+             		"countyId":"893",
+             		"areaGroup":"離島"
              	}, {
              		"cityName": "連江縣",
              		"siteName": "馬祖",
              		"county":"南竿鄉",
-             		"countyId":"209"
+             		"countyId":"209",
+             		"areaGroup":"離島"
              	}
 ]
 }

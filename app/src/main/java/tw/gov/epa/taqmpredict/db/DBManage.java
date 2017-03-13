@@ -5,13 +5,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.github.stuxuhai.jpinyin.PinyinException;
 import com.github.stuxuhai.jpinyin.PinyinFormat;
 import com.github.stuxuhai.jpinyin.PinyinHelper;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import tw.gov.epa.taqmpredict.gps.area.city.model.CityInfoData;
@@ -64,8 +61,9 @@ public class DBManage {
                         // Create a new map of values, where column names are the keys
                         values = new ContentValues();
                         values.put(CityDao.COUNTY_ID, cityInfoEntity.getCountyId());
-                        values.put(CityDao.CITY_Name,cityInfoEntity.getCityName());
-                        values.put(CityDao.CITY_Name_PINYIN,
+                        values.put(CityDao.AREA_GROUP,cityInfoEntity.getAreaGroup());
+                        values.put(CityDao.CITY_NAME,cityInfoEntity.getCityName());
+                        values.put(CityDao.CITY_NAME_PINYIN,
                                 PinyinHelper.convertToPinyinString(
                                         cityInfoEntity.getCityName(),",", PinyinFormat.WITH_TONE_MARK));
                         values.put(CityDao.COUNTY,cityInfoEntity.getCounty());
@@ -101,6 +99,12 @@ public class DBManage {
         return getCitys(allCitySql, true);
     }
 
+    //read group
+    public List<CityInfoData> getGroupArea(String group) {
+        String allCitySql = "select * from " + CityDao.TABLE_NAME+" where "+CityDao.AREA_GROUP + " like \"%" + group + "%\"";
+        return getCitys(allCitySql, true);
+    }
+
     /**
      * search by name or pinyin
      *
@@ -114,8 +118,8 @@ public class DBManage {
                             CityDao.SITE_NAME_PINYIN + " like \"%" + keyword + "%\" or " +
                             CityDao.COUNTY + " like \"%" + keyword + "%\" or " +
                             CityDao.COUNTY_PINYIN + " like \"%" + keyword + "%\" or " +
-                            CityDao.CITY_Name + " like \"%" + keyword + "%\" or " +
-                            CityDao.CITY_Name_PINYIN + " like \"%" + keyword + "%\" or " +
+                            CityDao.CITY_NAME + " like \"%" + keyword + "%\" or " +
+                            CityDao.CITY_NAME_PINYIN + " like \"%" + keyword + "%\" or " +
                             CityDao.COUNTY_ID + " like \"%" + keyword + "%\"";
 
         return getCitys(searchSql, false);
@@ -129,8 +133,8 @@ public class DBManage {
         String lastInitial = "";
         while (cursor.moveToNext()) {
             String id = cursor.getString(cursor.getColumnIndex(CityDao.COUNTY_ID));
-            String cityName = cursor.getString(cursor.getColumnIndex(CityDao.CITY_Name));
-            String cityName_pinyin = cursor.getString(cursor.getColumnIndex(CityDao.CITY_Name_PINYIN));
+            String cityName = cursor.getString(cursor.getColumnIndex(CityDao.CITY_NAME));
+            String cityName_pinyin = cursor.getString(cursor.getColumnIndex(CityDao.CITY_NAME_PINYIN));
             String county = cursor.getString(cursor.getColumnIndex(CityDao.COUNTY));
             String county_pinyin = cursor.getString(cursor.getColumnIndex(CityDao.COUNTY_PINYIN));
             String siteName = cursor.getString(cursor.getColumnIndex(CityDao.SITE_NAME));

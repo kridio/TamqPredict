@@ -34,6 +34,7 @@ public class CityEntry {
         private String county; //鄉鎮市區
         private String cityName; //縣市
         private String siteName; //測站名稱
+        private String areaGroup;//縣市分群
 
         public String getCountyId() {return countyId;}
 
@@ -58,6 +59,14 @@ public class CityEntry {
         public String getSiteName() {return siteName;}
 
         public void setSiteName(String siteName) {this.siteName = siteName;}
+
+        public String getAreaGroup() {
+            return areaGroup;
+        }
+
+        public void setAreaGroup(String areaGroup) {
+            this.areaGroup = areaGroup;
+        }
 
 //        public String getLat() {
 //            return lat;

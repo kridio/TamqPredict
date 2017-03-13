@@ -4,12 +4,14 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -61,6 +63,8 @@ public class HomeFragment extends BaseSwipeBackFragment {
     TextView tvDatetime;
     ImageView ivAddLoc;
     DrawerLayout dlCity;
+    FrameLayout fl_navigation_city;
+    SwipeRefreshLayout swiperefresh_home;
 
     TextView tv_pm25_view;
     TextView tv_slogan;
@@ -73,10 +77,13 @@ public class HomeFragment extends BaseSwipeBackFragment {
     TextView tv_slogan_alarm_1_nh;
     TextView tv_slogan_alarm_2_nh;
     ImageView iv_slogan_alarm_nh;
+    TextView tv_nh_predict;
 
     //String headline_site = "";
 
     HomeCityRecyclerViewAdapter cityRecyclerViewAdapter;
+    DataRequestPresenter dataRequestPresenter;
+    DriverService driverService;
 
     public static HomeFragment newInstance() {
         Bundle args = new Bundle();
@@ -99,6 +106,8 @@ public class HomeFragment extends BaseSwipeBackFragment {
         tvDatetime = (TextView)view.findViewById(R.id.tv_datetime);
         ivAddLoc = (ImageView)view.findViewById(R.id.iv_add_location);
         dlCity = (DrawerLayout)view.findViewById(R.id.drawerLayout_city);
+        fl_navigation_city = (FrameLayout) view.findViewById(R.id.fl_navigation_city);
+        swiperefresh_home = (SwipeRefreshLayout) view.findViewById(R.id.swiperefresh_home);
 
         tv_pm25_view = (TextView)view.findViewById(R.id.tv_pm25_view);
         tv_slogan = (TextView)view.findViewById(R.id.tv_slogan);
@@ -110,6 +119,10 @@ public class HomeFragment extends BaseSwipeBackFragment {
         tv_slogan_alarm_1_nh = (TextView)view.findViewById(R.id.tv_slogan_alarm_1_nh);
         tv_slogan_alarm_2_nh = (TextView)view.findViewById(R.id.tv_slogan_alarm_2_nh);
         iv_slogan_alarm_nh = (ImageView)view.findViewById(R.id.iv_slogan_alarm_nh);
+        tv_nh_predict = (TextView)view.findViewById(R.id.tv_nh_predict);
+
+        dataRequestPresenter = new DataRequestPresenter(new DataRequestService(),HomeFragment.this);
+        driverService = new DriverService(HomeFragment.this);
 //        View v1 = inflater.inflate(R.layout.main_header_pm25, null);
 //        View v2 = inflater.inflate(R.layout.main_header_pm25_n1, null);
 //        View v3 = inflater.inflate(R.layout.main_header_pm25_n6, null);
@@ -217,19 +230,24 @@ public class HomeFragment extends BaseSwipeBackFragment {
         ivAddLoc.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                logd("driver service");
-                new DriverService(HomeFragment.this).getPredictData();
-                new DataRequestPresenter(new DataRequestService(),HomeFragment.this).getEpaData();
-//                if(dlCity.isDrawerOpen(v.findViewById(R.id.fl_navigation_city))) {
-//                    dlCity.closeDrawer(v.findViewById(R.id.fl_navigation_city));
-//                    logd("close");
-//                }
-//                else{
-//                    dlCity.openDrawer(v.findViewById(R.id.fl_navigation_city));
-//                    logd("open");
-//                }
+                dlCity.openDrawer(fl_navigation_city);
             }
         });
+
+        swiperefresh_home.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener(){
+            @Override
+            public void onRefresh() {
+                getData();
+                swiperefresh_home.setRefreshing(false);
+            }
+        });
+    }
+
+    public void getData(){
+        if(dataRequestPresenter!=null && driverService!=null) {
+            dataRequestPresenter.getEpaData();
+            driverService.getPredictData();
+        }
     }
 
 
@@ -237,6 +255,7 @@ public class HomeFragment extends BaseSwipeBackFragment {
         for(Result rs:result) {
             if(PreferencesUtil.get(Constants.SITENAME,"").equals(rs.getSiteName())){
                 tv_pm25_view_nh.setText(String.valueOf(rs.getHr1().intValue()));
+                tv_nh_predict.setText(DateTimeUtil.getPredictTime(rs.getTime())+"空氣品質預報");
                 setPredictSlogan(rs.getHr1().intValue());
             }
         }
@@ -245,14 +264,22 @@ public class HomeFragment extends BaseSwipeBackFragment {
     public void setEpaData(List<Record> result){
         for(Record rc:result) {
             if(PreferencesUtil.get(Constants.SITENAME,"").equals(rc.getSiteName())){
-                tv_pm25_view.setText(String.valueOf(rc.getPM25()));
-                setSlogan(Integer.valueOf(rc.getPM25()));
+                if(!rc.getPM25().equals("")) {
+                    tv_pm25_view.setText(String.valueOf(rc.getPM25()));
+                    setSlogan(Integer.valueOf(rc.getPM25()));
+                }
             }
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getData();
+    }
+
     public void setPredictSlogan(int pm){
-        if(pm<50){
+        if(pm<36){
             tv_slogan_nh.setText(R.string.slogan_good);
             tv_slogan_nh.setBackgroundResource(R.color.pm25_good);
             tv_slogan_alarm_1_nh.setText(R.string.slogan_good_sentence_1);
@@ -260,21 +287,21 @@ public class HomeFragment extends BaseSwipeBackFragment {
             iv_slogan_alarm_nh.setBackgroundResource(R.drawable.ic_directions_bike_black_24dp);
 
         }
-        else if(pm<100){
+        else if(pm<54){
             tv_slogan_nh.setText(R.string.slogan_primary);
             tv_slogan_nh.setBackgroundResource(R.color.pm25_primary);
             tv_slogan_alarm_1_nh.setText(R.string.slogan_primary_sentence_1);
             tv_slogan_alarm_2_nh.setText(R.string.slogan_primary_sentence_2);
             iv_slogan_alarm_nh.setBackgroundResource(R.drawable.ic_directions_run_black_24dp);
         }
-        else if(pm<150){
+        else if(pm<71){
             tv_slogan_nh.setText(R.string.slogan_intermediate);
             tv_slogan_nh.setBackgroundResource(R.color.pm25_intermediate);
             tv_slogan_alarm_1_nh.setText(R.string.slogan_intermediate_sentence_1);
             tv_slogan_alarm_2_nh.setText(R.string.slogan_intermediate_sentence_2);
             iv_slogan_alarm_nh.setBackgroundResource(R.drawable.ic_directions_bike_black_24dp);
         }
-        else if(pm<200){
+        else{
             tv_slogan_nh.setText(R.string.slogan_urgent);
             tv_slogan_nh.setBackgroundResource(R.color.pm25_urgent);
             tv_slogan_alarm_1_nh.setText(R.string.slogan_urgent_sentence_1);
@@ -283,33 +310,33 @@ public class HomeFragment extends BaseSwipeBackFragment {
         }
     }
     public void setSlogan(int pm){
-        if(pm<50){
+        if(pm<36){
             tv_slogan.setText(R.string.slogan_good);
-            tv_slogan_nh.setBackgroundResource(R.color.pm25_good);
+            tv_slogan.setBackgroundResource(R.color.pm25_good);
             tv_slogan_alarm_1.setText(R.string.slogan_good_sentence_1);
             tv_slogan_alarm_2.setText(R.string.slogan_good_sentence_2);
-            iv_slogan_alarm_nh.setBackgroundResource(R.drawable.ic_directions_bike_black_24dp);
+            iv_slogan_alarm.setBackgroundResource(R.drawable.ic_directions_bike_black_24dp);
         }
-        else if(pm<100){
+        else if(pm<54){
             tv_slogan.setText(R.string.slogan_primary);
-            tv_slogan_nh.setBackgroundResource(R.color.pm25_primary);
+            tv_slogan.setBackgroundResource(R.color.pm25_primary);
             tv_slogan_alarm_1.setText(R.string.slogan_primary_sentence_1);
             tv_slogan_alarm_2.setText(R.string.slogan_primary_sentence_2);
-            iv_slogan_alarm_nh.setBackgroundResource(R.drawable.ic_directions_run_black_24dp);
+            iv_slogan_alarm.setBackgroundResource(R.drawable.ic_directions_run_black_24dp);
         }
-        else if(pm<150){
+        else if(pm<71){
             tv_slogan.setText(R.string.slogan_intermediate);
-            tv_slogan_nh.setBackgroundResource(R.color.pm25_intermediate);
+            tv_slogan.setBackgroundResource(R.color.pm25_intermediate);
             tv_slogan_alarm_1.setText(R.string.slogan_intermediate_sentence_1);
             tv_slogan_alarm_2.setText(R.string.slogan_intermediate_sentence_2);
-            iv_slogan_alarm_nh.setBackgroundResource(R.drawable.ic_directions_bike_black_24dp);
+            iv_slogan_alarm.setBackgroundResource(R.drawable.ic_directions_bike_black_24dp);
         }
-        else if(pm<200){
+        else{
             tv_slogan.setText(R.string.slogan_urgent);
-            tv_slogan_nh.setBackgroundResource(R.color.pm25_urgent);
+            tv_slogan.setBackgroundResource(R.color.pm25_urgent);
             tv_slogan_alarm_1.setText(R.string.slogan_urgent_sentence_1);
             tv_slogan_alarm_2.setText(R.string.slogan_urgent_sentence_2);
-            iv_slogan_alarm_nh.setBackgroundResource(R.drawable.ic_directions_bike_black_24dp);
+            iv_slogan_alarm.setBackgroundResource(R.drawable.ic_directions_bike_black_24dp);
         }
     }
     /**

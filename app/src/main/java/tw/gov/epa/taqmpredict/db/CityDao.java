@@ -22,9 +22,11 @@ class CityDao implements BaseColumns {
 
     static final String COUNTY_ID = "countyId";
 
-    static final String CITY_Name = "cityName";
+    static final String CITY_NAME = "cityName";
 
-    static final String CITY_Name_PINYIN = "cityName_pinyin";
+    static final String CITY_NAME_PINYIN = "cityName_pinyin";
+
+    static final String AREA_GROUP = "areaGroup";
 
     private static final String CITY_INFO = "cityInfo";
 
@@ -37,8 +39,9 @@ class CityDao implements BaseColumns {
             COUNTY_PINYIN + TEXT_TYPE + COMMA_SEP +
             SITE_NAME + TEXT_TYPE + COMMA_SEP +
             SITE_NAME_PINYIN + TEXT_TYPE + COMMA_SEP +
-            CITY_Name + TEXT_TYPE + COMMA_SEP +
-            CITY_Name_PINYIN + TEXT_TYPE + COMMA_SEP +
+            CITY_NAME + TEXT_TYPE + COMMA_SEP +
+            CITY_NAME_PINYIN + TEXT_TYPE + COMMA_SEP +
+            AREA_GROUP + TEXT_TYPE + COMMA_SEP +
             COUNTY_ID + TEXT_TYPE + COMMA_SEP +
             CITY_INFO + TEXT_TYPE +
             ")";

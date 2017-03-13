@@ -67,22 +67,6 @@ public class DataRequestPresenter implements IDataRequestPresenter {
                             Log.d(TAG, record.getPublishTime() + "\r\n" + record.getSiteName() + " " + record.getCounty() + "\r\n PM25:" + record.getPM25());
                         }
                         mHm.setEpaData(response_result.getRecords());
-//                        Gson gson = new Gson();
-//
-//                        try {
-//                            File file = new File(Environment.getExternalStorageDirectory() + File.separator + "test.txt");
-//                            file.createNewFile();
-//                            BufferedWriter out = new BufferedWriter(
-//                                    new OutputStreamWriter(new FileOutputStream(file), "UTF-8"));
-//                            gson.toJson(inf_list, out);
-//                            out.close();
-//
-//                            //File file = new File(Environment.getExternalStorageDirectory() + File.separator + "test.txt");
-//                            //file.createNewFile();
-//                            //gson.toJson(inf_list, new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file),"UTF-8")));
-//                        } catch (IOException e) {
-//                            e.printStackTrace();
-//                        }
                     }
 
                     @Override

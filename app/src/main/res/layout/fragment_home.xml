@@ -1,269 +1,270 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawerLayout_city"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swiperefresh_home"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <!--<FrameLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:background="@drawable/dusk1"-->
-        <!--android:alpha="0.5"/>-->
-        <include layout="@layout/toolbar" />
-
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/toolbar"
-            android:orientation="vertical"
-            android:weightSum="2">
+            android:layout_height="match_parent">
 
-            <RelativeLayout
+            <include layout="@layout/toolbar" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_below="@+id/toolbar"
+                android:orientation="vertical"
+                android:weightSum="2">
 
-                <FrameLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/dusk4">
+                    android:layout_weight="1">
 
-                </FrameLayout>
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/dusk4">
 
-                <TextView
-                    android:id="@+id/tv_pm_txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
-                    android:text="細懸浮微粒PM"
-                    android:textColor="@color/bg_white"
-                    android:textSize="20sp" />
+                    </FrameLayout>
 
-                <TextView
-                    android:id="@+id/tv_25_txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/tv_pm_txt"
-                    android:layout_toRightOf="@+id/tv_pm_txt"
-                    android:text="2.5"
-                    android:textColor="@color/bg_white"
-                    android:textSize="15sp" />
+                    <TextView
+                        android:id="@+id/tv_pm_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="10dp"
+                        android:text="細懸浮微粒PM"
+                        android:textColor="@color/bg_white"
+                        android:textSize="20sp" />
 
-                <TextView
-                    android:id="@+id/tv_pm25_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/tv_pm_txt"
-                    android:layout_alignStart="@+id/tv_pm_txt"
-                    android:layout_below="@+id/tv_pm_txt"
-                    android:text="79"
-                    android:textColor="@color/bg_white"
-                    android:textSize="80sp" />
+                    <TextView
+                        android:id="@+id/tv_25_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/tv_pm_txt"
+                        android:layout_toRightOf="@+id/tv_pm_txt"
+                        android:text="2.5"
+                        android:textColor="@color/bg_white"
+                        android:textSize="15sp" />
 
-                <TextView
-                    android:id="@+id/tv_slogan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/tv_pm25_view"
-                    android:layout_below="@+id/tv_pm25_view"
-                    android:background="@color/pm25_primary"
-                    android:paddingBottom="3dp"
-                    android:paddingLeft="2dp"
-                    android:paddingRight="60dp"
-                    android:paddingTop="3dp"
-                    android:text="初級防護"
-                    android:textColor="@color/pm25_txt" />
+                    <TextView
+                        android:id="@+id/tv_pm25_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/tv_pm_txt"
+                        android:layout_alignStart="@+id/tv_pm_txt"
+                        android:layout_below="@+id/tv_pm_txt"
+                        android:text="----"
+                        android:textColor="@color/bg_white"
+                        android:textSize="80sp" />
 
-                <ImageView
-                    android:id="@+id/iv_slogan_alarm"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/tv_slogan"
-                    android:layout_alignStart="@+id/tv_slogan"
-                    android:layout_below="@+id/tv_slogan"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/ic_directions_run_black_24dp" />
+                    <TextView
+                        android:id="@+id/tv_slogan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/tv_pm25_view"
+                        android:layout_below="@+id/tv_pm25_view"
+                        android:background="@color/bottom_list"
+                        android:paddingBottom="3dp"
+                        android:paddingLeft="2dp"
+                        android:paddingRight="60dp"
+                        android:paddingTop="3dp"
+                        android:text="----"
+                        android:textColor="@color/pm25_txt" />
 
-                <TextView
-                    android:id="@+id/tv_slogan_alarm_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_slogan"
-                    android:layout_marginTop="15dp"
-                    android:layout_toRightOf="@+id/iv_slogan_alarm"
-                    android:paddingLeft="3dp"
-                    android:text="可正常戶外活動"
-                    android:textColor="@color/bg_white" />
+                    <ImageView
+                        android:id="@+id/iv_slogan_alarm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/tv_slogan"
+                        android:layout_alignStart="@+id/tv_slogan"
+                        android:layout_below="@+id/tv_slogan"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/ic_update_black_24dp" />
 
-                <TextView
-                    android:id="@+id/tv_slogan_alarm_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/tv_slogan_alarm_1"
-                    android:layout_alignStart="@+id/tv_slogan_alarm_1"
-                    android:layout_below="@+id/tv_slogan_alarm_1"
-                    android:paddingLeft="3dp"
-                    android:text="若不適者請戴口罩"
-                    android:textColor="@color/bg_white" />
+                    <TextView
+                        android:id="@+id/tv_slogan_alarm_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_slogan"
+                        android:layout_marginTop="15dp"
+                        android:layout_toRightOf="@+id/iv_slogan_alarm"
+                        android:paddingLeft="3dp"
+                        android:text="------"
+                        android:textColor="@color/bg_white" />
 
-                <TextView
-                    android:id="@+id/tv_immediate_air"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:text="即時空氣品質"
-                    android:textColor="@color/bg_white" />
+                    <TextView
+                        android:id="@+id/tv_slogan_alarm_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/tv_slogan_alarm_1"
+                        android:layout_alignStart="@+id/tv_slogan_alarm_1"
+                        android:layout_below="@+id/tv_slogan_alarm_1"
+                        android:paddingLeft="3dp"
+                        android:text="------"
+                        android:textColor="@color/bg_white" />
 
-                <!--<TextView-->
-                <!--android:text="ug/m"-->
-                <!--android:textSize="30dp"-->
-                <!--android:textColor="@color/bg_white"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_alignStart="@+id/tv_25_txt"-->
-                <!--android:layout_alignLeft="@+id/tv_25_txt"-->
-                <!--android:layout_alignBottom="@+id/tv_pm25_view"-->
-                <!--android:id="@+id/tv_ugm_txt" />-->
-                <!--<TextView-->
-                <!--android:text="3"-->
-                <!--android:textSize="15dp"-->
-                <!--android:textColor="@color/bg_white"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_toRightOf="@+id/tv_ugm_txt"-->
-                <!--android:layout_alignTop="@+id/tv_ugm_txt"-->
-                <!--android:id="@+id/tv_ugm3_txt" />-->
+                    <TextView
+                        android:id="@+id/tv_immediate_air"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="即時空氣品質"
+                        android:textColor="@color/bg_white" />
 
-            </RelativeLayout>
+                    <!--<TextView-->
+                    <!--android:text="ug/m"-->
+                    <!--android:textSize="30dp"-->
+                    <!--android:textColor="@color/bg_white"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignStart="@+id/tv_25_txt"-->
+                    <!--android:layout_alignLeft="@+id/tv_25_txt"-->
+                    <!--android:layout_alignBottom="@+id/tv_pm25_view"-->
+                    <!--android:id="@+id/tv_ugm_txt" />-->
+                    <!--<TextView-->
+                    <!--android:text="3"-->
+                    <!--android:textSize="15dp"-->
+                    <!--android:textColor="@color/bg_white"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_toRightOf="@+id/tv_ugm_txt"-->
+                    <!--android:layout_alignTop="@+id/tv_ugm_txt"-->
+                    <!--android:id="@+id/tv_ugm3_txt" />-->
 
-            <!--<FrameLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="5dp"-->
-            <!--android:alpha="0.1"-->
-            <!--android:background="@color/bottom_list"/>-->
+                </RelativeLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
+                <!--<FrameLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="5dp"-->
+                <!--android:alpha="0.1"-->
+                <!--android:background="@color/bottom_list"/>-->
 
-                <FrameLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:background="@drawable/dusk3">
+                    android:layout_weight="1">
 
-                </FrameLayout>
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:background="@drawable/dusk3">
 
-                <TextView
-                    android:id="@+id/tv_pm_txt_nh"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
-                    android:text="細懸浮微粒PM"
-                    android:textColor="@color/bg_white"
-                    android:textSize="20sp" />
+                    </FrameLayout>
 
-                <TextView
-                    android:id="@+id/tv_25_txt_nh"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/tv_pm_txt_nh"
-                    android:layout_toRightOf="@+id/tv_pm_txt_nh"
-                    android:text="2.5"
-                    android:textColor="@color/bg_white"
-                    android:textSize="15sp" />
+                    <TextView
+                        android:id="@+id/tv_pm_txt_nh"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="10dp"
+                        android:text="細懸浮微粒PM"
+                        android:textColor="@color/bg_white"
+                        android:textSize="20sp" />
 
-                <TextView
-                    android:id="@+id/tv_pm25_view_nh"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/tv_pm_txt_nh"
-                    android:layout_alignStart="@+id/tv_pm_txt_nh"
-                    android:layout_below="@+id/tv_pm_txt_nh"
-                    android:text="45"
-                    android:textColor="@color/bg_white"
-                    android:textSize="80sp" />
+                    <TextView
+                        android:id="@+id/tv_25_txt_nh"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/tv_pm_txt_nh"
+                        android:layout_toRightOf="@+id/tv_pm_txt_nh"
+                        android:text="2.5"
+                        android:textColor="@color/bg_white"
+                        android:textSize="15sp" />
 
-                <TextView
-                    android:id="@+id/tv_slogan_nh"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/tv_pm25_view_nh"
-                    android:layout_below="@+id/tv_pm25_view_nh"
-                    android:background="@color/pm25_good"
-                    android:paddingBottom="3dp"
-                    android:paddingLeft="2dp"
-                    android:paddingRight="60dp"
-                    android:paddingTop="3dp"
-                    android:text="品質良好"
-                    android:textColor="@color/pm25_txt" />
+                    <TextView
+                        android:id="@+id/tv_pm25_view_nh"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/tv_pm_txt_nh"
+                        android:layout_alignStart="@+id/tv_pm_txt_nh"
+                        android:layout_below="@+id/tv_pm_txt_nh"
+                        android:text="----"
+                        android:textColor="@color/bg_white"
+                        android:textSize="80sp" />
 
-                <ImageView
-                    android:id="@+id/iv_slogan_alarm_nh"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/tv_slogan_nh"
-                    android:layout_alignStart="@+id/tv_slogan_nh"
-                    android:layout_below="@+id/tv_slogan_nh"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/ic_directions_bike_black_24dp" />
+                    <TextView
+                        android:id="@+id/tv_slogan_nh"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/tv_pm25_view_nh"
+                        android:layout_below="@+id/tv_pm25_view_nh"
+                        android:background="@color/bottom_list"
+                        android:paddingBottom="3dp"
+                        android:paddingLeft="2dp"
+                        android:paddingRight="60dp"
+                        android:paddingTop="3dp"
+                        android:text="----"
+                        android:textColor="@color/pm25_txt" />
 
-                <TextView
-                    android:id="@+id/tv_slogan_alarm_1_nh"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_slogan_nh"
-                    android:layout_marginTop="15dp"
-                    android:layout_toRightOf="@+id/iv_slogan_alarm_nh"
-                    android:paddingLeft="3dp"
-                    android:text="空氣品質良好"
-                    android:textColor="@color/bg_white" />
+                    <ImageView
+                        android:id="@+id/iv_slogan_alarm_nh"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/tv_slogan_nh"
+                        android:layout_alignStart="@+id/tv_slogan_nh"
+                        android:layout_below="@+id/tv_slogan_nh"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/ic_update_black_24dp" />
 
-                <TextView
-                    android:id="@+id/tv_slogan_alarm_2_nh"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/tv_slogan_alarm_1_nh"
-                    android:layout_alignStart="@+id/tv_slogan_alarm_1_nh"
-                    android:layout_below="@+id/tv_slogan_alarm_1_nh"
-                    android:paddingLeft="3dp"
-                    android:text="適合遊山玩水"
-                    android:textColor="@color/bg_white" />
+                    <TextView
+                        android:id="@+id/tv_slogan_alarm_1_nh"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_slogan_nh"
+                        android:layout_marginTop="15dp"
+                        android:layout_toRightOf="@+id/iv_slogan_alarm_nh"
+                        android:paddingLeft="3dp"
+                        android:text="------"
+                        android:textColor="@color/bg_white" />
 
-                <TextView
-                    android:id="@+id/tv_nh_predict"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:text="下一小時空氣品質預報"
-                    android:textColor="@color/bg_white" />
+                    <TextView
+                        android:id="@+id/tv_slogan_alarm_2_nh"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/tv_slogan_alarm_1_nh"
+                        android:layout_alignStart="@+id/tv_slogan_alarm_1_nh"
+                        android:layout_below="@+id/tv_slogan_alarm_1_nh"
+                        android:paddingLeft="3dp"
+                        android:text="------"
+                        android:textColor="@color/bg_white" />
 
-            </RelativeLayout>
-        </LinearLayout>
-    </RelativeLayout>
+                    <TextView
+                        android:id="@+id/tv_nh_predict"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="下一小時空氣品質預報"
+                        android:textColor="@color/bg_white" />
+
+                </RelativeLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <FrameLayout
         android:layout_width="@dimen/navigation_drawer_width"
         android:layout_height="match_parent"
         android:id="@+id/fl_navigation_city"
-        android:layout_gravity="right">
+        android:layout_gravity="left">
 
         <include layout="@layout/navigation_city" />
     </FrameLayout>

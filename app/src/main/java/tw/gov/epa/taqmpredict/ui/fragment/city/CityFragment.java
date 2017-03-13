@@ -21,10 +21,12 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import tw.gov.epa.taqmpredict.R;
 import tw.gov.epa.taqmpredict.base.BaseSwipeBackFragment;
+import tw.gov.epa.taqmpredict.base.Constants;
 import tw.gov.epa.taqmpredict.db.DBManage;
 import tw.gov.epa.taqmpredict.event.ChoiceSiteEvent;
 import tw.gov.epa.taqmpredict.event.TabSelectedEvent;
@@ -53,8 +55,13 @@ public class CityFragment extends BaseSwipeBackFragment implements SearchCityVie
     HomeFragment homeFragment;
 
     @Override
-    public void onMatched(String key) {
-        listCities = DBManage.getInstance().searchCity(key);
+    public void onMatched(String key,boolean isGroup) {
+        if(isGroup){
+            listCities = DBManage.getInstance().getGroupArea(key);
+        }
+        else {
+            listCities = DBManage.getInstance().searchCity(key);
+        }
         dataList.clear();
         for(CityInfoData data:listCities){
             dataList.add(data.getCityName()+data.getSiteName()+"測站");
@@ -71,13 +78,18 @@ public class CityFragment extends BaseSwipeBackFragment implements SearchCityVie
     }
 
     @Override
-    public void onAllCities() {
-        listCities = DBManage.getInstance().getAllCities();
+    public void onAllGroups() {
+        //listCities = DBManage.getInstance().getAllCities();
+        //dataList.clear();
+//        for(CityInfoData data:listCities){
+//            dataList.add(data.getCityName()+data.getSiteName()+"測站");
+//        }
+//        rv_city.setVisibility(VISIBLE);
+
         dataList.clear();
-        for(CityInfoData data:listCities){
-            dataList.add(data.getCityName()+data.getSiteName()+"測站");
+        for(String group: Constants.AREA_GROUP){
+            dataList.add(group);
         }
-        rv_city.setVisibility(VISIBLE);
     }
 
     public static CityFragment newInstance() {
@@ -112,24 +124,30 @@ public class CityFragment extends BaseSwipeBackFragment implements SearchCityVie
         rv_city.setLayoutManager(new LinearLayoutManager(_mActivity));
         rv_city.setHasFixedSize(true);
 
-        onAllCities();
+        onAllGroups();
 
         mCityAdapter = new CityAdapter(_mActivity);
         rv_city.setAdapter(mCityAdapter);
 
         mCityAdapter.setOnItemClickListener((view, pos)->{
             Log.d("CityFragment:",dataList.get(pos));
-            ChoiceSiteEvent event = new ChoiceSiteEvent();
-            event.setCityInfo(listCities.get(pos));
-            EventBus.getDefault().post(event);
-            replaceFragment(homeFragment,false);
+            if(Arrays.asList(Constants.AREA_GROUP).contains(dataList.get(pos))){
+                onMatched(dataList.get(pos),true);
+                mCityAdapter.setData(dataList);
+                mCityAdapter.notifyDataSetChanged();
+            }else{
+                ChoiceSiteEvent event = new ChoiceSiteEvent();
+                event.setCityInfo(listCities.get(pos));
+                EventBus.getDefault().post(event);
+                replaceFragment(homeFragment,false);
+            }
         });
 
         mActionEmptyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mSearchTextView.setText("");
-                onAllCities();
+                onAllGroups();
                 mCityAdapter.setData(dataList);
                 mCityAdapter.notifyDataSetChanged();
             }
@@ -164,10 +182,10 @@ public class CityFragment extends BaseSwipeBackFragment implements SearchCityVie
                 if (TextUtils.isEmpty(keyword)) {
                     mActionEmptyBtn.setVisibility(View.GONE);
                     mEmptyView.setVisibility(View.GONE);
-                    onAllCities();
+                    onAllGroups();
                 } else {
                     mActionEmptyBtn.setVisibility(View.VISIBLE);
-                    onMatched(keyword);
+                    onMatched(keyword,false);
                 }
             }
         });
