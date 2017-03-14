@@ -10,6 +10,8 @@ import android.widget.TextView;
 import java.util.List;
 
 import tw.gov.epa.taqmpredict.R;
+import tw.gov.epa.taqmpredict.base.Constants;
+import tw.gov.epa.taqmpredict.util.PreferencesUtil;
 
 /**
  * Created by Administrator on 2017/3/1.
@@ -22,12 +24,17 @@ public class HomeCityRecyclerViewAdapter extends RecyclerView.Adapter<HomeCityRe
 
     private List<String> mDataArea;
 
+    final static int CURRENT = 0;
+
+    HomeFragment mHf;
+
     public void setData(List data){
         mDataArea = data;
     }
 
-    public HomeCityRecyclerViewAdapter(Context context) {
+    public HomeCityRecyclerViewAdapter(Context context,HomeFragment hf) {
         mContext = context;
+        mHf = hf;
     }
 
 
@@ -54,13 +61,17 @@ public class HomeCityRecyclerViewAdapter extends RecyclerView.Adapter<HomeCityRe
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Toast.makeText(mContext, "Item " + position + " is clicked.", Toast.LENGTH_SHORT).show();
+                if(position==CURRENT){
+                    PreferencesUtil.put(Constants.HEADLINE_SITE,PreferencesUtil.get(Constants.CURRENT_HEADLINE_SITE,""));
+                    PreferencesUtil.put(Constants.SITENAME,PreferencesUtil.get(Constants.CURRENT_SITE,""));
+                    mHf.closeDrawer();
+                    mHf.getData();
+                }
             }
         });
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-//                Toast.makeText(mContext, "Item " + position + " is long clicked.", Toast.LENGTH_SHORT).show();
                 return true;
             }
         });

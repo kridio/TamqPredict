@@ -65,7 +65,7 @@
                         android:layout_alignLeft="@+id/tv_pm_txt"
                         android:layout_alignStart="@+id/tv_pm_txt"
                         android:layout_below="@+id/tv_pm_txt"
-                        android:text="----"
+                        android:text="@string/air_value_empty"
                         android:textColor="@color/bg_white"
                         android:textSize="80sp" />
 
@@ -80,7 +80,7 @@
                         android:paddingLeft="2dp"
                         android:paddingRight="60dp"
                         android:paddingTop="3dp"
-                        android:text="----"
+                        android:text="@string/slogan_empty"
                         android:textColor="@color/pm25_txt" />
 
                     <ImageView
@@ -101,7 +101,7 @@
                         android:layout_marginTop="15dp"
                         android:layout_toRightOf="@+id/iv_slogan_alarm"
                         android:paddingLeft="3dp"
-                        android:text="------"
+                        android:text="@string/slogan_empty_sentence"
                         android:textColor="@color/bg_white" />
 
                     <TextView
@@ -112,7 +112,7 @@
                         android:layout_alignStart="@+id/tv_slogan_alarm_1"
                         android:layout_below="@+id/tv_slogan_alarm_1"
                         android:paddingLeft="3dp"
-                        android:text="------"
+                        android:text="@string/slogan_empty_sentence"
                         android:textColor="@color/bg_white" />
 
                     <TextView
@@ -197,7 +197,7 @@
                         android:layout_alignLeft="@+id/tv_pm_txt_nh"
                         android:layout_alignStart="@+id/tv_pm_txt_nh"
                         android:layout_below="@+id/tv_pm_txt_nh"
-                        android:text="----"
+                        android:text="@string/air_value_empty"
                         android:textColor="@color/bg_white"
                         android:textSize="80sp" />
 
@@ -212,7 +212,7 @@
                         android:paddingLeft="2dp"
                         android:paddingRight="60dp"
                         android:paddingTop="3dp"
-                        android:text="----"
+                        android:text="@string/slogan_empty"
                         android:textColor="@color/pm25_txt" />
 
                     <ImageView
@@ -233,7 +233,7 @@
                         android:layout_marginTop="15dp"
                         android:layout_toRightOf="@+id/iv_slogan_alarm_nh"
                         android:paddingLeft="3dp"
-                        android:text="------"
+                        android:text="@string/slogan_empty_sentence"
                         android:textColor="@color/bg_white" />
 
                     <TextView
@@ -244,7 +244,7 @@
                         android:layout_alignStart="@+id/tv_slogan_alarm_1_nh"
                         android:layout_below="@+id/tv_slogan_alarm_1_nh"
                         android:paddingLeft="3dp"
-                        android:text="------"
+                        android:text="@string/slogan_empty_sentence"
                         android:textColor="@color/bg_white" />
 
                     <TextView
@@ -252,7 +252,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:text="下一小時空氣品質預報"
+                        android:text="@string/air_slogan_nh_empty"
                         android:textColor="@color/bg_white" />
 
                 </RelativeLayout>

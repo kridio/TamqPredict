@@ -16,17 +16,23 @@ import io.nlopez.smartlocation.OnLocationUpdatedListener;
 import io.nlopez.smartlocation.SmartLocation;
 import io.nlopez.smartlocation.geofencing.utils.TransitionGeofence;
 import io.nlopez.smartlocation.location.providers.LocationGooglePlayServicesProvider;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.Observer;
 
 public class GPSTrackerService implements OnActivityUpdatedListener,OnLocationUpdatedListener,OnGeofencingTransitionListener {
     private final static String TAG = GPSTrackerService.class.getSimpleName();
 
     private Context context;
     private LocationGooglePlayServicesProvider provider;
-    private String lat = "";
-    private String lng = "";
+    private double mLat = 0;
+    private double mLng = 0;
+    Observer mObserver;
 
-    public GPSTrackerService(Context context){
+    public GPSTrackerService(Context context,Observer observer){
         this.context = context;
+        mObserver = observer;
     }
 
     public void startLocation() {
@@ -67,7 +73,26 @@ public class GPSTrackerService implements OnActivityUpdatedListener,OnLocationUp
     @Override
     public void onLocationUpdated(Location location) {
         logd("onLocationUpdated: "+location.getLatitude()+","+location.getLongitude());
+        mLat = location.getLatitude();
+        mLng = location.getLongitude();
 
+        Observable.create(new ObservableOnSubscribe<String>() {
+            @Override
+            public void subscribe(ObservableEmitter<String> e) throws Exception {
+                if(mLat!=0 && mLng!=0) {
+                    e.onNext(mLat + "," + mLng);
+                    e.onComplete();
+                }
+            }
+        }).subscribe(mObserver);
+    }
+
+    public double getLat(){
+        return mLat;
+    }
+
+    public double getLng(){
+        return mLng;
     }
 
     public void logd(String log){

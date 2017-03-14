@@ -15,25 +15,11 @@ import me.yokeyword.fragmentation.SupportFragment;
 import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
 import me.yokeyword.fragmentation.helper.FragmentLifecycleCallbacks;
-import tw.gov.epa.taqmpredict.data.DataCache;
-import tw.gov.epa.taqmpredict.data.DataRequestService;
-import tw.gov.epa.taqmpredict.data.IDataRequestPresenter;
-import tw.gov.epa.taqmpredict.gps.GPSTrackerService;
-import tw.gov.epa.taqmpredict.gps.area.AreaRequestService;
-import tw.gov.epa.taqmpredict.gps.area.IAreaRequestPresenter;
 import tw.gov.epa.taqmpredict.ui.fragment.MainFragment;
 import tw.gov.epa.taqmpredict.util.PermissionsManager;
 
 public class MainActivity extends SupportActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
-
-    private DataCache<String,String> dataCache;
-    private GPSTrackerService gpsTrackerService;
-    private AreaRequestService areaRequestService;
-    private DataRequestService epaDataRequestService;
-
-    private IDataRequestPresenter epaDataRequestPresenter;
-    private IAreaRequestPresenter areaRequestPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,10 +53,6 @@ public class MainActivity extends SupportActivity {
 
 //        changeFragment(MainFragment.newInstance());
 
-        gpsTrackerService = new GPSTrackerService(this);
-        areaRequestService = new AreaRequestService(this);
-        epaDataRequestService = new DataRequestService();
-
 //        epaDataRequestPresenter = new DataRequestPresenter(this,epaDataRequestService);
 //        areaRequestPresenter = new AreaRequestPresenter(this,areaRequestService,gpsTrackerService);
     }
@@ -80,13 +62,11 @@ public class MainActivity extends SupportActivity {
         super.onResume();
         //set full screen
         //getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
-        gpsTrackerService.startLocation();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        gpsTrackerService.stopLocation();
     }
 
     @Override

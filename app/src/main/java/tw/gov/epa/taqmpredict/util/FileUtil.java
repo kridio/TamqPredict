@@ -41,7 +41,7 @@ public class FileUtil {
 
 
     /**
-     * close IO
+     * closeDrawer IO
      * @param closeables closeable
      */
     public static void closeIO(Closeable... closeables) {

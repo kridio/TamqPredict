@@ -1,7 +1,7 @@
 <resources>
     <string name="title_activity_maps">Map</string>
-    <string name="title_area_display">桃園市 龍潭區</string>
-    <string name="title_datetime_display">2017-02-24 (五) Friday 10:08:05</string>
+    <string name="title_area_display">----(----)</string>
+    <string name="title_datetime_display"><!--2017-02-24 (五) Friday 10:08:05-->----/--/-- ---- --:--:--</string>
     <string name="chart_label_Predict">預測數值</string>
     <string name="chart_label_Real">實際數值</string>
     <string name="chart_title">比較圖表</string>
@@ -23,6 +23,11 @@
     <string name="slogan_intermediate_sentence_2">敏感族群建議戴口罩</string>
     <string name="slogan_urgent_sentence_1">不適者減少戶外活動</string>
     <string name="slogan_urgent_sentence_2">敏感族群避免外出</string>
+    <string name="slogan_empty_sentence">------</string>
+    <string name="slogan_empty">----</string>
+    <string name="air_value_empty">----</string>
+    <string name="air_slogan_nh_empty">下一小時空氣品質預報</string>
+
 
     <string name="hint_search_box">輸入測站名稱或郵遞區號</string>
     <string name="nothing_found">没有搜索结果</string>

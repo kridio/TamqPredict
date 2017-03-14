@@ -105,6 +105,12 @@ public class DBManage {
         return getCitys(allCitySql, true);
     }
 
+    //read site
+    public List<CityInfoData> getLocality(String county) {
+        String allCitySql = "select * from " + CityDao.TABLE_NAME+" where "+CityDao.COUNTY + " like \"%" + county + "%\"";
+        return getCitys(allCitySql, true);
+    }
+
     /**
      * search by name or pinyin
      *

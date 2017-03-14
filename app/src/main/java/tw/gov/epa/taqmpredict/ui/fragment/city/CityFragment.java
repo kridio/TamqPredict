@@ -53,6 +53,7 @@ public class CityFragment extends BaseSwipeBackFragment implements SearchCityVie
 
     List<CityInfoData> listCities;
     HomeFragment homeFragment;
+    boolean mEnterGroup=false;
 
     @Override
     public void onMatched(String key,boolean isGroup) {
@@ -132,7 +133,8 @@ public class CityFragment extends BaseSwipeBackFragment implements SearchCityVie
         mCityAdapter.setOnItemClickListener((view, pos)->{
             Log.d("CityFragment:",dataList.get(pos));
             if(Arrays.asList(Constants.AREA_GROUP).contains(dataList.get(pos))){
-                onMatched(dataList.get(pos),true);
+                mEnterGroup = true;
+                onMatched(dataList.get(pos),mEnterGroup);
                 mCityAdapter.setData(dataList);
                 mCityAdapter.notifyDataSetChanged();
             }else{
@@ -217,7 +219,15 @@ public class CityFragment extends BaseSwipeBackFragment implements SearchCityVie
 
     @Override
     public boolean onBackPressedSupport() {
-        replaceFragment(homeFragment,false);
+        if(mEnterGroup){
+            onAllGroups();
+            mCityAdapter.setData(dataList);
+            mCityAdapter.notifyDataSetChanged();
+        }
+        else {
+            replaceFragment(homeFragment, false);
+        }
+        mEnterGroup = false;
         return true;
     }
 }

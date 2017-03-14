@@ -5,5 +5,5 @@ package tw.gov.epa.taqmpredict.gps.area;
  */
 
 public interface IAreaRequestPresenter {
-    public void getArea();
+    public void getArea(double lat,double lng);
 }

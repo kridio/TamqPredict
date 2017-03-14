@@ -1,6 +1,5 @@
 package tw.gov.epa.taqmpredict.ui.fragment.home;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
@@ -19,19 +18,22 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.sql.Driver;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 import tw.gov.epa.taqmpredict.R;
-import tw.gov.epa.taqmpredict.base.BaseFragment;
 import tw.gov.epa.taqmpredict.base.BaseSwipeBackFragment;
 import tw.gov.epa.taqmpredict.base.Constants;
 import tw.gov.epa.taqmpredict.data.DataRequestPresenter;
 import tw.gov.epa.taqmpredict.data.DataRequestService;
 import tw.gov.epa.taqmpredict.data.model.Record;
+import tw.gov.epa.taqmpredict.db.DBManage;
 import tw.gov.epa.taqmpredict.event.ChoiceSiteEvent;
 import tw.gov.epa.taqmpredict.event.TabSelectedEvent;
+import tw.gov.epa.taqmpredict.gps.area.AreaRequestPresenter;
+import tw.gov.epa.taqmpredict.gps.area.city.model.CityInfoData;
 import tw.gov.epa.taqmpredict.predict.DriverService;
 import tw.gov.epa.taqmpredict.predict.model.Result;
 import tw.gov.epa.taqmpredict.ui.fragment.MainFragment;
@@ -45,16 +47,6 @@ import tw.gov.epa.taqmpredict.util.PreferencesUtil;
 
 public class HomeFragment extends BaseSwipeBackFragment {
     private static final String TAG = HomeFragment.class.getSimpleName();
-//    @BindView(R.id.mainhead_viewpager)
-//    ViewPager mainheadViewpager;
-//    @BindView(R.id.lineChart)
-//    LineChart lineChart;
-//    @BindView(R.id.smartTabLayout)
-//    SmartTabLayout smartTabLayout;
-
-//    List<View> viewList;
-
-//    private HomeRecyclerAdapter mAdapter;
 
     RecyclerView recyclerViewCity;
     TextView tvAddArea;
@@ -84,6 +76,7 @@ public class HomeFragment extends BaseSwipeBackFragment {
     HomeCityRecyclerViewAdapter cityRecyclerViewAdapter;
     DataRequestPresenter dataRequestPresenter;
     DriverService driverService;
+    AreaRequestPresenter areaRequestPresenter;
 
     public static HomeFragment newInstance() {
         Bundle args = new Bundle();
@@ -123,80 +116,7 @@ public class HomeFragment extends BaseSwipeBackFragment {
 
         dataRequestPresenter = new DataRequestPresenter(new DataRequestService(),HomeFragment.this);
         driverService = new DriverService(HomeFragment.this);
-//        View v1 = inflater.inflate(R.layout.main_header_pm25, null);
-//        View v2 = inflater.inflate(R.layout.main_header_pm25_n1, null);
-//        View v3 = inflater.inflate(R.layout.main_header_pm25_n6, null);
-//        View v4 = inflater.inflate(R.layout.main_header_pm25_n12, null);
 
-
-//        viewList = new ArrayList<View>();
-//        viewList.add(v1);
-//        //viewList.add(v2);
-//        viewList.add(v3);
-//        viewList.add(v4);
-
-//        mainheadViewpager.setAdapter(new HomeViewPagerAdapter(viewList));
-//        mainheadViewpager.setCurrentItem(0);
-
-//        smartTabLayout.setViewPager(mainheadViewpager);
-
-//        ArrayList<String> labels = new ArrayList<String>();
-//        labels.add("January");
-//        labels.add("February");
-
-//        LineChartData lineChartData = new LineChartData(getContext());
-//        lineChartData.configChartAxis(lineChart);
-//        lineChart.setData(lineChartData.getLineData());
-//        lineChart.setVisibleXRangeMaximum(7);
-//        lineChart.moveViewToX(15);
-//        lineChart.setBackgroundColor(Color.GRAY);
-//        lineChart.setAlpha(0.3f);
-//        lineChart.invalidate();
-
-//        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-//        toolbar.setNavigationIcon(R.drawable.ic_playlist_add_white_24dp);
-//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(getContext(), "navigation", Toast.LENGTH_LONG).show();
-//            }
-//        });
-
-//        BarChartData chartData = new BarChartData(getContext());
-//        chartData.configChartAxis(barChart);
-//        barChart.setData(chartData.getBarData());
-//        barChart.setVisibleXRangeMaximum(6);
-//        barChart.moveViewToX(15);
-//        barChart.invalidate();
-
-//        tabLayout.addTab(tabLayout.newTab().setText("PM2.5"));
-//        tabLayout.addTab(tabLayout.newTab().setText("PM10"));
-//        tabLayout.addTab(tabLayout.newTab().setText("O3"));
-//        tabLayout.addTab(tabLayout.newTab().setText("CO"));
-//        tabLayout.addTab(tabLayout.newTab().setText("SO2"));
-//        tabLayout.addTab(tabLayout.newTab().setText("NO"));
-//        tabLayout.setTabTextColors(Color.WHITE,Color.WHITE);
-//
-//        tabLayout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(getContext(), "tab", Toast.LENGTH_LONG).show();
-//            }
-//        });
-
-
-//        toolbar.inflateMenu(R.menu.menu_layout);
-//        mAdapter = new HomeRecyclerAdapter(getContext());
-//        ArrayList<String> myDataset = new ArrayList<>();
-//        for (int i = 0; i < 100; i++) {
-//            myDataset.add(Integer.toString(i));
-//        }
-//        mAdapter.setData(myDataset);
-//
-//        recyclerView.setHasFixedSize(true);
-//        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
-//        recyclerView.addItemDecoration(new MarginDecoration(getContext()));
-//        recyclerView.setAdapter(mAdapter);
         return view;
     }
 
@@ -204,7 +124,7 @@ public class HomeFragment extends BaseSwipeBackFragment {
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
 
-        cityRecyclerViewAdapter = new HomeCityRecyclerViewAdapter(getContext());
+        cityRecyclerViewAdapter = new HomeCityRecyclerViewAdapter(getContext(),this);
         ArrayList<String> myDataset = new ArrayList<>();
         for(int i = 0; i < 1; i++){
             myDataset.add(Integer.toString(i));
@@ -216,9 +136,6 @@ public class HomeFragment extends BaseSwipeBackFragment {
         recyclerViewCity.setLayoutManager(layoutManager);
         recyclerViewCity.setHasFixedSize(true);
         recyclerViewCity.setAdapter(cityRecyclerViewAdapter);
-
-        tvLocation.setText(PreferencesUtil.get(Constants.HEADLINE_SITE,""));
-        tvDatetime.setText(DateTimeUtil.getCurrentHLDateTime());
 
         tvAddArea.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -238,26 +155,47 @@ public class HomeFragment extends BaseSwipeBackFragment {
             @Override
             public void onRefresh() {
                 getData();
-                swiperefresh_home.setRefreshing(false);
             }
         });
     }
 
+    public void closeDrawer(){
+        dlCity.closeDrawers();
+    }
+
     public void getData(){
         if(dataRequestPresenter!=null && driverService!=null) {
+            swiperefresh_home.setRefreshing(true);
             dataRequestPresenter.getEpaData();
             driverService.getPredictData();
+            tvDatetime.setText(DateTimeUtil.getCurrentHLDateTime());
+            tvLocation.setText(PreferencesUtil.get(Constants.HEADLINE_SITE,getResources().getString(R.string.title_area_display)));
         }
     }
 
-
+    boolean predictReady=false;
+    boolean realReady=false;
     public void setData(List<Result> result){
+        boolean hasValue = false;
         for(Result rs:result) {
             if(PreferencesUtil.get(Constants.SITENAME,"").equals(rs.getSiteName())){
                 tv_pm25_view_nh.setText(String.valueOf(rs.getHr1().intValue()));
-                tv_nh_predict.setText(DateTimeUtil.getPredictTime(rs.getTime())+"空氣品質預報");
+                tv_nh_predict.setText(DateTimeUtil.getPredictTime(rs.getTime())+Constants.AIR_PREDICT_STR);
                 setPredictSlogan(rs.getHr1().intValue());
+                hasValue = true;
             }
+        }
+        if(!hasValue){
+            tv_pm25_view_nh.setText(getResources().getString(R.string.air_value_empty));
+            tv_nh_predict.setText(getResources().getString(R.string.air_slogan_nh_empty));
+            setPredictSlogan(AIR_EMPTY);
+        }
+        if(predictReady){
+            swiperefresh_home.setRefreshing(false);
+            predictReady = false;
+        }
+        else{
+            realReady = true;
         }
     }
 
@@ -270,16 +208,75 @@ public class HomeFragment extends BaseSwipeBackFragment {
                 }
             }
         }
+        if(realReady){
+            swiperefresh_home.setRefreshing(false);
+            realReady = false;
+        }
+        else{
+            predictReady = true;
+        }
     }
+
+    Observer<String> mObserver = new Observer<String>() {
+        @Override
+        public void onSubscribe(Disposable d) {
+
+        }
+
+        @Override
+        public void onNext(String county) {
+            List<CityInfoData> countys = DBManage.getInstance().getLocality(county);
+            for(CityInfoData data:countys){
+                if(PreferencesUtil.get(Constants.SITENAME,"").equals("")){
+                    PreferencesUtil.put(Constants.HEADLINE_SITE,data.getCityName()+"("+data.getSiteName()+")");
+                    PreferencesUtil.put(Constants.SITENAME,data.getSiteName());
+                    getData();
+                }
+                PreferencesUtil.put(Constants.CURRENT_SITE,data.getSiteName());
+                PreferencesUtil.put(Constants.CURRENT_HEADLINE_SITE,data.getCityName()+"("+data.getSiteName()+")");
+            }
+        }
+
+        @Override
+        public void onError(Throwable e) {
+
+        }
+
+        @Override
+        public void onComplete() {
+
+        }
+    };
 
     @Override
     public void onResume() {
         super.onResume();
+
+        areaRequestPresenter = new AreaRequestPresenter(getContext(),mObserver);
+        areaRequestPresenter.start();
+
         getData();
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        areaRequestPresenter.stop();
+    }
+
+    final static int AIR_EMPTY = -1;
+    final static int AIR_GOOD = 36;
+    final static int AIR_primary = 54;
+    final static int AIR_intermediate = 71;
     public void setPredictSlogan(int pm){
-        if(pm<36){
+        if(pm==AIR_EMPTY){
+            tv_slogan_nh.setText(R.string.slogan_empty);
+            tv_slogan_nh.setBackgroundResource(R.color.bottom_list);
+            tv_slogan_alarm_1_nh.setText(R.string.slogan_empty_sentence);
+            tv_slogan_alarm_2_nh.setText(R.string.slogan_empty_sentence);
+            iv_slogan_alarm_nh.setBackgroundResource(R.drawable.ic_update_black_24dp);
+        }
+        else if(pm>AIR_EMPTY && pm<AIR_GOOD){
             tv_slogan_nh.setText(R.string.slogan_good);
             tv_slogan_nh.setBackgroundResource(R.color.pm25_good);
             tv_slogan_alarm_1_nh.setText(R.string.slogan_good_sentence_1);
@@ -287,14 +284,14 @@ public class HomeFragment extends BaseSwipeBackFragment {
             iv_slogan_alarm_nh.setBackgroundResource(R.drawable.ic_directions_bike_black_24dp);
 
         }
-        else if(pm<54){
+        else if(pm<AIR_primary){
             tv_slogan_nh.setText(R.string.slogan_primary);
             tv_slogan_nh.setBackgroundResource(R.color.pm25_primary);
             tv_slogan_alarm_1_nh.setText(R.string.slogan_primary_sentence_1);
             tv_slogan_alarm_2_nh.setText(R.string.slogan_primary_sentence_2);
             iv_slogan_alarm_nh.setBackgroundResource(R.drawable.ic_directions_run_black_24dp);
         }
-        else if(pm<71){
+        else if(pm<AIR_intermediate){
             tv_slogan_nh.setText(R.string.slogan_intermediate);
             tv_slogan_nh.setBackgroundResource(R.color.pm25_intermediate);
             tv_slogan_alarm_1_nh.setText(R.string.slogan_intermediate_sentence_1);
@@ -310,21 +307,21 @@ public class HomeFragment extends BaseSwipeBackFragment {
         }
     }
     public void setSlogan(int pm){
-        if(pm<36){
+        if(pm<AIR_GOOD){
             tv_slogan.setText(R.string.slogan_good);
             tv_slogan.setBackgroundResource(R.color.pm25_good);
             tv_slogan_alarm_1.setText(R.string.slogan_good_sentence_1);
             tv_slogan_alarm_2.setText(R.string.slogan_good_sentence_2);
             iv_slogan_alarm.setBackgroundResource(R.drawable.ic_directions_bike_black_24dp);
         }
-        else if(pm<54){
+        else if(pm<AIR_primary){
             tv_slogan.setText(R.string.slogan_primary);
             tv_slogan.setBackgroundResource(R.color.pm25_primary);
             tv_slogan_alarm_1.setText(R.string.slogan_primary_sentence_1);
             tv_slogan_alarm_2.setText(R.string.slogan_primary_sentence_2);
             iv_slogan_alarm.setBackgroundResource(R.drawable.ic_directions_run_black_24dp);
         }
-        else if(pm<71){
+        else if(pm<AIR_intermediate){
             tv_slogan.setText(R.string.slogan_intermediate);
             tv_slogan.setBackgroundResource(R.color.pm25_intermediate);
             tv_slogan_alarm_1.setText(R.string.slogan_intermediate_sentence_1);
