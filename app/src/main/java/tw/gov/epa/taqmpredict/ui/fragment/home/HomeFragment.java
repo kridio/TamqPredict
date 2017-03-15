@@ -72,6 +72,7 @@ public class HomeFragment extends BaseSwipeBackFragment {
     TextView tv_nh_predict;
 
     //String headline_site = "";
+    private static ArrayList<SiteListData> siteDataList = new ArrayList<>();
 
     HomeCityRecyclerViewAdapter cityRecyclerViewAdapter;
     DataRequestPresenter dataRequestPresenter;
@@ -125,11 +126,7 @@ public class HomeFragment extends BaseSwipeBackFragment {
         super.onLazyInitView(savedInstanceState);
 
         cityRecyclerViewAdapter = new HomeCityRecyclerViewAdapter(getContext(),this);
-        ArrayList<String> myDataset = new ArrayList<>();
-        for(int i = 0; i < 1; i++){
-            myDataset.add(Integer.toString(i));
-        }
-        cityRecyclerViewAdapter.setData(myDataset);
+        cityRecyclerViewAdapter.setData(siteDataList);
 
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -175,9 +172,9 @@ public class HomeFragment extends BaseSwipeBackFragment {
 
     boolean predictReady=false;
     boolean realReady=false;
-    public void setData(List<Result> result){
+    public void setData(List<Result> results){
         boolean hasValue = false;
-        for(Result rs:result) {
+        for(Result rs:results) {
             if(PreferencesUtil.get(Constants.SITENAME,"").equals(rs.getSiteName())){
                 tv_pm25_view_nh.setText(String.valueOf(rs.getHr1().intValue()));
                 tv_nh_predict.setText(DateTimeUtil.getPredictTime(rs.getTime())+Constants.AIR_PREDICT_STR);
@@ -200,13 +197,31 @@ public class HomeFragment extends BaseSwipeBackFragment {
     }
 
     public void setEpaData(List<Record> result){
+        boolean hasValue=false;
+        parse();
         for(Record rc:result) {
             if(PreferencesUtil.get(Constants.SITENAME,"").equals(rc.getSiteName())){
                 if(!rc.getPM25().equals("")) {
                     tv_pm25_view.setText(String.valueOf(rc.getPM25()));
                     setSlogan(Integer.valueOf(rc.getPM25()));
+                    hasValue=true;
                 }
             }
+            String list = PreferencesUtil.get(Constants.SITE_LIST,"");
+            //need modified to be better
+            if(!list.equals("")){
+                for (SiteListData data : siteDataList) {
+                    if (data.getSiteName().equals(rc.getSiteName())) {
+                        data.setPm25_value(Integer.valueOf(rc.getPM25()));
+                    }
+                }
+                cityRecyclerViewAdapter.setData(siteDataList);
+                cityRecyclerViewAdapter.notifyDataSetChanged();
+            }
+        }
+        if(!hasValue){
+            tv_pm25_view.setText(getResources().getString(R.string.air_value_empty));
+            setSlogan(AIR_EMPTY);
         }
         if(realReady){
             swiperefresh_home.setRefreshing(false);
@@ -230,7 +245,18 @@ public class HomeFragment extends BaseSwipeBackFragment {
                 if(PreferencesUtil.get(Constants.SITENAME,"").equals("")){
                     PreferencesUtil.put(Constants.HEADLINE_SITE,data.getCityName()+"("+data.getSiteName()+")");
                     PreferencesUtil.put(Constants.SITENAME,data.getSiteName());
+                    addSite(Constants.CURRENT_SITE_NAME);
+                    PreferencesUtil.put(Constants.SITE_LIST,Constants.CURRENT_SITE_NAME);
+                    SiteListData siteListData = new SiteListData();
+                    siteListData.setSiteName(data.getSiteName());
+                    siteListData.setOrder(Constants.CURRENT_SITE_INDEX);
+                    siteDataList.add(siteListData);
                     getData();
+                }
+                for(SiteListData siteData:siteDataList){
+                    if(siteData.getOrder()==Constants.CURRENT_SITE_INDEX){
+                        siteData.setSiteName(data.getSiteName());
+                    }
                 }
                 PreferencesUtil.put(Constants.CURRENT_SITE,data.getSiteName());
                 PreferencesUtil.put(Constants.CURRENT_HEADLINE_SITE,data.getCityName()+"("+data.getSiteName()+")");
@@ -307,7 +333,14 @@ public class HomeFragment extends BaseSwipeBackFragment {
         }
     }
     public void setSlogan(int pm){
-        if(pm<AIR_GOOD){
+        if(pm==AIR_EMPTY){
+            tv_slogan.setText(R.string.slogan_empty);
+            tv_slogan.setBackgroundResource(R.color.bottom_list);
+            tv_slogan_alarm_1.setText(R.string.slogan_empty_sentence);
+            tv_slogan_alarm_2.setText(R.string.slogan_empty_sentence);
+            iv_slogan_alarm.setBackgroundResource(R.drawable.ic_update_black_24dp);
+        }
+        else if(pm<AIR_GOOD){
             tv_slogan.setText(R.string.slogan_good);
             tv_slogan.setBackgroundResource(R.color.pm25_good);
             tv_slogan_alarm_1.setText(R.string.slogan_good_sentence_1);
@@ -361,6 +394,69 @@ public class HomeFragment extends BaseSwipeBackFragment {
         String headline_site = choiceSiteEvent.getCityInfo().getCityName()+"("+choiceSiteEvent.getCityInfo().getSiteName()+")";
         PreferencesUtil.put(Constants.HEADLINE_SITE,headline_site);
         PreferencesUtil.put(Constants.SITENAME,choiceSiteEvent.getCityInfo().getSiteName());
+        addSite(choiceSiteEvent.getCityInfo().getSiteName());
+    }
+
+    public void addSite(String siteName){
+        String siteArrayStr = PreferencesUtil.get(Constants.SITE_LIST,"");
+        if (!checkSiteExisted(siteName,siteArrayStr,true)) {
+            siteArrayStr = siteArrayStr+","+siteName;
+            PreferencesUtil.put(Constants.SITE_LIST,siteArrayStr);
+        }
+        parse();
+        logd(PreferencesUtil.get(Constants.SITE_LIST,""));
+    }
+
+    public void removeSite(String siteName){
+        String siteArrayStr = PreferencesUtil.get(Constants.SITE_LIST,"");
+        if (checkSiteExisted(siteName,siteArrayStr,false)) {
+            String[] SiteArray = siteArrayStr.split(",");
+            for(String site:SiteArray){
+                if(!site.equals(siteName)){
+                    siteArrayStr = site + ",";
+                }
+            }
+            PreferencesUtil.put(Constants.SITE_LIST, siteArrayStr.substring(0,siteArrayStr.length()-1));
+        }
+        parse();
+        cityRecyclerViewAdapter.setData(siteDataList);
+        cityRecyclerViewAdapter.notifyDataSetChanged();
+        logd(PreferencesUtil.get(Constants.SITE_LIST,""));
+    }
+
+    public void parse(){
+        siteDataList.clear();
+        if(!PreferencesUtil.get(Constants.SITE_LIST,"").equals("")) {
+            String[] SiteArray = PreferencesUtil.get(Constants.SITE_LIST, "").split(",");
+            for (String site:SiteArray) {
+                SiteListData siteListData = new SiteListData();
+                if(site.equals(Constants.CURRENT_SITE_NAME)) {
+                    siteListData.setSiteName(PreferencesUtil.get(Constants.CURRENT_SITE,""));
+                }
+                else{
+                    siteListData.setSiteName(site);
+                }
+                siteDataList.add(siteListData);
+            }
+        }
+    }
+
+    public boolean checkSiteExisted(String siteName,String siteArrayStr,boolean isCurrentSite){
+        boolean isExisted = false;
+        if(siteArrayStr!=null &&
+                !siteArrayStr.equals("") &&
+                siteArrayStr.length()>Constants.CURRENT_SITE_NAME.length()) {
+            String[] SiteArray = siteArrayStr.split(",");
+            for(String site:SiteArray){
+                if(site.equals(siteName)){
+                    isExisted = true;
+                }
+            }
+        }
+        if(isCurrentSite&&PreferencesUtil.get(Constants.CURRENT_SITE,"").equals(siteName)){
+            isExisted = true;
+        }
+        return isExisted;
     }
 
     private void logd(String log) {
