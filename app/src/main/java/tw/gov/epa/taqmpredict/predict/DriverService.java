@@ -2,6 +2,9 @@ package tw.gov.epa.taqmpredict.predict;
 
 import android.util.Log;
 
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -24,8 +27,13 @@ public class DriverService {
     HomeFragment mHm;
 
     public DriverService(HomeFragment hm) {
+        final OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .readTimeout(20, TimeUnit.SECONDS)
+                .connectTimeout(20, TimeUnit.SECONDS)
+                .build();
+
         Retrofit retrofit = new Retrofit.Builder()
-                //.client(new OkHttpClient())
+                .client(okHttpClient)
                 .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();

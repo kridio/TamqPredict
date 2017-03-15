@@ -1,5 +1,6 @@
 package tw.gov.epa.taqmpredict.ui.fragment.home;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
@@ -118,6 +119,7 @@ public class HomeFragment extends BaseSwipeBackFragment {
         dataRequestPresenter = new DataRequestPresenter(new DataRequestService(),HomeFragment.this);
         driverService = new DriverService(HomeFragment.this);
 
+        PreferencesUtil.put(Constants.EDIT_CITY_LIST,false);
         return view;
     }
 
@@ -138,6 +140,22 @@ public class HomeFragment extends BaseSwipeBackFragment {
             @Override
             public void onClick(View v) {
                 start(CityFragment.newInstance());
+            }
+        });
+
+        tvEditArea.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(PreferencesUtil.get(Constants.EDIT_CITY_LIST,false)){
+                    tvEditArea.setTextColor(Color.WHITE);
+                    tvEditArea.setText(R.string.edit_str);
+                    PreferencesUtil.put(Constants.EDIT_CITY_LIST,false);
+                }
+                else {
+                    tvEditArea.setTextColor(Color.RED);
+                    tvEditArea.setText(R.string.edit_complete_str);
+                    PreferencesUtil.put(Constants.EDIT_CITY_LIST,true);
+                }
             }
         });
 
@@ -207,7 +225,7 @@ public class HomeFragment extends BaseSwipeBackFragment {
                     hasValue=true;
                 }
             }
-            String list = PreferencesUtil.get(Constants.SITE_LIST,"");
+            String list = PreferencesUtil.get(Constants.HEAD_SITE_LIST,"");
             //need modified to be better
             if(!list.equals("")){
                 for (SiteListData data : siteDataList) {
@@ -245,10 +263,10 @@ public class HomeFragment extends BaseSwipeBackFragment {
                 if(PreferencesUtil.get(Constants.SITENAME,"").equals("")){
                     PreferencesUtil.put(Constants.HEADLINE_SITE,data.getCityName()+"("+data.getSiteName()+")");
                     PreferencesUtil.put(Constants.SITENAME,data.getSiteName());
-                    addSite(Constants.CURRENT_SITE_NAME);
-                    PreferencesUtil.put(Constants.SITE_LIST,Constants.CURRENT_SITE_NAME);
+                    PreferencesUtil.put(Constants.HEAD_SITE_LIST,Constants.CURRENT_SITE_NAME);
                     SiteListData siteListData = new SiteListData();
                     siteListData.setSiteName(data.getSiteName());
+                    siteListData.setCityHead(data.getCityName()+"("+data.getSiteName()+")");
                     siteListData.setOrder(Constants.CURRENT_SITE_INDEX);
                     siteDataList.add(siteListData);
                     getData();
@@ -256,6 +274,7 @@ public class HomeFragment extends BaseSwipeBackFragment {
                 for(SiteListData siteData:siteDataList){
                     if(siteData.getOrder()==Constants.CURRENT_SITE_INDEX){
                         siteData.setSiteName(data.getSiteName());
+                        siteData.setCityHead(data.getCityName()+"("+data.getSiteName()+")");
                     }
                 }
                 PreferencesUtil.put(Constants.CURRENT_SITE,data.getSiteName());
@@ -394,47 +413,50 @@ public class HomeFragment extends BaseSwipeBackFragment {
         String headline_site = choiceSiteEvent.getCityInfo().getCityName()+"("+choiceSiteEvent.getCityInfo().getSiteName()+")";
         PreferencesUtil.put(Constants.HEADLINE_SITE,headline_site);
         PreferencesUtil.put(Constants.SITENAME,choiceSiteEvent.getCityInfo().getSiteName());
-        addSite(choiceSiteEvent.getCityInfo().getSiteName());
+        //addSite(choiceSiteEvent.getCityInfo().getSiteName());
+        addSite(headline_site);
     }
 
-    public void addSite(String siteName){
-        String siteArrayStr = PreferencesUtil.get(Constants.SITE_LIST,"");
-        if (!checkSiteExisted(siteName,siteArrayStr,true)) {
-            siteArrayStr = siteArrayStr+","+siteName;
-            PreferencesUtil.put(Constants.SITE_LIST,siteArrayStr);
+    public void addSite(String headline_site){
+        String siteArrayStr = PreferencesUtil.get(Constants.HEAD_SITE_LIST,"");
+        if (!checkSiteExisted(headline_site,siteArrayStr,true)) {
+            siteArrayStr = siteArrayStr+","+headline_site;
+            PreferencesUtil.put(Constants.HEAD_SITE_LIST,siteArrayStr);
         }
         parse();
-        logd(PreferencesUtil.get(Constants.SITE_LIST,""));
+        logd(PreferencesUtil.get(Constants.HEAD_SITE_LIST,""));
     }
 
-    public void removeSite(String siteName){
-        String siteArrayStr = PreferencesUtil.get(Constants.SITE_LIST,"");
-        if (checkSiteExisted(siteName,siteArrayStr,false)) {
-            String[] SiteArray = siteArrayStr.split(",");
-            for(String site:SiteArray){
-                if(!site.equals(siteName)){
-                    siteArrayStr = site + ",";
+    public void removeSite(String headline_site){
+        String headSiteArrayStr = PreferencesUtil.get(Constants.HEAD_SITE_LIST,"");
+        if (checkSiteExisted(headline_site,headSiteArrayStr,false)) {
+            String[] headSiteArray = headSiteArrayStr.split(",");
+            for(String headSite:headSiteArray){
+                if(!headSite.equals(headline_site)){
+                    headSiteArrayStr = headSite + ",";
                 }
             }
-            PreferencesUtil.put(Constants.SITE_LIST, siteArrayStr.substring(0,siteArrayStr.length()-1));
+            PreferencesUtil.put(Constants.HEAD_SITE_LIST, headSiteArrayStr.substring(0,headSiteArrayStr.length()-1));
         }
         parse();
         cityRecyclerViewAdapter.setData(siteDataList);
         cityRecyclerViewAdapter.notifyDataSetChanged();
-        logd(PreferencesUtil.get(Constants.SITE_LIST,""));
+        logd(PreferencesUtil.get(Constants.HEAD_SITE_LIST,""));
     }
 
     public void parse(){
         siteDataList.clear();
-        if(!PreferencesUtil.get(Constants.SITE_LIST,"").equals("")) {
-            String[] SiteArray = PreferencesUtil.get(Constants.SITE_LIST, "").split(",");
-            for (String site:SiteArray) {
+        if(!PreferencesUtil.get(Constants.HEAD_SITE_LIST,"").equals("")) {
+            String[] headSiteArray = PreferencesUtil.get(Constants.HEAD_SITE_LIST, "").split(",");
+            for (String headSite:headSiteArray) {
                 SiteListData siteListData = new SiteListData();
-                if(site.equals(Constants.CURRENT_SITE_NAME)) {
+                if(headSite.equals(Constants.CURRENT_SITE_NAME)) {
                     siteListData.setSiteName(PreferencesUtil.get(Constants.CURRENT_SITE,""));
+                    siteListData.setCityHead(PreferencesUtil.get(Constants.CURRENT_HEADLINE_SITE,""));
                 }
                 else{
-                    siteListData.setSiteName(site);
+                    siteListData.setSiteName(headSite.substring(4,6));
+                    siteListData.setCityHead(headSite);
                 }
                 siteDataList.add(siteListData);
             }

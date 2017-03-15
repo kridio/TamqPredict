@@ -2,7 +2,9 @@ package tw.gov.epa.taqmpredict.data;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -40,10 +42,16 @@ public class DataRequestService {
     private Map<String, String> mParams;
 
     public DataRequestService(){
+        final OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .readTimeout(20, TimeUnit.SECONDS)
+                .connectTimeout(20, TimeUnit.SECONDS)
+                .build();
+
         Retrofit retrofit = new Retrofit.Builder()
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(url)
+                .client(okHttpClient)
                 .build();
 
         dataRequestApi = retrofit.create(DataRequestApi.class);
