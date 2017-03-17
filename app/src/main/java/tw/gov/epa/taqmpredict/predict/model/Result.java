@@ -9,6 +9,9 @@ public class Result {
     @SerializedName("SiteName")
     @Expose
     private String siteName;
+    @SerializedName("hr")
+    @Expose
+    private Double hr;
     @SerializedName("hr_1")
     @Expose
     private Double hr1;
@@ -34,6 +37,14 @@ public class Result {
 
     public void setSiteName(String siteName) {
         this.siteName = siteName;
+    }
+
+    public Double getHr() {
+        return hr;
+    }
+
+    public void setHr(Double hr) {
+        this.hr = hr;
     }
 
     public Double getHr1() {

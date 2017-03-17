@@ -20,6 +20,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import io.reactivex.Observer;
@@ -181,8 +182,8 @@ public class HomeFragment extends BaseSwipeBackFragment {
     public void getData(){
         if(dataRequestPresenter!=null && driverService!=null) {
             swiperefresh_home.setRefreshing(true);
-            dataRequestPresenter.getEpaData();
             driverService.getPredictData();
+            dataRequestPresenter.getEpaData();
             tvDatetime.setText(DateTimeUtil.getCurrentHLDateTime());
             tvLocation.setText(PreferencesUtil.get(Constants.HEADLINE_SITE,getResources().getString(R.string.title_area_display)));
         }
@@ -195,8 +196,12 @@ public class HomeFragment extends BaseSwipeBackFragment {
         for(Result rs:results) {
             if(PreferencesUtil.get(Constants.SITENAME,"").equals(rs.getSiteName())){
                 tv_pm25_view_nh.setText(String.valueOf(rs.getHr1().intValue()));
-                tv_nh_predict.setText(DateTimeUtil.getPredictTime(rs.getTime())+Constants.AIR_PREDICT_STR);
+                tv_nh_predict.setText(DateTimeUtil.getPredictTime(rs.getTime()) + Constants.AIR_PREDICT_STR);
                 setPredictSlogan(rs.getHr1().intValue());
+                if(Arrays.asList(Constants.AREA_PREDICT).contains(rs.getSiteName())){
+                    tv_pm25_view.setText(String.valueOf(rs.getHr().intValue()));
+                    setSlogan(rs.getHr().intValue());
+                }
                 hasValue = true;
             }
         }
@@ -219,22 +224,24 @@ public class HomeFragment extends BaseSwipeBackFragment {
         parse();
         for(Record rc:result) {
             if(PreferencesUtil.get(Constants.SITENAME,"").equals(rc.getSiteName())){
-                if(!rc.getPM25().equals("")) {
-                    tv_pm25_view.setText(String.valueOf(rc.getPM25()));
-                    setSlogan(Integer.valueOf(rc.getPM25()));
-                    hasValue=true;
-                }
-            }
-            String list = PreferencesUtil.get(Constants.HEAD_SITE_LIST,"");
-            //need modified to be better
-            if(!list.equals("")){
-                for (SiteListData data : siteDataList) {
-                    if (data.getSiteName().equals(rc.getSiteName())) {
-                        data.setPm25_value(Integer.valueOf(rc.getPM25()));
+                if(!Arrays.asList(Constants.AREA_PREDICT).contains(rc.getSiteName())) {
+                    if (!rc.getPM25().equals("")) {
+                        tv_pm25_view.setText(String.valueOf(rc.getPM25()));
+                        setSlogan(Integer.valueOf(rc.getPM25()));
+                    }
+                    String list = PreferencesUtil.get(Constants.HEAD_SITE_LIST,"");
+                    //need modified to be better
+                    if(!list.equals("")){
+                        for (SiteListData data : siteDataList) {
+                            if (data.getSiteName().equals(rc.getSiteName())) {
+                                data.setPm25_value(Integer.valueOf(rc.getPM25()));
+                            }
+                        }
+                        cityRecyclerViewAdapter.setData(siteDataList);
+                        cityRecyclerViewAdapter.notifyDataSetChanged();
                     }
                 }
-                cityRecyclerViewAdapter.setData(siteDataList);
-                cityRecyclerViewAdapter.notifyDataSetChanged();
+                hasValue = true;
             }
         }
         if(!hasValue){
