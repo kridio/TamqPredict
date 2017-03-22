@@ -32,12 +32,10 @@ import tw.gov.epa.taqmpredict.data.DataRequestPresenter;
 import tw.gov.epa.taqmpredict.data.DataRequestService;
 import tw.gov.epa.taqmpredict.db.DBManage;
 import tw.gov.epa.taqmpredict.event.ChoiceSiteEvent;
-import tw.gov.epa.taqmpredict.event.TabSelectedEvent;
 import tw.gov.epa.taqmpredict.gps.area.AreaRequestPresenter;
 import tw.gov.epa.taqmpredict.gps.area.city.model.CityInfoData;
 import tw.gov.epa.taqmpredict.predict.DriverService;
 import tw.gov.epa.taqmpredict.predict.model.Result;
-import tw.gov.epa.taqmpredict.ui.fragment.MainFragment;
 import tw.gov.epa.taqmpredict.ui.fragment.city.CityFragment;
 import tw.gov.epa.taqmpredict.util.DateTimeUtil;
 import tw.gov.epa.taqmpredict.util.PreferencesUtil;
@@ -120,9 +118,16 @@ public class HomeFragment extends BaseSwipeBackFragment {
 
         dataRequestPresenter = new DataRequestPresenter(new DataRequestService(), HomeFragment.this);
         driverService = new DriverService(HomeFragment.this);
+        areaRequestPresenter = new AreaRequestPresenter(getContext(), mObserver);
+        areaRequestPresenter.start();
 
+        if(PreferencesUtil.get(Constants.HEAD_SITE_LIST,"").equals("")){
+            PreferencesUtil.put(Constants.HEAD_SITE_LIST, Constants.CURRENT_SITE_NAME);
+        }
+
+        cityRecyclerViewAdapter = new HomeCityRecyclerViewAdapter(getContext(), this);
+        createCityList();
         setHead();
-
         PreferencesUtil.put(Constants.EDIT_CITY_LIST, false);
         return view;
     }
@@ -130,9 +135,6 @@ public class HomeFragment extends BaseSwipeBackFragment {
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
-
-        cityRecyclerViewAdapter = new HomeCityRecyclerViewAdapter(getContext(), this);
-        cityRecyclerViewAdapter.setData(siteDataList);
 
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -211,12 +213,7 @@ public class HomeFragment extends BaseSwipeBackFragment {
                     setSloganPredict(rs.getHr12().intValue(),iv_nth_pic);
                     hasValue = true;
                 }
-                for (SiteListData data : siteDataList) {
-                    if (data.getSiteName().equals(rs.getSiteName())) {
-                        data.setPm25_value(rs.getHr().intValue());
-                    }
-                }
-                cityRecyclerViewAdapter.setData(siteDataList);
+                cityRecyclerViewAdapter.updateItemValue(rs.getSiteName(),rs.getHr().intValue());
                 cityRecyclerViewAdapter.notifyDataSetChanged();
             }
         }
@@ -248,20 +245,8 @@ public class HomeFragment extends BaseSwipeBackFragment {
                 if (PreferencesUtil.get(Constants.SITENAME, "").equals("")) {
                     PreferencesUtil.put(Constants.HEADLINE_SITE, data.getCityName() + "(" + data.getSiteName() + ")");
                     PreferencesUtil.put(Constants.SITENAME, data.getSiteName());
-                    PreferencesUtil.put(Constants.HEAD_SITE_LIST, Constants.CURRENT_SITE_NAME);
-                    SiteListData siteListData = new SiteListData();
-                    siteListData.setSiteName(data.getSiteName());
-                    siteListData.setCityHead(data.getCityName() + "(" + data.getSiteName() + ")");
-                    siteListData.setOrder(Constants.CURRENT_SITE_INDEX);
-                    siteDataList.add(siteListData);
-                    getData();
                 }
-                for (SiteListData siteData : siteDataList) {
-                    if (siteData.getOrder() == Constants.CURRENT_SITE_INDEX) {
-                        siteData.setSiteName(data.getSiteName());
-                        siteData.setCityHead(data.getCityName() + "(" + data.getSiteName() + ")");
-                    }
-                }
+                cityRecyclerViewAdapter.updateCurrentSite(data.getSiteName(),data.getCityName());
                 PreferencesUtil.put(Constants.CURRENT_SITE, data.getSiteName());
                 PreferencesUtil.put(Constants.CURRENT_HEADLINE_SITE, data.getCityName() + "(" + data.getSiteName() + ")");
             }
@@ -281,15 +266,14 @@ public class HomeFragment extends BaseSwipeBackFragment {
     @Override
     public void onResume() {
         super.onResume();
-        areaRequestPresenter = new AreaRequestPresenter(getContext(), mObserver);
-        areaRequestPresenter.start();
-        getData();
+        if(siteDataList.size()>0) {
+            getData();
+        }
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        areaRequestPresenter.stop();
     }
 
     final static int AIR_EMPTY = -1;
@@ -345,20 +329,11 @@ public class HomeFragment extends BaseSwipeBackFragment {
         }
     }
 
-    /**
-     * reselected fragment
-     *
-     * @param event
-     */
-    @Subscribe
-    public void onTabSelectedEvent(TabSelectedEvent event) {
-        if (event.position != MainFragment.FIRST) return;
-    }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         EventBus.getDefault().unregister(this);
+        areaRequestPresenter.stop();
     }
 
     /**
@@ -380,7 +355,7 @@ public class HomeFragment extends BaseSwipeBackFragment {
             siteArrayStr = siteArrayStr + "," + headline_site;
             PreferencesUtil.put(Constants.HEAD_SITE_LIST, siteArrayStr);
         }
-        parse();
+        createCityList();
         logd(PreferencesUtil.get(Constants.HEAD_SITE_LIST, ""));
     }
 
@@ -395,27 +370,32 @@ public class HomeFragment extends BaseSwipeBackFragment {
             }
             PreferencesUtil.put(Constants.HEAD_SITE_LIST, headSiteArrayStr.substring(0, headSiteArrayStr.length() - 1));
         }
-        parse();
-        cityRecyclerViewAdapter.setData(siteDataList);
-        cityRecyclerViewAdapter.notifyDataSetChanged();
+        createCityList();
         logd(PreferencesUtil.get(Constants.HEAD_SITE_LIST, ""));
     }
 
-    public void parse() {
+    public void createCityList() {
         siteDataList.clear();
         if (!PreferencesUtil.get(Constants.HEAD_SITE_LIST, "").equals("")) {
             String[] headSiteArray = PreferencesUtil.get(Constants.HEAD_SITE_LIST, "").split(",");
             for (String headSite : headSiteArray) {
                 SiteListData siteListData = new SiteListData();
                 if (headSite.equals(Constants.CURRENT_SITE_NAME)) {
-                    siteListData.setSiteName(PreferencesUtil.get(Constants.CURRENT_SITE, ""));
-                    siteListData.setCityHead(PreferencesUtil.get(Constants.CURRENT_HEADLINE_SITE, ""));
+                    if(PreferencesUtil.get(Constants.CURRENT_SITE, "").equals("")) {
+                        siteListData.setOrder(Constants.CURRENT_SITE_INDEX);
+                    }
+                    else {
+                        siteListData.setSiteName(PreferencesUtil.get(Constants.CURRENT_SITE, ""));
+                        siteListData.setCityHead(PreferencesUtil.get(Constants.CURRENT_HEADLINE_SITE, ""));
+                    }
                 } else {
                     siteListData.setSiteName(headSite.substring(4, 6));
                     siteListData.setCityHead(headSite);
                 }
                 siteDataList.add(siteListData);
             }
+            cityRecyclerViewAdapter.setData(siteDataList);
+            cityRecyclerViewAdapter.notifyDataSetChanged();
         }
     }
 

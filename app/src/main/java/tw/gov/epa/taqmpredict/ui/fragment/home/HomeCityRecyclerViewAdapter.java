@@ -80,31 +80,26 @@ public class HomeCityRecyclerViewAdapter extends RecyclerView.Adapter<HomeCityRe
             @Override
             public void onClick(View v) {
                 //PreferencesUtil.put(Constants.HEADLINE_SITE, );
-                if(position==Constants.CURRENT_SITE_INDEX) {
-                    PreferencesUtil.put(Constants.HEADLINE_SITE, PreferencesUtil.get(Constants.CURRENT_HEADLINE_SITE, ""));
-                    PreferencesUtil.put(Constants.SITENAME, PreferencesUtil.get(Constants.CURRENT_SITE, ""));
-                }
-                else{
-                    PreferencesUtil.put(Constants.HEADLINE_SITE,mDataArea.get(position).getCityHead());
-                    PreferencesUtil.put(Constants.SITENAME, mDataArea.get(position).getSiteName());
-                }
-                mHf.closeDrawer();
-                mHf.setHead();
-                mHf.getData();
-            }
-        });
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
                 if(PreferencesUtil.get(Constants.EDIT_CITY_LIST,false)){
-                    if(position!=Constants.CURRENT_SITE_INDEX) {
+                    if(mDataArea.get(position).getOrder() != Constants.CURRENT_SITE_INDEX) {
                         PreferencesUtil.put(Constants.HEADLINE_SITE, PreferencesUtil.get(Constants.CURRENT_HEADLINE_SITE, ""));
                         PreferencesUtil.put(Constants.SITENAME, PreferencesUtil.get(Constants.CURRENT_SITE, ""));
                         mHf.removeSite(mDataArea.get(position).getCityHead());
                         mHf.getData();
                     }
                 }
-                return true;
+                else {
+                    if (position == Constants.CURRENT_SITE_INDEX) {
+                        PreferencesUtil.put(Constants.HEADLINE_SITE, PreferencesUtil.get(Constants.CURRENT_HEADLINE_SITE, ""));
+                        PreferencesUtil.put(Constants.SITENAME, PreferencesUtil.get(Constants.CURRENT_SITE, ""));
+                    } else {
+                        PreferencesUtil.put(Constants.HEADLINE_SITE, mDataArea.get(position).getCityHead());
+                        PreferencesUtil.put(Constants.SITENAME, mDataArea.get(position).getSiteName());
+                    }
+                    mHf.closeDrawer();
+                    mHf.setHead();
+                    mHf.getData();
+                }
             }
         });
     }
@@ -112,5 +107,24 @@ public class HomeCityRecyclerViewAdapter extends RecyclerView.Adapter<HomeCityRe
     @Override
     public int getItemCount() {
         return mDataArea.size();
+    }
+
+    public void updateItemValue(String siteName,int value){
+        for(SiteListData data:mDataArea){
+            if(data.getSiteName()!=null && data.getSiteName().equals(siteName)){
+                data.setPm25_value(value);
+            }
+        }
+    }
+    public boolean updateCurrentSite(String siteName,String cityName){
+        boolean hasCurrent = false;
+        for (SiteListData siteData : mDataArea) {
+            if (siteData.getOrder() == Constants.CURRENT_SITE_INDEX) {
+                siteData.setSiteName(siteName);
+                siteData.setCityHead(cityName + "(" + siteName + ")");
+                hasCurrent = true;
+            }
+        }
+        return hasCurrent;
     }
 }

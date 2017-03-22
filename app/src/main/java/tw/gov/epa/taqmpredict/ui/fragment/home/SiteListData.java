@@ -9,7 +9,7 @@ public class SiteListData {
     public String siteName;
     public int pm25_value;
     public boolean isSelected=false;
-    public int order;
+    public int order=-1;
 
     public String getCityHead() {
         return cityHead;
