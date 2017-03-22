@@ -15,18 +15,18 @@
     <!--10級-->
     <string name="slogan_urgent">緊急防護</string>
 
-    <string name="slogan_good_sentence_1">空氣品質良好</string>
-    <string name="slogan_good_sentence_2">適合遊山玩水</string>
-    <string name="slogan_primary_sentence_1">可正常戶外活動</string>
-    <string name="slogan_primary_sentence_2">若不適者請戴口罩</string>
-    <string name="slogan_intermediate_sentence_1">不適者減少戶外活動</string>
-    <string name="slogan_intermediate_sentence_2">敏感族群建議戴口罩</string>
-    <string name="slogan_urgent_sentence_1">不適者減少戶外活動</string>
-    <string name="slogan_urgent_sentence_2">敏感族群避免外出</string>
+    <!--<string name="slogan_good_sentence_1">空氣品質良好</string>-->
+    <string name="slogan_good_sentence_1">適合遊山玩水</string>
+    <!--<string name="slogan_primary_sentence_1">可正常戶外活動</string>-->
+    <string name="slogan_primary_sentence_1">若不適者請戴口罩</string>
+    <!--<string name="slogan_intermediate_sentence_1">不適者減少戶外活動</string>-->
+    <string name="slogan_intermediate_sentence_1">敏感族群建議戴口罩</string>
+    <!--<string name="slogan_urgent_sentence_1">不適者減少戶外活動</string>-->
+    <string name="slogan_urgent_sentence_1">敏感族群避免外出</string>
     <string name="slogan_empty_sentence">------</string>
     <string name="slogan_empty">----</string>
     <string name="air_value_empty">----</string>
-    <string name="air_slogan_nh_empty">下一小時空氣品質預報</string>
+    <string name="air_slogan_nh_empty">下一小時預測值</string>
 
     <string name="current_place">現在位置</string>
     <string name="edit_str">編輯</string>
@@ -34,5 +34,4 @@
 
     <string name="hint_search_box">輸入測站名稱或郵遞區號</string>
     <string name="nothing_found">没有搜索结果</string>
-
 </resources>

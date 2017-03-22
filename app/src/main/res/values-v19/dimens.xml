@@ -22,4 +22,7 @@
     <dimen name="text_size_big">34sp</dimen>
     <dimen name="side_letter_bar_width">36dp</dimen>
     <dimen name="cardview_margin">8dp</dimen>
+
+    <!--home bottom width-->
+    <dimen name="home_bottom_dimen">100dp</dimen>
 </resources>

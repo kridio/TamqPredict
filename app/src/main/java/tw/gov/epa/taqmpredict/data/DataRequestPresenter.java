@@ -66,7 +66,7 @@ public class DataRequestPresenter implements IDataRequestPresenter {
                         for (Record record : response_result.getRecords()) {
                             Log.d(TAG, record.getPublishTime() + "\r\n" + record.getSiteName() + " " + record.getCounty() + "\r\n PM25:" + record.getPM25());
                         }
-                        mHm.setEpaData(response_result.getRecords());
+//                        mHm.setEpaData(response_result.getRecords());
                     }
 
                     @Override

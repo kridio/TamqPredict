@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_nh_headline"
+        android:layout_width="@dimen/home_bottom_dimen"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:text="下一小時預測值"
+        android:textAlignment="center"
+        android:textColor="@android:color/white" />
+
+    <ImageView
+        android:id="@+id/iv_nh_pic"
+        android:layout_width="@dimen/home_bottom_dimen"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_update_black_24dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/tv_nh_headline"
+        android:layout_alignLeft="@+id/tv_nh_headline"/>
+
+    <TextView
+        android:id="@+id/tv_nh_pm25"
+        android:layout_width="@dimen/home_bottom_dimen"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_nh_pic"
+        android:layout_marginTop="10dp"
+        android:layout_alignLeft="@+id/tv_nh_headline"
+        android:text="@string/air_value_empty"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/tv_nsh_headline"
+        android:layout_width="@dimen/home_bottom_dimen"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="未來6小時高值"
+        android:textAlignment="center"
+        android:textColor="@android:color/white" />
+
+    <ImageView
+        android:id="@+id/iv_nsh_pic"
+        android:layout_width="@dimen/home_bottom_dimen"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_update_black_24dp"
+        android:layout_below="@+id/tv_nsh_headline"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/tv_nsh_pm25"
+        android:layout_width="@dimen/home_bottom_dimen"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_nsh_pic"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="@string/air_value_empty"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/tv_nth_headline"
+        android:layout_width="@dimen/home_bottom_dimen"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
+        android:text="未來12小時高值"
+        android:textAlignment="center"
+        android:textColor="@android:color/white" />
+
+    <ImageView
+        android:id="@+id/iv_nth_pic"
+        android:layout_width="@dimen/home_bottom_dimen"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_update_black_24dp"
+        android:layout_below="@+id/tv_nth_headline"
+        android:layout_marginTop="10dp"
+        android:layout_alignLeft="@+id/tv_nth_headline"/>
+
+    <TextView
+        android:id="@+id/tv_nth_pm25"
+        android:layout_width="@dimen/home_bottom_dimen"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_nth_pic"
+        android:layout_marginTop="10dp"
+        android:layout_alignLeft="@+id/tv_nth_headline"
+        android:text="@string/air_value_empty"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:textColor="@android:color/white" />
+
+</RelativeLayout>

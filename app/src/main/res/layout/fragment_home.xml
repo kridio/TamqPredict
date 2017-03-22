@@ -81,7 +81,8 @@
                         android:paddingRight="60dp"
                         android:paddingTop="3dp"
                         android:text="@string/slogan_empty"
-                        android:textColor="@color/pm25_txt" />
+                        android:textColor="@color/pm25_txt"
+                        android:textSize="20sp"/>
 
                     <ImageView
                         android:id="@+id/iv_slogan_alarm"
@@ -90,7 +91,7 @@
                         android:layout_alignLeft="@+id/tv_slogan"
                         android:layout_alignStart="@+id/tv_slogan"
                         android:layout_below="@+id/tv_slogan"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="25dp"
                         android:background="@drawable/ic_update_black_24dp" />
 
                     <TextView
@@ -98,22 +99,24 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/tv_slogan"
-                        android:layout_marginTop="15dp"
                         android:layout_toRightOf="@+id/iv_slogan_alarm"
+                        android:layout_alignTop="@+id/iv_slogan_alarm"
                         android:paddingLeft="3dp"
                         android:text="@string/slogan_empty_sentence"
-                        android:textColor="@color/bg_white" />
+                        android:textColor="@color/bg_white"
+                        android:textSize="20sp"/>
 
-                    <TextView
-                        android:id="@+id/tv_slogan_alarm_2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignLeft="@+id/tv_slogan_alarm_1"
-                        android:layout_alignStart="@+id/tv_slogan_alarm_1"
-                        android:layout_below="@+id/tv_slogan_alarm_1"
-                        android:paddingLeft="3dp"
-                        android:text="@string/slogan_empty_sentence"
-                        android:textColor="@color/bg_white" />
+                    <!--<TextView-->
+                        <!--android:id="@+id/tv_slogan_alarm_2"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_alignLeft="@+id/tv_slogan_alarm_1"-->
+                        <!--android:layout_alignStart="@+id/tv_slogan_alarm_1"-->
+                        <!--android:layout_below="@+id/tv_slogan_alarm_1"-->
+                        <!--android:paddingLeft="3dp"-->
+                        <!--android:text="@string/slogan_empty_sentence"-->
+                        <!--android:textColor="@color/bg_white"-->
+                        <!--android:textSize="25sp"/>-->
 
                     <TextView
                         android:id="@+id/tv_immediate_air"
@@ -123,138 +126,21 @@
                         android:text="即時空氣品質"
                         android:textColor="@color/bg_white" />
 
-                    <!--<TextView-->
-                    <!--android:text="ug/m"-->
-                    <!--android:textSize="30dp"-->
-                    <!--android:textColor="@color/bg_white"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_alignStart="@+id/tv_25_txt"-->
-                    <!--android:layout_alignLeft="@+id/tv_25_txt"-->
-                    <!--android:layout_alignBottom="@+id/tv_pm25_view"-->
-                    <!--android:id="@+id/tv_ugm_txt" />-->
-                    <!--<TextView-->
-                    <!--android:text="3"-->
-                    <!--android:textSize="15dp"-->
-                    <!--android:textColor="@color/bg_white"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_toRightOf="@+id/tv_ugm_txt"-->
-                    <!--android:layout_alignTop="@+id/tv_ugm_txt"-->
-                    <!--android:id="@+id/tv_ugm3_txt" />-->
-
-                </RelativeLayout>
-
-                <!--<FrameLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="5dp"-->
-                <!--android:alpha="0.1"-->
-                <!--android:background="@color/bottom_list"/>-->
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-
                     <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentTop="true"
-                        android:background="@drawable/dusk3">
-
+                        android:layout_height="120dp"
+                        android:layout_alignParentBottom="true">
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/icon_disabled"
+                            android:alpha="0.2"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginBottom="10dp"/>
+                        <include layout="@layout/home_bottom" />
                     </FrameLayout>
-
-                    <TextView
-                        android:id="@+id/tv_pm_txt_nh"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="10dp"
-                        android:text="細懸浮微粒PM"
-                        android:textColor="@color/bg_white"
-                        android:textSize="20sp" />
-
-                    <TextView
-                        android:id="@+id/tv_25_txt_nh"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBottom="@+id/tv_pm_txt_nh"
-                        android:layout_toRightOf="@+id/tv_pm_txt_nh"
-                        android:text="2.5"
-                        android:textColor="@color/bg_white"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:id="@+id/tv_pm25_view_nh"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignLeft="@+id/tv_pm_txt_nh"
-                        android:layout_alignStart="@+id/tv_pm_txt_nh"
-                        android:layout_below="@+id/tv_pm_txt_nh"
-                        android:text="@string/air_value_empty"
-                        android:textColor="@color/bg_white"
-                        android:textSize="80sp" />
-
-                    <TextView
-                        android:id="@+id/tv_slogan_nh"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignLeft="@+id/tv_pm25_view_nh"
-                        android:layout_below="@+id/tv_pm25_view_nh"
-                        android:background="@color/bottom_list"
-                        android:paddingBottom="3dp"
-                        android:paddingLeft="2dp"
-                        android:paddingRight="60dp"
-                        android:paddingTop="3dp"
-                        android:text="@string/slogan_empty"
-                        android:textColor="@color/pm25_txt" />
-
-                    <ImageView
-                        android:id="@+id/iv_slogan_alarm_nh"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignLeft="@+id/tv_slogan_nh"
-                        android:layout_alignStart="@+id/tv_slogan_nh"
-                        android:layout_below="@+id/tv_slogan_nh"
-                        android:layout_marginTop="20dp"
-                        android:background="@drawable/ic_update_black_24dp" />
-
-                    <TextView
-                        android:id="@+id/tv_slogan_alarm_1_nh"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/tv_slogan_nh"
-                        android:layout_marginTop="15dp"
-                        android:layout_toRightOf="@+id/iv_slogan_alarm_nh"
-                        android:paddingLeft="3dp"
-                        android:text="@string/slogan_empty_sentence"
-                        android:textColor="@color/bg_white" />
-
-                    <TextView
-                        android:id="@+id/tv_slogan_alarm_2_nh"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignLeft="@+id/tv_slogan_alarm_1_nh"
-                        android:layout_alignStart="@+id/tv_slogan_alarm_1_nh"
-                        android:layout_below="@+id/tv_slogan_alarm_1_nh"
-                        android:paddingLeft="3dp"
-                        android:text="@string/slogan_empty_sentence"
-                        android:textColor="@color/bg_white" />
-
-                    <TextView
-                        android:id="@+id/tv_nh_predict"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:text="@string/air_slogan_nh_empty"
-                        android:textColor="@color/bg_white" />
-
                 </RelativeLayout>
             </LinearLayout>
         </RelativeLayout>

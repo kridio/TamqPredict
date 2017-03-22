@@ -89,6 +89,7 @@ public class HomeCityRecyclerViewAdapter extends RecyclerView.Adapter<HomeCityRe
                     PreferencesUtil.put(Constants.SITENAME, mDataArea.get(position).getSiteName());
                 }
                 mHf.closeDrawer();
+                mHf.setHead();
                 mHf.getData();
             }
         });
