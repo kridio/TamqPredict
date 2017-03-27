@@ -1,4 +1,5 @@
 <resources>
+    <string name="air_predict_title">空汙預測</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_area_display">----(----)</string>
     <string name="title_datetime_display"><!--2017-02-24 (五) Friday 10:08:05-->----/--/-- ---- --:--:--</string>
