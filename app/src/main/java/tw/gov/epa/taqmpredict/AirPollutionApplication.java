@@ -35,7 +35,7 @@ public class AirPollutionApplication extends Application {
 
         if (BuildConfig.DEBUG) {
             LogHelper.debugInit();
-            LeakCanary.install(this);
+//            LeakCanary.install(this);
         } else {
             LogHelper.releaseInit();
         }

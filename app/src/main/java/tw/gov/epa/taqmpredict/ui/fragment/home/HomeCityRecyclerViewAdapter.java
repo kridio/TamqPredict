@@ -85,7 +85,6 @@ public class HomeCityRecyclerViewAdapter extends RecyclerView.Adapter<HomeCityRe
                         PreferencesUtil.put(Constants.HEADLINE_SITE, PreferencesUtil.get(Constants.CURRENT_HEADLINE_SITE, ""));
                         PreferencesUtil.put(Constants.SITENAME, PreferencesUtil.get(Constants.CURRENT_SITE, ""));
                         mHf.removeSite(mDataArea.get(position).getCityHead());
-                        mHf.getData();
                     }
                 }
                 else {
@@ -97,9 +96,9 @@ public class HomeCityRecyclerViewAdapter extends RecyclerView.Adapter<HomeCityRe
                         PreferencesUtil.put(Constants.SITENAME, mDataArea.get(position).getSiteName());
                     }
                     mHf.closeDrawer();
-                    mHf.setHead();
-                    mHf.getData();
                 }
+                mHf.setHead();
+                mHf.getData();
             }
         });
     }
