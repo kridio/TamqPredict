@@ -21,7 +21,6 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import io.reactivex.Observer;
@@ -332,13 +331,13 @@ public class HomeFragment extends BaseSwipeBackFragment {
             tv_slogan.setBackgroundResource(R.color.pm25_intermediate);
 //            tv_slogan_alarm_1.setText(R.string.slogan_intermediate_sentence_1);
             tv_slogan_alarm_1.setText(R.string.slogan_intermediate_sentence_1);
-            iv_slogan_alarm.setBackgroundResource(R.drawable.ic_directions_bike_black_24dp);
+            iv_slogan_alarm.setBackgroundResource(R.drawable.ic_sentiment_very_dissatisfied_black_24dp);
         } else {
             tv_slogan.setText(R.string.slogan_urgent);
             tv_slogan.setBackgroundResource(R.color.pm25_urgent);
 //            tv_slogan_alarm_1.setText(R.string.slogan_urgent_sentence_1);
             tv_slogan_alarm_1.setText(R.string.slogan_urgent_sentence_1);
-            iv_slogan_alarm.setBackgroundResource(R.drawable.ic_directions_bike_black_24dp);
+            iv_slogan_alarm.setBackgroundResource(R.drawable.ic_direction_home_white_24dp);
         }
     }
 
@@ -350,9 +349,9 @@ public class HomeFragment extends BaseSwipeBackFragment {
         } else if (pm < AIR_primary) {
             iv.setImageResource(R.drawable.ic_directions_run_black_24dp);
         } else if (pm < AIR_intermediate) {
-            iv.setImageResource(R.drawable.ic_directions_bike_black_24dp);
+            iv.setImageResource(R.drawable.ic_sentiment_very_dissatisfied_black_24dp);
         } else {
-            iv.setImageResource(R.drawable.ic_directions_bike_black_24dp);
+            iv.setImageResource(R.drawable.ic_direction_home_white_24dp);
         }
     }
 
