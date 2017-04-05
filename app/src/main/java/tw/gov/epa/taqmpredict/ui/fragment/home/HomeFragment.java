@@ -224,15 +224,15 @@ public class HomeFragment extends BaseSwipeBackFragment {
 
                 tv_nh_headline.setText(DateTimeUtil.getPredictTime(rs.getTime()) + Constants.AIR_PREDICT_STR);
                 if (!rs.getHr1().equals(Constants.NO_DATA)) {
-                    tv_nh_pm25.setText(((int)Double.parseDouble(rs.getHr1())));
+                    tv_nh_pm25.setText(String.valueOf((int)Double.parseDouble(rs.getHr1())));
                     setSloganPredict(((int)Double.parseDouble(rs.getHr1())), iv_nh_pic);
                 }
                 if (!rs.getHr6().equals(Constants.NO_DATA)) {
-                    tv_nsh_pm25.setText(((int)Double.parseDouble(rs.getHr6())));
+                    tv_nsh_pm25.setText(String.valueOf((int)Double.parseDouble(rs.getHr6())));
                     setSloganPredict(((int)Double.parseDouble(rs.getHr6())), iv_nsh_pic);
                 }
                 if (!rs.getHr12().equals(Constants.NO_DATA)) {
-                    tv_nth_pm25.setText(((int)Double.parseDouble(rs.getHr12())));
+                    tv_nth_pm25.setText(String.valueOf((int)Double.parseDouble(rs.getHr12())));
                     setSloganPredict(((int)Double.parseDouble(rs.getHr12())), iv_nth_pic);
                 }
                 hasValue = true;
