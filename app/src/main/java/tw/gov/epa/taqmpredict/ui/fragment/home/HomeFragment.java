@@ -218,8 +218,8 @@ public class HomeFragment extends BaseSwipeBackFragment {
             //if (Arrays.asList(Constants.AREA_PREDICT).contains(rs.getSiteName())) {
             if (PreferencesUtil.get(Constants.SITENAME, "").equals(rs.getSiteName())) {
                 if (!rs.getHr().equals(Constants.NO_DATA)) {
-                    tv_pm25_view.setText(rs.getHr());
-                    setSlogan(Integer.parseInt(rs.getHr()));
+                    tv_pm25_view.setText(String.valueOf((int)Double.parseDouble(rs.getHr())));
+                    setSlogan(((int)Double.parseDouble(rs.getHr())));
                 }
 
                 tv_nh_headline.setText(DateTimeUtil.getPredictTime(rs.getTime()) + Constants.AIR_PREDICT_STR);
