@@ -24,5 +24,5 @@
     <dimen name="cardview_margin">8dp</dimen>
 
     <!--home bottom width-->
-    <dimen name="home_bottom_dimen">100dp</dimen>
+    <dimen name="home_bottom_dimen">108dp</dimen>
 </resources>
