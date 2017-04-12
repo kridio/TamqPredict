@@ -13,6 +13,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="15dp"
         android:text="下一小時預測值"
+        android:textSize="13dp"
         android:textAlignment="center"
         android:textColor="@android:color/white" />
 
@@ -31,7 +32,7 @@
         android:layout_alignTop="@+id/tv_nth_pm25"
         android:layout_alignLeft="@+id/tv_nh_headline"
         android:text="@string/air_value_empty"
-        android:textSize="20sp"
+        android:textSize="20dp"
         android:textAlignment="center"
         android:textColor="@color/white" />
 
@@ -42,6 +43,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:text="未來6小時高值"
+        android:textSize="13dp"
         android:textAlignment="center"
         android:textColor="@android:color/white" />
 
@@ -60,7 +62,7 @@
         android:layout_alignTop="@+id/tv_nth_pm25"
         android:layout_centerHorizontal="true"
         android:text="@string/air_value_empty"
-        android:textSize="20sp"
+        android:textSize="20dp"
         android:textAlignment="center"
         android:textColor="@android:color/white" />
 
@@ -73,6 +75,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginRight="15dp"
         android:text="未來12小時高值"
+        android:textSize="13dp"
         android:textAlignment="center"
         android:textColor="@android:color/white" />
 
@@ -93,7 +96,7 @@
         android:layout_marginTop="5dp"
         android:layout_alignLeft="@+id/tv_nth_headline"
         android:text="@string/air_value_empty"
-        android:textSize="20sp"
+        android:textSize="20dp"
         android:textAlignment="center"
         android:textColor="@android:color/white" />
 

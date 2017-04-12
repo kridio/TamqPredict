@@ -45,7 +45,6 @@ public class MainActivity extends SupportActivity {
             }
         });
 
-
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 //        mToolbar = (Toolbar) findViewById(R.id.toolbar);
