@@ -3,6 +3,7 @@ package tw.gov.epa.taqmpredict.ui.fragment.home;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.IntegerRes;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -39,6 +40,7 @@ import tw.gov.epa.taqmpredict.predict.model.Result;
 import tw.gov.epa.taqmpredict.ui.fragment.city.CityFragment;
 import tw.gov.epa.taqmpredict.util.DateTimeUtil;
 import tw.gov.epa.taqmpredict.util.PreferencesUtil;
+import tw.gov.epa.taqmpredict.util.ResourceUtil;
 
 /**
  * Created by user on 2017/2/14.
@@ -47,6 +49,7 @@ import tw.gov.epa.taqmpredict.util.PreferencesUtil;
 public class HomeFragment extends BaseSwipeBackFragment {
     private static final String TAG = HomeFragment.class.getSimpleName();
 
+    FrameLayout homeCityBg;
     RecyclerView recyclerViewCity;
     TextView tvAddArea;
     TextView tvEditArea;
@@ -73,6 +76,7 @@ public class HomeFragment extends BaseSwipeBackFragment {
 
     //String headline_site = "";
     private static ArrayList<SiteListData> siteDataList = new ArrayList<>();
+    List<CityInfoData> countys;
 
     Handler mHandler;
 
@@ -95,6 +99,7 @@ public class HomeFragment extends BaseSwipeBackFragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         EventBus.getDefault().register(this);
 
+        homeCityBg = (FrameLayout) view.findViewById(R.id.home_city_bg);
         recyclerViewCity = (RecyclerView) view.findViewById(R.id.recyclerView_city);
         tvAddArea = (TextView) view.findViewById(R.id.tv_add_area);
         tvEditArea = (TextView) view.findViewById(R.id.tv_edit_area);
@@ -129,6 +134,7 @@ public class HomeFragment extends BaseSwipeBackFragment {
             PreferencesUtil.put(Constants.HEAD_SITE_LIST, Constants.CURRENT_SITE_NAME);
         }
 
+        countys = DBManage.getInstance().getAllCities();
         cityRecyclerViewAdapter = new HomeCityRecyclerViewAdapter(getContext(), this);
         createCityList();
         setHead();
@@ -210,6 +216,18 @@ public class HomeFragment extends BaseSwipeBackFragment {
     public void setHead(){
         tvDatetime.setText(DateTimeUtil.getCurrentHLDateTime());
         tvLocation.setText(PreferencesUtil.get(Constants.HEADLINE_SITE, getResources().getString(R.string.title_area_display)));
+//        PreferencesUtil.get(Constants.SITENAME, "");
+//        homeCityBg.setBackgroundResource(R.drawable.dusk2);
+        int id = 0;
+        logd(PreferencesUtil.get(Constants.SITENAME,""));
+        for (CityInfoData info:countys) {
+            if(info.getSiteName().equals(PreferencesUtil.get(Constants.SITENAME,""))){
+                id = ResourceUtil.getResourceId("b"+info.getCityId());
+            }
+        }
+        if(id!=0) {
+            homeCityBg.setBackgroundResource(id);
+        }
     }
 
     public void setData(List<Result> results) {
@@ -266,8 +284,8 @@ public class HomeFragment extends BaseSwipeBackFragment {
 
         @Override
         public void onNext(String county) {
-            List<CityInfoData> countys = DBManage.getInstance().getLocality(county);
-            for (CityInfoData data : countys) {
+            List<CityInfoData> cityInfo = DBManage.getInstance().getLocality(county);
+            for (CityInfoData data : cityInfo) {
                 if (PreferencesUtil.get(Constants.SITENAME, "").equals("")) {
                     PreferencesUtil.put(Constants.HEADLINE_SITE, data.getCityName() + "(" + data.getSiteName() + ")");
                     PreferencesUtil.put(Constants.SITENAME, data.getSiteName());
@@ -377,13 +395,11 @@ public class HomeFragment extends BaseSwipeBackFragment {
 
     public void addSite(String headline_site) {
         String siteArrayStr = PreferencesUtil.get(Constants.HEAD_SITE_LIST, "");
-        if(siteArrayStr.split(",").length<=5) {
-            if (!checkSiteExisted(headline_site, siteArrayStr, true)) {
-                siteArrayStr = siteArrayStr + "," + headline_site;
-                PreferencesUtil.put(Constants.HEAD_SITE_LIST, siteArrayStr);
-            }
-            createCityList();
+        if (!checkSiteExisted(headline_site, siteArrayStr, true)) {
+            siteArrayStr = siteArrayStr + "," + headline_site;
+            PreferencesUtil.put(Constants.HEAD_SITE_LIST, siteArrayStr);
         }
+        createCityList();
         logd(PreferencesUtil.get(Constants.HEAD_SITE_LIST, ""));
     }
 

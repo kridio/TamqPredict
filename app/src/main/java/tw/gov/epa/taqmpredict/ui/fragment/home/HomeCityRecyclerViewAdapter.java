@@ -1,7 +1,6 @@
 package tw.gov.epa.taqmpredict.ui.fragment.home;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,11 +9,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.lang.reflect.Field;
 import java.util.List;
 
 import tw.gov.epa.taqmpredict.R;
 import tw.gov.epa.taqmpredict.base.Constants;
+import tw.gov.epa.taqmpredict.db.DBManage;
+import tw.gov.epa.taqmpredict.gps.area.city.model.CityInfoData;
 import tw.gov.epa.taqmpredict.util.PreferencesUtil;
+import tw.gov.epa.taqmpredict.util.ResourceUtil;
 
 /**
  * Created by Administrator on 2017/3/1.
@@ -34,13 +37,14 @@ public class HomeCityRecyclerViewAdapter extends RecyclerView.Adapter<HomeCityRe
     public List<SiteListData> getData() {
         return mDataArea;
     }
-    int[] image_list = {R.drawable.bg1,R.drawable.bg2,R.drawable.bg3,R.drawable.bg4,R.drawable.bg5,R.drawable.bg6};
-
+//    int[] image_list = {R.drawable.bg1,R.drawable.bg2,R.drawable.bg3,R.drawable.bg4,R.drawable.bg5,R.drawable.bg6};
+    List<CityInfoData> countys;
 
 
     public HomeCityRecyclerViewAdapter(Context context, HomeFragment hf) {
         mContext = context;
         mHf = hf;
+        countys = DBManage.getInstance().getAllCities();
     }
 
 
@@ -75,7 +79,20 @@ public class HomeCityRecyclerViewAdapter extends RecyclerView.Adapter<HomeCityRe
             holder.tvArea.setText(mDataArea.get(position).getCityHead());
         }
         holder.tvAreaPm25.setText(String.valueOf(mDataArea.get(position).getPm25_value()));
-        holder.ivBg.setBackground(mContext.getResources().getDrawable(image_list[position]));
+        int id = 0;
+        for (CityInfoData info:countys) {
+            if(info.getSiteName().equals(mDataArea.get(position).getSiteName())){
+                id = ResourceUtil.getResourceId("a"+info.getCityId());
+            }
+        }
+        if(id!=0) {
+            holder.ivBg.setBackground(mContext.getResources().getDrawable(id));
+        }
+        else{
+            Log.d("onBindViewHolder:","there is no picture");
+//            holder.ivBg.setBackground(mContext.getResources().getDrawable(image_list[position]));
+        }
+//        holder.ivBg.setBackground(mContext.getResources().getDrawable(image_list[position]));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

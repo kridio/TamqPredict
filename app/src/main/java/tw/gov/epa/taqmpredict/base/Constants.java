@@ -1,5 +1,10 @@
 package tw.gov.epa.taqmpredict.base;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import tw.gov.epa.taqmpredict.R;
+
 /**
  * Created by Administrator on 2017/2/28.
  */
@@ -19,7 +24,6 @@ public class Constants {
     public static final String AIR_PREDICT_STR = "預測值";
     public static final String NO_DATA = "NaN";
     public static final String[] AREA_GROUP = {"北部","竹苗","中部","雲嘉南","高屏","宜蘭","花東","離島"};
-    public static final String[] AREA_PREDICT = {"古亭","忠明","左營","龍潭"};
 
     public static final String EDIT_CITY_LIST = "EDIT_CITY_LIST";
 }
