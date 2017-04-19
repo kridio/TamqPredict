@@ -12,7 +12,18 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
+            <FrameLayout
+                android:id="@+id/home_city_bg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/dusk4">
+            </FrameLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0.6"
+                android:background="@color/alpha_gray">
+            </FrameLayout>
             <include layout="@layout/toolbar" />
 
             <LinearLayout
@@ -26,14 +37,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
-
-                    <FrameLayout
-                        android:id="@+id/home_city_bg"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/dusk4">
-
-                    </FrameLayout>
 
                     <TextView
                         android:id="@+id/tv_pm_txt"
@@ -118,14 +121,6 @@
                         <!--android:text="@string/slogan_empty_sentence"-->
                         <!--android:textColor="@color/bg_white"-->
                         <!--android:textSize="25sp"/>-->
-
-                    <TextView
-                        android:id="@+id/tv_immediate_air"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:text="即時空氣品質"
-                        android:textColor="@color/bg_white" />
 
                     <FrameLayout
                         android:layout_width="match_parent"
