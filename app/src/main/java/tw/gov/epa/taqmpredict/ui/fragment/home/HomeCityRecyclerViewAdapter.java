@@ -90,7 +90,7 @@ public class HomeCityRecyclerViewAdapter extends RecyclerView.Adapter<HomeCityRe
         }
         else{
             Log.d("onBindViewHolder:","there is no picture");
-//            holder.ivBg.setBackground(mContext.getResources().getDrawable(image_list[position]));
+            holder.ivBg.setBackground(mContext.getResources().getDrawable(ResourceUtil.getResourceId(Constants.NO_DATA_PIC_ID)));
         }
 //        holder.ivBg.setBackground(mContext.getResources().getDrawable(image_list[position]));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
