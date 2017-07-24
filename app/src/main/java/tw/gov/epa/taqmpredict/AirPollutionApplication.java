@@ -3,12 +3,9 @@ package tw.gov.epa.taqmpredict;
 import android.app.Application;
 
 import com.google.gson.Gson;
-import com.squareup.leakcanary.LeakCanary;
 
-import tw.gov.epa.taqmpredict.base.Constants;
 import tw.gov.epa.taqmpredict.db.DBManage;
 import tw.gov.epa.taqmpredict.util.LogHelper;
-import tw.gov.epa.taqmpredict.util.PreferencesUtil;
 import tw.gov.epa.taqmpredict.util.TaskExecutor;
 
 /**

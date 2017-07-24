@@ -7,31 +7,7 @@
     style="@style/mToolbarStyle"
     android:touchscreenBlocksFocus="false"
     xmlns:android="http://schemas.android.com/apk/res/android" >
-    <!--<LinearLayout android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:orientation="vertical"-->
-        <!--android:id="@+id/location_bar">-->
 
-        <!--<TextView-->
-            <!--android:id="@+id/tv_location"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:text="@string/title_area_display"-->
-            <!--android:textColor="@color/cardview_light_background"-->
-            <!--android:textSize="@dimen/font_size_medium" />-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/tv_datetime"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:layout_marginTop="5dp"-->
-            <!--android:text="@string/title_datetime_display"-->
-            <!--android:textColor="@color/cardview_light_background"-->
-            <!--android:textSize="@dimen/font_size_small" />-->
-    <!--</LinearLayout>-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -72,7 +48,7 @@
             android:src="@drawable/ic_view_list_black_36dp"/>
 
         <!--<ImageView-->
-            <!--android:id="@+id/iv_refresh_location"-->
+            <!--android:id="@+id/iv_switch_map"-->
             <!--android:layout_width="wrap_content"-->
             <!--android:layout_height="wrap_content"-->
             <!--android:layout_alignParentRight="true"-->
@@ -81,7 +57,8 @@
             <!--android:paddingBottom="10dp"-->
             <!--android:paddingLeft="10dp"-->
             <!--android:paddingRight="10dp"-->
-            <!--android:src="@drawable/ic_refresh_black_24dp"/>-->
+            <!--android:src="@drawable/ic_map_white_24dp"/>-->
+
     </RelativeLayout>
 
 </android.support.v7.widget.Toolbar>

@@ -1,5 +1,6 @@
 package tw.gov.epa.taqmpredict.ui.fragment.home;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,6 +27,7 @@ import java.util.List;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
+import tw.gov.epa.taqmpredict.MainActivity;
 import tw.gov.epa.taqmpredict.R;
 import tw.gov.epa.taqmpredict.base.BaseSwipeBackFragment;
 import tw.gov.epa.taqmpredict.base.Constants;
@@ -56,6 +58,7 @@ public class HomeFragment extends BaseSwipeBackFragment {
     TextView tvLocation;
     TextView tvDatetime;
     ImageView ivAddLoc;
+//    ImageView ivSwitchMap;
     DrawerLayout dlCity;
     FrameLayout fl_navigation_city;
     SwipeRefreshLayout swiperefresh_home;
@@ -106,6 +109,7 @@ public class HomeFragment extends BaseSwipeBackFragment {
         tvLocation = (TextView) view.findViewById(R.id.tv_location);
         tvDatetime = (TextView) view.findViewById(R.id.tv_datetime);
         ivAddLoc = (ImageView) view.findViewById(R.id.iv_add_location);
+//        ivSwitchMap = (ImageView) view.findViewById(R.id.iv_switch_map);
         dlCity = (DrawerLayout) view.findViewById(R.id.drawerLayout_city);
         fl_navigation_city = (FrameLayout) view.findViewById(R.id.fl_navigation_city);
         swiperefresh_home = (SwipeRefreshLayout) view.findViewById(R.id.swiperefresh_home);
@@ -184,7 +188,13 @@ public class HomeFragment extends BaseSwipeBackFragment {
             }
         });
 
-
+//        ivSwitchMap.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getActivity(),MapsActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
         swiperefresh_home.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -235,27 +245,27 @@ public class HomeFragment extends BaseSwipeBackFragment {
         for (Result rs : results) {
             //if (Arrays.asList(Constants.AREA_PREDICT).contains(rs.getSiteName())) {
             if (PreferencesUtil.get(Constants.SITENAME, "").equals(rs.getSiteName())) {
-                if (!rs.getHr().equals(Constants.NO_DATA)) {
+                if (!rs.getHr().toLowerCase().equals(Constants.NO_DATA)) {
                     tv_pm25_view.setText(String.valueOf((int)Double.parseDouble(rs.getHr())));
                     setSlogan(((int)Double.parseDouble(rs.getHr())));
                 }
 
                 tv_nh_headline.setText(DateTimeUtil.getPredictTime(rs.getTime()) + Constants.AIR_PREDICT_STR);
-                if (!rs.getHr1().equals(Constants.NO_DATA)) {
+                if (!rs.getHr1().toLowerCase().equals(Constants.NO_DATA)) {
                     tv_nh_pm25.setText(String.valueOf((int)Double.parseDouble(rs.getHr1())));
                     setSloganPredict(((int)Double.parseDouble(rs.getHr1())), iv_nh_pic);
                 }
-                if (!rs.getHr6().equals(Constants.NO_DATA)) {
+                if (!rs.getHr6().toLowerCase().equals(Constants.NO_DATA)) {
                     tv_nsh_pm25.setText(String.valueOf((int)Double.parseDouble(rs.getHr6())));
                     setSloganPredict(((int)Double.parseDouble(rs.getHr6())), iv_nsh_pic);
                 }
-                if (!rs.getHr12().equals(Constants.NO_DATA)) {
+                if (!rs.getHr12().toLowerCase().equals(Constants.NO_DATA)) {
                     tv_nth_pm25.setText(String.valueOf((int)Double.parseDouble(rs.getHr12())));
                     setSloganPredict(((int)Double.parseDouble(rs.getHr12())), iv_nth_pic);
                 }
                 hasValue = true;
             }
-            if (!rs.getHr().equals(Constants.NO_DATA)) {
+            if (!rs.getHr().toLowerCase().equals(Constants.NO_DATA)) {
                 cityRecyclerViewAdapter.updateItemValue(rs.getSiteName(), ((int)Double.parseDouble(rs.getHr())));
                 cityRecyclerViewAdapter.notifyDataSetChanged();
             }
