@@ -93,9 +93,9 @@ public class ListFragment extends BaseFragment {
 
 //    private void initData() {
 //        pageList = new ArrayList<>();
-//        pageList.add(new PageOne(MainActivity.this));
-//        pageList.add(new PageTwo(MainActivity.this));
-//        pageList.add(new PageThree(MainActivity.this));
+//        pageList.add(new PageOne(MapActivity.this));
+//        pageList.add(new PageTwo(MapActivity.this));
+//        pageList.add(new PageThree(MapActivity.this));
 //    }
 
 //    private void initView() {

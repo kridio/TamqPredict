@@ -1,0 +1,15 @@
+[
+  {"lat" : 25, "lng" : 121, "intensity":1.0 },
+  {"lat" : 24.1005, "lng" : 121.0002, "intensity":0.1 },
+  {"lat" : 23.6005, "lng" : 121.0002, "intensity":0.1 },
+  {"lat" : 23.1005, "lng" : 120.9002, "intensity":0.1 },
+  {"lat" : 23.1005, "lng" : 121.1002, "intensity":0.1 },
+  {"lat" : 23.1005, "lng" : 121.2002, "intensity":0.1 },
+  {"lat" : 23.1005, "lng" : 121.3002, "intensity":0.1 },
+  {"lat" : 23.1005, "lng" : 121.4002, "intensity":0.1 },
+  {"lat" : 23.1005, "lng" : 121.4002, "intensity":0.1 },
+  {"lat" : 23.1005, "lng" : 121.4002, "intensity":0.1 },
+  {"lat" : 23.1005, "lng" : 121.4002, "intensity":0.1 },
+  {"lat" : 23.1005, "lng" : 121.4002, "intensity":0.1 },
+  {"lat" : 23.1005, "lng" : 121.5002, "intensity":0.1 }
+]

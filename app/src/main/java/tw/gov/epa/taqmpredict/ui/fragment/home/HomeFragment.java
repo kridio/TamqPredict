@@ -27,7 +27,6 @@ import java.util.List;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
-import tw.gov.epa.taqmpredict.MainActivity;
 import tw.gov.epa.taqmpredict.R;
 import tw.gov.epa.taqmpredict.base.BaseSwipeBackFragment;
 import tw.gov.epa.taqmpredict.base.Constants;
@@ -37,6 +36,7 @@ import tw.gov.epa.taqmpredict.db.DBManage;
 import tw.gov.epa.taqmpredict.event.ChoiceSiteEvent;
 import tw.gov.epa.taqmpredict.gps.area.AreaRequestPresenter;
 import tw.gov.epa.taqmpredict.gps.area.city.model.CityInfoData;
+import tw.gov.epa.taqmpredict.map.MapActivity;
 import tw.gov.epa.taqmpredict.predict.DriverService;
 import tw.gov.epa.taqmpredict.predict.model.Result;
 import tw.gov.epa.taqmpredict.ui.fragment.city.CityFragment;
@@ -58,6 +58,7 @@ public class HomeFragment extends BaseSwipeBackFragment {
     TextView tvLocation;
     TextView tvDatetime;
     ImageView ivAddLoc;
+    ImageView ivMapStart;
 //    ImageView ivSwitchMap;
     DrawerLayout dlCity;
     FrameLayout fl_navigation_city;
@@ -109,6 +110,7 @@ public class HomeFragment extends BaseSwipeBackFragment {
         tvLocation = (TextView) view.findViewById(R.id.tv_location);
         tvDatetime = (TextView) view.findViewById(R.id.tv_datetime);
         ivAddLoc = (ImageView) view.findViewById(R.id.iv_add_location);
+        ivMapStart = (ImageView) view.findViewById(R.id.iv_map_start);
 //        ivSwitchMap = (ImageView) view.findViewById(R.id.iv_switch_map);
         dlCity = (DrawerLayout) view.findViewById(R.id.drawerLayout_city);
         fl_navigation_city = (FrameLayout) view.findViewById(R.id.fl_navigation_city);
@@ -185,6 +187,14 @@ public class HomeFragment extends BaseSwipeBackFragment {
             @Override
             public void onClick(View v) {
                 dlCity.openDrawer(fl_navigation_city);
+            }
+        });
+
+        ivMapStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),MapActivity.class);
+                startActivity(intent);
             }
         });
 

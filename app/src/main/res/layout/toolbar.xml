@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.Toolbar android:id="@+id/toolbar"
+<android.support.v7.widget.Toolbar xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="right"
@@ -46,6 +47,18 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:src="@drawable/ic_view_list_black_36dp"/>
+
+        <ImageView
+            android:id="@+id/iv_map_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:src="@android:drawable/ic_menu_myplaces" />
 
         <!--<ImageView-->
             <!--android:id="@+id/iv_switch_map"-->

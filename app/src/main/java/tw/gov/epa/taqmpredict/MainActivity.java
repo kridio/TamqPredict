@@ -36,7 +36,7 @@ public class MainActivity extends SupportActivity {
         registerFragmentLifecycleCallbacks(new FragmentLifecycleCallbacks() {
             @Override
             public void onFragmentSupportVisible(SupportFragment fragment) {
-                Log.i("MainActivity", "onFragmentSupportVisible--->" + fragment.getClass().getSimpleName());
+                Log.i("MapActivity", "onFragmentSupportVisible--->" + fragment.getClass().getSimpleName());
             }
 
             @Override
