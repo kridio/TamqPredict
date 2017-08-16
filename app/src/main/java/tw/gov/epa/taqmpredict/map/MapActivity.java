@@ -14,6 +14,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -184,7 +185,12 @@ public class MapActivity extends Activity {
 //        sv.draw(canvas);
         iv.setImageBitmap(bitmap);
 
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(basemap.getWidth(), basemap.getHeight());
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int sHeight = displayMetrics.heightPixels;
+        int sWidth = displayMetrics.widthPixels;
+
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(sWidth, sHeight);
         layoutParams.leftMargin = 0;
         layoutParams.topMargin = 0;
         layoutParams.bottomMargin = 0;
@@ -321,7 +327,7 @@ public class MapActivity extends Activity {
 //
 //    }
 
-    int mColors[] = new int[1440 * 2464];
+    int mColors[] = new int[width * height];
     private void readFromFile(int data) {
         try {
             InputStream inputStream = getResources().openRawResource(data);
